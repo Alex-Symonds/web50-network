@@ -3,7 +3,7 @@ from django.db import models
 import datetime
 
 class User(AbstractUser):
-    following = models.ManyToManyField("self", related_name="followers")
+    following = models.ManyToManyField("self", related_name="followers", symmetrical=False)
 
 
 class Post(models.Model):

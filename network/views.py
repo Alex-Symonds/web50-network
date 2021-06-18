@@ -32,24 +32,6 @@ def index(request):
         "form": NewPostForm
     })
 
-
-@login_required
-def following(request):
-    user = request.user
-    flist = user.following
-
-    data = Post.objects.filter(poster__in=flist).order_by("-created_on")
-    posts = []
-    for p in range(data.count()):
-        posts.append(data[p].index_fields())
-
-    return render(request, "network/index.html", {
-        "posts": posts
-    })
-
- 
-
-
 def login_view(request):
     if request.method == "POST":
 
@@ -100,3 +82,24 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+
+def profile(request, user_id):
+    u = User.objects.get(id=user_id)
+
+    data = Post.objects.filter(poster=u).order_by("-created_on")
+
+    posts = []
+    for p in range(data.count()):
+        posts.append(data[p].index_fields())
+    
+    return render(request, "network/profile.html", {
+        "following_count": u.following.count(),
+        "followers_count": u.followers.all().count(),
+        "profile_name": u.username,
+        "profile_id": u.id,
+        "posts": posts
+    })
+
+
+
