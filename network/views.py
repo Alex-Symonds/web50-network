@@ -3,12 +3,51 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
-from .models import User
+from .models import User, Post
+from .forms import NewPostForm
 
 
 def index(request):
-    return render(request, "network/index.html")
+
+    if request.method == "POST":
+        posted_form = NewPostForm(request.POST)
+        if posted_form.is_valid():
+            new_content = posted_form.cleaned_data["content"]
+            u = request.user
+
+            npo = Post(poster=u, content=new_content)
+            npo.save()
+            return HttpResponseRedirect(reverse("index"))
+
+    data = Post.objects.all().order_by("-created_on")
+
+    posts = []
+    for p in range(data.count()):
+        posts.append(data[p].index_fields())
+
+    return render(request, "network/index.html", {
+        "posts": posts,
+        "form": NewPostForm
+    })
+
+
+@login_required
+def following(request):
+    user = request.user
+    flist = user.following
+
+    data = Post.objects.filter(poster__in=flist).order_by("-created_on")
+    posts = []
+    for p in range(data.count()):
+        posts.append(data[p].index_fields())
+
+    return render(request, "network/index.html", {
+        "posts": posts
+    })
+
+ 
 
 
 def login_view(request):
