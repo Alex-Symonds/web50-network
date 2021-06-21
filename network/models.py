@@ -3,7 +3,7 @@ from django.db import models
 import datetime
 
 class User(AbstractUser):
-    following = models.ManyToManyField("self", related_name="followers")
+    following = models.ManyToManyField("self", related_name="followers", symmetrical=False)
 
 
 class Post(models.Model):
@@ -15,6 +15,7 @@ class Post(models.Model):
     def index_fields(self):
         return {
             "username": self.poster.username,
+            "user_id": self.poster.id,
             "created_on": self.created_on,
             "content": self.content,
             "like_count": self.likes.count()
