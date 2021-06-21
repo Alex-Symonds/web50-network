@@ -101,5 +101,15 @@ def profile(request, user_id):
         "posts": posts
     })
 
+def following(request):
+    user = User.objects.get(username=request.user)
+    fposts = Post.objects.filter(poster__in=user.following.all())
 
+    posts = []
+    for p in range(fposts.count()):
+        posts.append(fposts[p].index_fields())
+
+    return render(request, "network/following.html", {
+        "posts": posts
+    })
 
