@@ -15,6 +15,7 @@ class Post(models.Model):
     def index_fields(self):
         return {
             "username": self.poster.username,
+            "user_id": self.poster.id,
             "created_on": self.created_on,
             "content": self.content,
             "like_count": self.likes.count()
