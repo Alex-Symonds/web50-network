@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     if (document.getElementById('follow_btn')){
         load_follow_btn();
     }
@@ -14,14 +13,14 @@ function load_follow_btn(){
     fetch(`/follow/${target_id}`)
     .then(response => response.json())
     .then(data =>{
-        display_follow_btn(data["is_followed"]);
+        update_follow_btn(data["is_followed"]);
     })
     .catch(error =>{
         console.log('Error: ', error);
     })
 }
 
-function display_follow_btn(is_followed){
+function update_follow_btn(is_followed){
     // Set the follow button's value and class based on is_followed bool.
     const button = document.querySelector('#follow_btn');
     const st_input = document.querySelector('#follow_status');
@@ -37,7 +36,7 @@ function display_follow_btn(is_followed){
     }   
 }
 
-function update_followedby_counter(want_follow){
+function update_followers_counter(want_follow){
     // Increment or decrement the followers counter based on want_follow.
     counter = document.querySelector('#num-followers');
     if (counter){
@@ -81,8 +80,8 @@ function follow_toggle(){
         headers: headers,
         credentials: 'include'
     })
-    .then(display_follow_btn(result))
-    .then(update_followedby_counter(result))
+    .then(update_follow_btn(result))
+    .then(update_followers_counter(result))
     .catch(error => {
         console.log('Error: ', error)
     });
@@ -90,6 +89,8 @@ function follow_toggle(){
 
 
 function getCookie(name) {
+    // Gets a cookie.
+    // Taken from Django documentation for CSRF handling
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');

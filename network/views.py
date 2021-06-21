@@ -118,8 +118,6 @@ def following(request):
     })
 
 
-#from django.views.decorators.csrf import csrf_exempt
-#@csrf_exempt
 def follow_toggle(request, user_id):
     target_user = User.objects.get(id=user_id)
     current_user = request.user
