@@ -1,9 +1,11 @@
+import json
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from .models import User, Post
 from .forms import NewPostForm
@@ -85,21 +87,23 @@ def register(request):
 
 
 def profile(request, user_id):
-    u = User.objects.get(id=user_id)
 
-    data = Post.objects.filter(poster=u).order_by("-created_on")
+    target_user = User.objects.get(id=user_id)
 
+    data = Post.objects.filter(poster=target_user).order_by("-created_on")
     posts = []
     for p in range(data.count()):
         posts.append(data[p].index_fields())
     
     return render(request, "network/profile.html", {
-        "following_count": u.following.count(),
-        "followers_count": u.followers.all().count(),
-        "profile_name": u.username,
-        "profile_id": u.id,
+        "following_count": target_user.following.count(),
+        "followers_count": target_user.followers.all().count(),
+        "profile_name": target_user.username,
+        "profile_id": user_id,
         "posts": posts
     })
+
+
 
 def following(request):
     user = User.objects.get(username=request.user)
@@ -113,3 +117,33 @@ def following(request):
         "posts": posts
     })
 
+
+#from django.views.decorators.csrf import csrf_exempt
+#@csrf_exempt
+def follow_toggle(request, user_id):
+    target_user = User.objects.get(id=user_id)
+    current_user = request.user
+
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        want_follow = data.get("want_follow")
+        if want_follow is not None:
+            if want_follow:
+                current_user.following.add(target_user)
+            else:
+                current_user.following.remove(target_user)
+                
+            return JsonResponse({
+                "message": "Follow status toggled successfully."
+            }, status=201)
+
+    elif request.method == "GET":
+        status = target_user in current_user.following.all()
+        return JsonResponse({
+            "is_followed": status
+        })
+
+    else:
+        return JsonResponse({
+            "Error": "GET or PUT request required."
+        }, status=400)
