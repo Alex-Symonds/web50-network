@@ -15,15 +15,6 @@ class Post(models.Model):
     def count_likes(self):
         return self.likes.count()
 
-    def index_fields(self):
-        return {
-            "username": self.poster.username,
-            "user_id": self.poster.id,
-            "created_on": self.created_on,
-            "content": self.content,
-            "like_count": self.likes.count()
-        }
-
     def __str__(self):
         return f"Post #{self.id}: {self.poster.username} @ {self.created_on - datetime.timedelta(microseconds=self.created_on.microsecond)} "
 

@@ -2,6 +2,7 @@
 
 {% block body %}
 
+{# Pagination navigation until r54-ish #}
 {% if page.has_other_pages %}
     <nav aria-label="See more posts">
         <ul class="pagination">
@@ -52,6 +53,9 @@
     </nav>
 {% endif %}
 
+
+
+{# Posts list #}
     <div id="all-posts">
         {% for post in page %}
             <div class="post">
@@ -63,9 +67,7 @@
                 </div>
 
             {% if user.is_authenticated and user.username == post.poster.username %}
-                <div class="pcont-edit">
-                    [EDIT]
-                </div>
+                [edit]
             {% endif %}
 
                 <div class="pcont-content">

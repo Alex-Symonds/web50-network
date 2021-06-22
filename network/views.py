@@ -149,3 +149,38 @@ def follow_toggle(request, user_id):
         return JsonResponse({
             "Error": "GET or PUT request required."
         }, status=400)
+
+#from django.views.decorators.csrf import csrf_exempt
+#@csrf_exempt
+def posts(request):
+    if request.method == "POST":
+        posted_form = NewPostForm(request.POST)
+        if posted_form.is_valid():
+            new_content = posted_form.cleaned_data["content"]
+            u = request.user
+
+            npo = Post(poster=u, content=new_content)
+            npo.save()
+            return HttpResponseRedirect(reverse("index"))
+
+    elif request.method == "PUT":
+        try:
+            u = request.user
+            data = json.loads(request.body)
+            post_id = data.get("id")
+            new_content = data.get("editted_content")
+
+            this_post = Post.objects.get(id=post_id)
+            this_post.content = new_content
+            this_post.save()
+
+            return JsonResponse({
+                "message": "Post editted successfully."
+            }, status=201)
+        except:
+            return JsonResponse({
+                "message": "Something went wrong, but at least the path was ok."
+            }, status=500)            
+
+        
+ 

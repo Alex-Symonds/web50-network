@@ -96,7 +96,7 @@
 
         </div>
         {% empty %}
-            You haven't / This user hasn't posted anything yet. (JS for this?)
+            {% if profile_name == user.username %} You haven't {% else %} This user hasn't {% endif %}posted anything yet.
         {% endfor %}
     </div>
 

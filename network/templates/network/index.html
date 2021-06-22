@@ -5,7 +5,7 @@
 {% if form %}
     <div id="add-post">
         <h2>New Post</h2>
-        <form action="{% url 'index' %}" method="POST">
+        <form action="{% url 'posts' %}" method="POST">
             {% csrf_token %}
             {{ form }}
             <input value="Post" type="submit">
@@ -76,11 +76,11 @@
 
             {% if user.is_authenticated and user.username == post.poster.username %}
                 <div class="pcont-edit">
-                    [EDIT]
+                    <button class="edit_btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}">edit</button>
                 </div>
             {% endif %}
 
-                <div class="pcont-content">
+                <div class="pcont-content" id="post_content_{{ post.id }}">
                     {{ post.content }}
                 </div>
 
