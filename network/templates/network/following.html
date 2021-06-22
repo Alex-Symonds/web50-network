@@ -2,8 +2,58 @@
 
 {% block body %}
 
+{% if page.has_other_pages %}
+    <nav aria-label="See more posts">
+        <ul class="pagination">
+
+    {% if page.paginator.num_pages > 2 %}
+        {% if page.number > 1 %}
+            <li class="page-item"><a class="page-link" href="?page=1">Newest</a></li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Newest</span>
+            </li>
+        {% endif %}
+    {% endif %}
+
+    {% if page.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>
+    {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">---</span>
+            </li>
+    {% endif %}
+
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">
+                {{ page.number }} of {{ page.paginator.num_pages }}
+                <span class="sr-only">(current)</span>
+                </span>
+            </li>
+
+    {% if page.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
+    {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">---</span>
+            </li>
+    {% endif %}
+
+    {% if page.paginator.num_pages > 2 %}
+        {% if page.number < page.paginator.num_pages %}
+            <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Oldest</a></li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Oldest</span>
+            </li>
+        {% endif %}
+    {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
     <div id="all-posts">
-        {% for post in posts %}
+        {% for post in page %}
             <div class="post">
                 <div class="pcont-user">
                     <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username }}</a>
