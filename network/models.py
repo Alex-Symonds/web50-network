@@ -12,6 +12,9 @@ class Post(models.Model):
     content = models.TextField()
     likes = models.ManyToManyField(User, related_name="liked")
 
+    def count_likes(self):
+        return self.likes.count()
+
     def index_fields(self):
         return {
             "username": self.poster.username,

@@ -25,12 +25,8 @@ def index(request):
 
     data = Post.objects.all().order_by("-created_on")
 
-    posts = []
-    for p in range(data.count()):
-        posts.append(data[p].index_fields())
-
     return render(request, "network/index.html", {
-        "posts": posts,
+        "posts": data,
         "form": NewPostForm
     })
 
@@ -91,16 +87,13 @@ def profile(request, user_id):
     target_user = User.objects.get(id=user_id)
 
     data = Post.objects.filter(poster=target_user).order_by("-created_on")
-    posts = []
-    for p in range(data.count()):
-        posts.append(data[p].index_fields())
-    
+
     return render(request, "network/profile.html", {
         "following_count": target_user.following.count(),
         "followers_count": target_user.followers.all().count(),
         "profile_name": target_user.username,
         "profile_id": user_id,
-        "posts": posts
+        "posts": data
     })
 
 
@@ -109,12 +102,8 @@ def following(request):
     user = User.objects.get(username=request.user)
     fposts = Post.objects.filter(poster__in=user.following.all())
 
-    posts = []
-    for p in range(fposts.count()):
-        posts.append(fposts[p].index_fields())
-
     return render(request, "network/following.html", {
-        "posts": posts
+        "posts": fposts
     })
 
 

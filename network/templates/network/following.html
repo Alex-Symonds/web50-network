@@ -6,13 +6,13 @@
         {% for post in posts %}
             <div class="post">
                 <div class="pcont-user">
-                    <a href="{% url 'profile' post.user_id %}">{{  post.username }}</a>
+                    <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username }}</a>
                 </div>
                 <div class="pcont-time">
                     {{  post.created_on }}
                 </div>
 
-            {% if user.is_authenticated and user.username == post.username %}
+            {% if user.is_authenticated and user.username == post.poster.username %}
                 <div class="pcont-edit">
                     [EDIT]
                 </div>
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="pcont-likes">
-                    {{ post.like_count }} likes
+                    {{ post.count_likes }} likes
                 </div>
 
             </div>
