@@ -10,6 +10,8 @@ from django.http import JsonResponse
 from .models import User, Post
 from .forms import NewPostForm
 
+from django.core.paginator import Paginator
+MAX_POSTS_PER_PAGE = 10
 
 def index(request):
 
@@ -24,14 +26,14 @@ def index(request):
             return HttpResponseRedirect(reverse("index"))
 
     data = Post.objects.all().order_by("-created_on")
-
-    posts = []
-    for p in range(data.count()):
-        posts.append(data[p].index_fields())
+    p = Paginator(data, MAX_POSTS_PER_PAGE)
+    
+    page_num = request.GET.get("page")
+    req_page = p.get_page(page_num)
 
     return render(request, "network/index.html", {
-        "posts": posts,
-        "form": NewPostForm
+        "form": NewPostForm,
+        "page": req_page
     })
 
 def login_view(request):
@@ -91,16 +93,18 @@ def profile(request, user_id):
     target_user = User.objects.get(id=user_id)
 
     data = Post.objects.filter(poster=target_user).order_by("-created_on")
-    posts = []
-    for p in range(data.count()):
-        posts.append(data[p].index_fields())
+    p = Paginator(data, MAX_POSTS_PER_PAGE)
     
+    page_num = request.GET.get("page")
+    req_page = p.get_page(page_num)
+
+
     return render(request, "network/profile.html", {
         "following_count": target_user.following.count(),
         "followers_count": target_user.followers.all().count(),
         "profile_name": target_user.username,
         "profile_id": user_id,
-        "posts": posts
+        "page": req_page
     })
 
 
@@ -109,12 +113,12 @@ def following(request):
     user = User.objects.get(username=request.user)
     fposts = Post.objects.filter(poster__in=user.following.all())
 
-    posts = []
-    for p in range(fposts.count()):
-        posts.append(fposts[p].index_fields())
+    p = Paginator(fposts, MAX_POSTS_PER_PAGE)
+    page_num = request.GET.get("page")
+    req_page = p.get_page(page_num)
 
     return render(request, "network/following.html", {
-        "posts": posts
+        "page": req_page
     })
 
 
