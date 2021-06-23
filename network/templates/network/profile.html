@@ -12,12 +12,7 @@
     Followers: <span id="num-followers">{{ followers_count }}</span>
 
     {% if user.is_authenticated and user.username != profile_user.username %}
-        <form id="follow_toggle_form" onsubmit="follow_toggle(); return false" >
-            {% csrf_token %}
-            <input type="hidden" id="follow_target_id" name="follow_target_id" value={{ profile_user.id }}>
-            <input type="hidden" id="follow_status" name="follow_status" value="?">
-            <input type="submit" id="follow_btn" value="loading..." onload="load_follow_btn()">
-        </form>
+        <button id="follower_toggle" data-id="{{ profile_user.id }}" data-status="?" data-viewname="follow">loading...</button>
     {% endif %}
 
     <div id="profile_posts_cont">

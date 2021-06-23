@@ -116,7 +116,8 @@ def follow_toggle(request, user_id):
 
     if request.method == "PUT":
         data = json.loads(request.body)
-        want_follow = data.get("want_follow")
+        #want_follow = data.get("want_follow") # this is from before my unified toggle function
+        want_follow = data.get("toggled_status")
         if want_follow is not None:
             if want_follow:
                 current_user.following.add(target_user)
@@ -176,12 +177,14 @@ def posts(request):
 
 
 def likes(request, post_id):
+
     if request.method == "PUT":
         # Read in the JSON from the user
         data = json.loads(request.body)
-        like_now = data.get("is_liked")
+        #like_now = data.get("is_liked") # this is from before my unified toggle function
+        like_now = data.get("toggled_status")
 
-        # Set user and recorded like status
+        # Set user and previous like status
         user = request.user
         like_before = user.liked.filter(id=post_id).exists()
 

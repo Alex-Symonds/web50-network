@@ -9,11 +9,81 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners to any/all like buttons
     document.querySelectorAll('.like_btn').forEach(btn => {
         load_like_button(btn);
-        btn.addEventListener('click', function(e) {
-            toggle_like(e);
-        })
     })
 })
+
+
+// ==========================================================================================
+// TOGGLING (likes and followers)
+// ------------------------------------------------------------------------------------------
+
+// Toggle the status of something, updating the database and the page.
+function toggle(e){
+
+    // Stop the page from reloading afterwards
+    e.preventDefault();
+
+    // Determine the toggled status
+    const previous_status = e.target.dataset.status;
+    if (previous_status === 'true' || previous_status === 'false'){
+        // Toggling, so reverse the current status
+        var toggled_status = previous_status === 'false';
+
+    } else {
+        // Something went wrong with loading the button so .dataset.status is still a default value
+        console.log('Error: Toggle button failed to load (status is not a boolean).');
+        return;
+    }
+
+    // Prepare for CSRF validation
+    var csrftoken = getCookie('csrftoken');
+    var headers = new Headers();
+    headers.append('X-CSRFToken', csrftoken);
+
+    // Send to server
+    const view_name = e.target.dataset.viewname;
+    fetch(`/${view_name}/${e.target.dataset.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            'toggled_status': toggled_status
+        }),
+        headers: headers,
+        credentials: 'include'
+    })
+    .then(() => {
+        update_toggled_page(view_name, toggled_status, e);
+    })
+    .catch(error =>{
+        console.log('Error: ', error);
+    });
+    
+}
+
+// Increment or decrement a counter span.
+function update_counter(want_increment, span_id){
+    const counter_span = document.querySelector(`#${span_id}`);
+    if (counter_span){
+        var cval = parseInt(counter_span.innerHTML);
+        if (want_increment){
+            cval++;
+        } else {
+            cval--;
+        }
+        counter_span.innerHTML = cval;
+    }
+}
+
+// Update the page
+function update_toggled_page(toggle_type, toggled_status, e){
+    if (toggle_type === 'follow'){
+        update_follow_btn(toggled_status);
+        update_counter(toggled_status, 'num-followers');
+
+    } else if (toggle_type === 'likes'){
+        update_like_button(e.target, toggled_status);
+        update_counter(toggled_status, `num_likes_${e.target.dataset.id}`);
+    }
+}
 
 
 // ==========================================================================================
@@ -22,6 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Check database to get the initial like status for this post, then update the button
 function load_like_button(btn){
+
+    // Add toggle event when clicked
+    btn.addEventListener('click', function(e) {
+        toggle(e);
+    })
+
+    // Set initial display value
     fetch(`/likes/${btn.dataset.id}`)
     .then(response => response.json())
     .then(data => {
@@ -47,63 +124,7 @@ function update_like_button(btn, is_liked){
     btn.innerHTML = new_innerHTML; 
 }
 
-// Increment or decrement a likes counter
-function update_like_counter(btn, want_increment){
-    const counter_id = `num_likes_${btn.dataset.id}`;
-    counter_span = document.querySelector(`#${counter_id}`);
 
-    var counter = parseInt(counter_span.innerHTML);
-    if (want_increment){
-        counter++;
-    } else {
-        counter--;
-    }
-
-    counter_span.innerHTML = counter;
-}
-
-// Toggle like status, updating the database and the page.
-function toggle_like(e){
-
-    // Stop the page from reloading afterwards
-    e.preventDefault();
-
-    // Reverse the previous status
-    const liked_before = e.target.dataset.status;
-    if (liked_before == 'true'){
-        var like_now = false;
-    } else if (liked_before == 'false'){
-        var like_now = true;
-    } else {
-        // Something went wrong with load_like_button(...) and .dataset.status is still the default value
-        console.log('Error: Like button failed to load (status is not a boolean).');
-        return;
-    }
-
-    // Prepare for CSRF validation
-    var csrftoken = getCookie('csrftoken');
-    var headers = new Headers();
-    headers.append('X-CSRFToken', csrftoken);
-
-    // Send to server
-    fetch(`/likes/${e.target.dataset.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            'is_liked': like_now
-        }),
-        headers: headers,
-        credentials: 'include'
-    })
-    .then(() => {
-        // Update the page
-        update_like_button(e.target, like_now);
-        update_like_counter(e.target, like_now);
-    })
-    .catch(error =>{
-        console.log('Error: ', error);
-    });
-    
-}
 
 
 // ==========================================================================================
