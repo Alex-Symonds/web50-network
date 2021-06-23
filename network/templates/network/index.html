@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="pcont-likes">
-                    {{ post.count_likes }} likes
+                    {% if user.is_authenticated and user.username != post.poster.username %}<button class="like_btn" data-id="{{ post.id }}" data-status="?">+/-</button>{% endif %} <span class="likes_count" id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> likes
                 </div>
 
             </div>

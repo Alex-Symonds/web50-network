@@ -6,21 +6,51 @@
 {% endblock %}
 
 {% block body %}
-    <h2>{{ profile_name }}</h2>
+    <h2>{{ profile_user.username }}</h2>
 
     Following: {{ following_count }}
     Followers: <span id="num-followers">{{ followers_count }}</span>
 
-    {% if user.is_authenticated and user.username != profile_name %}
+    {% if user.is_authenticated and user.username != profile_user.username %}
         <form id="follow_toggle_form" onsubmit="follow_toggle(); return false" >
             {% csrf_token %}
-            <input type="hidden" id="follow_target_id" name="follow_target_id" value={{ profile_id }}>
+            <input type="hidden" id="follow_target_id" name="follow_target_id" value={{ profile_user.id }}>
             <input type="hidden" id="follow_status" name="follow_status" value="?">
             <input type="submit" id="follow_btn" value="loading..." onload="load_follow_btn()">
         </form>
     {% endif %}
 
-{% if page.has_other_pages %}
+    <div id="profile_posts_cont">
+        {% for post in page %}
+        <div class="post">
+            <div class="pcont-user">
+                {{  post.poster.username }}
+            </div>
+            <div class="pcont-time">
+                {{  post.created_on }}
+            </div>
+
+        {% if user.is_authenticated and user.username == post.poster.username %}
+            <div class="pcont-edit">
+                [EDIT]
+            </div>
+        {% endif %}
+
+            <div class="pcont-content">
+                {{ post.content }}
+            </div>
+
+            <div class="pcont-likes">
+                {{ post.count_likes }}
+            </div>
+
+        </div>
+        {% empty %}
+            {% if profile_name == user.username %} You haven't {% else %} This user hasn't {% endif %}posted anything yet.
+        {% endfor %}
+    </div>
+
+    {% if page.has_other_pages %}
     <nav aria-label="See more posts">
         <ul class="pagination">
 
@@ -69,37 +99,6 @@
         </ul>
     </nav>
 {% endif %}
-
-    <div id="profile_posts_cont">
-        {% for post in page %}
-        <div class="post">
-            <div class="pcont-user">
-                {{  post.poster.username }}
-            </div>
-            <div class="pcont-time">
-                {{  post.created_on }}
-            </div>
-
-        {% if user.is_authenticated and user.username == post.poster.username %}
-            <div class="pcont-edit">
-                [EDIT]
-            </div>
-        {% endif %}
-
-            <div class="pcont-content">
-                {{ post.content }}
-            </div>
-
-            <div class="pcont-likes">
-                {{ post.count_likes }}
-            </div>
-
-        </div>
-        {% empty %}
-            {% if profile_name == user.username %} You haven't {% else %} This user hasn't {% endif %}posted anything yet.
-        {% endfor %}
-    </div>
-
 
 
 {% endblock %}

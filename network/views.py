@@ -14,9 +14,9 @@ from django.core.paginator import Paginator
 MAX_POSTS_PER_PAGE = 10
 
 def index(request):
+    # Get all posts, paginate and extract one page
     data = Post.objects.all().order_by("-created_on")
     p = Paginator(data, MAX_POSTS_PER_PAGE)
-    
     page_num = request.GET.get("page")
     req_page = p.get_page(page_num)
 
@@ -79,20 +79,19 @@ def register(request):
 
 def profile(request, user_id):
 
+    # Get userobject for profile owner
     target_user = User.objects.get(id=user_id)
 
+    # Get all posts by the profile owner and paginate
     data = Post.objects.filter(poster=target_user).order_by("-created_on")
     p = Paginator(data, MAX_POSTS_PER_PAGE)
-    
     page_num = request.GET.get("page")
     req_page = p.get_page(page_num)
-
 
     return render(request, "network/profile.html", {
         "following_count": target_user.following.count(),
         "followers_count": target_user.followers.all().count(),
-        "profile_name": target_user.username,
-        "profile_id": user_id,
+        "profile_user": target_user,
         "page": req_page
     })
 
@@ -164,7 +163,7 @@ def posts(request):
                 this_post.save()
                 return JsonResponse({
                     "message": "Post editted successfully."
-                }, status=201)
+                }, status=200)
             else:
                 return JsonResponse({
                     "message": "Users can only edit their own posts."
@@ -172,8 +171,58 @@ def posts(request):
 
         except:
             return JsonResponse({
-                "message": "Something went wrong, but at least the path was ok."
+                "message": "Server problem: post was not saved."
             }, status=500)            
+
+
+def likes(request, post_id):
+    if request.method == "PUT":
+        # Read in the JSON from the user
+        data = json.loads(request.body)
+        like_now = data.get("is_liked")
+
+        # Set user and recorded like status
+        user = request.user
+        like_before = user.liked.filter(id=post_id).exists()
+
+        if like_now == like_before:
+            return JsonResponse({
+                "message": "OK"
+            }, status=200)
+
+        else:
+            post = Post.objects.get(id=post_id)
+
+            # If the user likes a previously unliked post, add it to the list
+            if like_now and not like_before:
+                user.liked.add(post)
+                return JsonResponse({
+                    "message": "Post liked successfully."
+                }, status=200)
+
+            # If the user un-likes a previously liked post, remove it from the list
+            elif not like_now and like_before:
+                user.liked.remove(post)
+                return JsonResponse({
+                    "message": "Post un-liked successfully."
+                }, status=200)
+
+    elif request.method == "GET":
+        user = request.user
+        post = Post.objects.get(id=post_id)
+        
+        return JsonResponse({
+            "liked": post in user.liked.all()
+        })
+
+          
+
+
+    
+
+
+        
+            
 
         
  
