@@ -115,15 +115,15 @@ function update_like_button(btn, is_liked){
     btn.dataset.status = is_liked;
 
     // Prepare cosmetic settings
-    var new_innerHTML = '';
     if (is_liked){
-        new_innerHTML = 'liked';
+        btn.classList.remove('unliked');
+        btn.classList.add('liked');
     } else {
-        new_innerHTML = '_____';
-    } 
-    btn.innerHTML = new_innerHTML; 
+        btn.classList.remove('liked');
+        btn.classList.add('unliked');       
+    }  
+    btn.blur();
 }
-
 
 
 
@@ -142,6 +142,7 @@ function get_edit_btn_id(post_id){
 
 function post_edit_mode(post_id){
     // Replace the post text with a textarea and a save button.
+
     // Grab the div for the contents
     cont_div = document.querySelector(get_edit_div_id(post_id));
   
@@ -211,7 +212,7 @@ function post_read_mode(post_id, editted_content){
 
     // Unhide the edit button
     btn = document.querySelector(get_edit_btn_id(post_id));
-    btn.style.display = 'block';
+    btn.style.display = 'inline';
 }
 
 
