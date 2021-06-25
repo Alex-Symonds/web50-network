@@ -10,12 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.like_btn').forEach(btn => {
         load_like_button(btn);
     })
-
-    document.querySelectorAll('.like_btn_replacement').forEach(ele =>{
-        ele.addEventListener('click', function(){
-            this.innerHTML = 'really? you narcissist. :/';
-        })
-    })
 })
 
 

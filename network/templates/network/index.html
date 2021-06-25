@@ -36,14 +36,15 @@
                             </div>
                             <div class="col-2">
                                 <div class="pcont-likes">
+    {% if user.is_authenticated and user.username != post.poster.username %}
                                     <p class="pcont-likecount">
                                         <span class="likes_count" id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> likes
                                     </p>
-    {% if user.is_authenticated and user.username != post.poster.username %}
                                     <button class="like_btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
-    {% elif user.is_authenticated and user.username == post.poster.username %}
-                                    <div class="like_btn_replacement">
-                                        can't like your own post
+    {% else %}
+                                    <div class="like_pane_replacement">
+                                        <p class="pcont-likecount">likes</p>
+                                        <p class="num-inc-likes">{{ post.count_likes }}</p>
                                     </div>
     {% endif %} 
                                 </div>

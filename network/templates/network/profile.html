@@ -7,29 +7,38 @@
 
 {% block body %}
     <div class="container">
+
         <div class="row">
             <div class="col-12">
                 <h2>{{ profile_user.username }}'s Profile</h2>
-{% if user.is_authenticated and user.username != profile_user.username %}
             </div>
         </div>
 
+
         <div class="row">
+
             <div class="col-3 follow-pane">
                 <h3>following {{ profile_user.username }}</h3>
                 <span class="follow-count-num" id="num-followers">{{ followers_count }}</span>
-                <button id="follower_toggle" class="follow-btn" data-id="{{ profile_user.id }}" data-status="?" data-viewname="follow">loading...</button>{% endif %}
+{% if user.is_authenticated and user.username != profile_user.username %}
+                <button id="follower_toggle" class="follow-btn" data-id="{{ profile_user.id }}" data-status="?" data-viewname="follow">loading...</button>
+{% endif %}
             </div>
+
             <div class="col-3 follow-pane">
                 <h3>{{ profile_user.username }} follows</h3>
                 <span class="follow-count-num">{{ following_count }}</span>
             </div>
+
         </div>
   
+
         <div class="row" id="profile-posts">
             <div class="col-12">
+
                 <h3>{{ profile_user.username }}'s posts</h3>
                 <div id="profile_posts_cont">
+
 {% for post in page %}
                     <div class="post">
                         <div class="row pheader">
