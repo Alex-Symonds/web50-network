@@ -29,11 +29,13 @@ function update_follow_btn(is_followed){
 
     if (is_followed){
         button.innerHTML='following';
-        button.className='following';
+        button.classList.add('following');
+        button.classList.remove('notfollowing');
         button.dataset.status=true;
     }else{
         button.innerHTML='not following';
-        button.className='not-following';
+        button.classList.remove('following');
+        button.classList.add('notfollowing');
         button.dataset.status=false;
     }   
 }

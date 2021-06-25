@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.like_btn').forEach(btn => {
         load_like_button(btn);
     })
+
+    document.querySelectorAll('.like_btn_replacement').forEach(ele =>{
+        ele.addEventListener('click', function(){
+            this.innerHTML = 'really? you narcissist. :/';
+        })
+    })
 })
 
 
@@ -158,6 +164,8 @@ function post_edit_mode(post_id){
     save_btn = document.createElement('input');
     save_btn.type = 'submit';
     save_btn.value = 'save';
+    save_btn.className = 'my-btn';
+    save_btn.id = 'save-post-btn';
     save_btn.addEventListener('click', function(e){
         update_post(e, post_id);
     });

@@ -35,51 +35,46 @@ textarea{
 }
 
 .pheader{
+    font-size: 0.85rem;
+    color: #ddd;
     padding: 0.2rem;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #555;
 }
 .pbody{
     margin-top: 0.3rem;
 }
 
-.pcont-time{
-    text-align: right;
-    min-width: 7rem;
-    font-size: 0.8rem;
-    color: #ddd;
-}
-
 .pcont-user a{
-    color: white;
+    font-weight: 1.2rem;
+    font-weight: bold;
+    color: rgb(255, 238, 0);
 }
 .pcont-user a:hover{
-    color:rgb(0, 174, 255);
+    color:white;
 }
 
 .pcont-edit{
     padding: 0.3rem;
 }
-.pcont-edit button, .like_btn_replacement button, .my-btn{
+
+.my-btn{
     padding: 0.1rem;
     border: 1px solid rgb(0, 174, 255);
     border-radius: 3px;
     background: #222;
     color: rgb(198, 237, 255);
     font-size: 0.9rem;
+    min-width: 3rem;
 }
-.pcont-edit button:hover, .like_btn_replacement button:hover, .my-btn:hover{
+.my-btn:hover{
     background: #282828;
     box-shadow: 0 0 4px 0 rgba(220, 244, 255, 0.623);
 }
-.pcont-edit button{
+.edit_btn{
     margin-top: 0.8rem;
-    width: 15%;
+    width: 100%;
 }
-.like_btn_replacement button{
-    width: 90%;
-    margin-top: 0.4rem;
-}
-#new-post-btn{
+#new-post-btn, #save-post-btn{
     width: 100%;
     padding: 0.5rem;
     font-size: 1.2rem;
@@ -107,13 +102,18 @@ textarea{
 
 .like_btn, .like_btn_replacement {
     width: 100%;
-    height: 2rem;
-    margin-top: 0.3rem;    
+    height: 2rem;  
 }
 .like_btn_replacement{
-    height: 2.75rem;
+    height: 2.25rem;
+    font-size: 0.6rem;
+    line-height: 0.6rem;
+    color: #666;
+    padding: 4px 2px;
 }
 .like_btn{
+    margin-top: 0.3rem;
+
     background: none;
     -webkit-background-size: contain;
     -moz-background-size: contain;
@@ -128,4 +128,57 @@ textarea{
 }
 .liked{
     background-image: url(thumb_rounded_full.svg);
+}
+
+
+
+
+.follow-btn{
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+    width: 100%;
+}
+
+.follow-btn:hover{
+    box-shadow: 0 0 4px rgb(208, 108, 255);
+}
+
+.following{
+    background: rgb(174, 0, 255);
+    border: 1px solid rgb(88, 0, 129);
+}
+.notfollowing{
+    background: #444;
+    border: none;
+    border-top: 1px solid #444;
+}
+.notfollowing:hover{
+    background: #666;
+    border: 1px solid rgb(208, 108, 255);
+    margin-top: -1px;
+}
+
+.follow-pane{
+    border: 1px solid #555;
+    border-radius: 4px;
+    margin: 3rem 1rem 0;
+    text-align: center;
+    padding: 0;
+}
+
+.follow-pane h3{
+    border-bottom: 1px solid rgb(174, 0, 255);
+    padding-bottom: 0.3rem;
+}
+
+.follow-count-num{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#profile-posts{
+    margin-top: 4rem;
 }
