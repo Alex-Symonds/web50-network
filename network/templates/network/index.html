@@ -4,21 +4,21 @@
     <div class="container">
 {% if form %}
         <div class="row justify-content-center">
-            <div class="col-6 order-2">
+            <div class="col-12 col-lg-6 order-1 order-lg-2">
                 <div id="add-post">
                     <h2>Join in</h2>
                     <form action="{% url 'posts' %}" method="POST">
                         {% csrf_token %}
                         {{ form }}
-                        <input value="post" type="submit" class="my-btn" id="new-post-btn">
+                        <input value="post" type="submit" class="post-solid-btn" id="new-post-btn">
                     </form>
                 </div>
             </div>
 
 {% endif %}
 
-            <div class="col-6 order-1">
-                <h2>Main</h2>
+            <div class="col-12 col-lg-6 order-2 order-lg-1">
+                <h2>Discussion</h2>
                 <div id="all-posts">
             
 {% for post in page %}
@@ -34,13 +34,15 @@
                                     {{ post.content }}
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3 col-sm-2 col-lg-3 col-xl-2">
                                 <div class="pcont-likes">
     {% if user.is_authenticated and user.username != post.poster.username %}
                                     <p class="pcont-likecount">
                                         <span class="likes_count" id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> likes
                                     </p>
-                                    <button class="like_btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
+                                    <div class="like_btn_container">
+                                        <button class="like_btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
+                                    </div>
     {% else %}
                                     <div class="like_pane_replacement">
                                         <p class="pcont-likecount">likes</p>
@@ -49,7 +51,7 @@
     {% endif %} 
                                 </div>
     {% if user.is_authenticated and user.username == post.poster.username %}
-                                <button class="edit_btn my-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}">edit</button>
+                                <button class="edit_btn post-hollow-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}">edit</button>
     {% endif %}
                             </div>
                         </div>
@@ -62,8 +64,8 @@
 
 
 {% if page.has_other_pages %}
-                <nav aria-label="See more posts">
-                    <ul class="pagination">
+                <nav aria-label="See more posts" id="pagination-nav">
+                    <ul class="pagination justify-content-center">
 
     {% if page.paginator.num_pages > 2 %}
         {% if page.number > 1 %}

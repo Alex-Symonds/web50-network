@@ -17,7 +17,7 @@
 
         <div class="row">
 
-            <div class="col-3 follow-pane">
+            <div class="col-11 col-sm-5 col-lg-3 follow-pane">
                 <h3>following {{ profile_user.username }}</h3>
                 <span class="follow-count-num" id="num-followers">{{ followers_count }}</span>
 {% if user.is_authenticated and user.username != profile_user.username %}
@@ -25,7 +25,7 @@
 {% endif %}
             </div>
 
-            <div class="col-3 follow-pane">
+            <div class="col-11 col-sm-5 col-lg-3 follow-pane">
                 <h3>{{ profile_user.username }} follows</h3>
                 <span class="follow-count-num">{{ following_count }}</span>
             </div>
@@ -43,7 +43,7 @@
                     <div class="post">
                         <div class="row pheader">
                             <div class="col-12 pcont-user">
-                                {{  post.created_on }}
+                                By <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username }}</a> on {{  post.created_on }}
                             </div>
                         </div>
                         <div class="row pbody">    
@@ -52,33 +52,34 @@
                                     {{ post.content }}
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3 col-sm-2">
                                 <div class="pcont-likes">
+    {% if user.is_authenticated and user.username != post.poster.username %}
                                     <p class="pcont-likecount">
                                         <span class="likes_count" id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> likes
                                     </p>
-    {% if user.is_authenticated and user.username != post.poster.username %}
                                     <button class="like_btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
-    {% elif user.is_authenticated and user.username == post.poster.username %}
-                                    <div class="like_btn_replacement">
-                                        can't like your own post
+    {% else %}
+                                    <div class="like_pane_replacement">
+                                        <p class="pcont-likecount">likes</p>
+                                        <p class="num-inc-likes">{{ post.count_likes }}</p>
                                     </div>
     {% endif %} 
                                 </div>
     {% if user.is_authenticated and user.username == post.poster.username %}
-                                <button class="edit_btn my-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}">edit</button>
+                                <button class="edit_btn post-hollow-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}">edit</button>
     {% endif %}
                             </div>
                         </div>
                     </div>
 {% empty %}
-    {% if profile_name == user.username %} You haven't {% else %} This user hasn't {% endif %}posted anything yet.
+                    {% if profile_name == user.username %} You haven't {% else %} This user hasn't {% endif %}posted anything yet.
 {% endfor %}
                 </div>
 
 {% if page.has_other_pages %}
                 <nav aria-label="See more posts">
-                    <ul class="pagination">
+                    <ul class="pagination justify-content-center">
 
     {% if page.paginator.num_pages > 2 %}
         {% if page.number > 1 %}

@@ -1,0 +1,343 @@
+// Fonts
+$f_branding: 'Lobster', cursive;
+$f_secondary: 'Open Sans', sans-serif;
+
+// Colour pallette
+$c_like: rgb(0, 216, 0);
+$c_links: rgb(255, 238, 0);
+$c_links_hv: rgb(255, 249, 167);
+
+$c_branding: rgb(93, 209, 255);
+
+$c_post: rgb(0, 174, 255);
+$c_post_dark: rgb(0, 66, 97);
+$c_post_glow: rgba(220, 244, 255, 0.623);
+$c_post_glow_border: rgba(220, 244, 255, 0.823);
+
+$c_follow: rgb(174, 0, 255);
+$c_follow_dark: rgb(88, 0, 129);
+$c_follow_glow: rgb(208, 108, 255);
+$c_follow_glow_border: rgb(228, 170, 255);
+
+$c_bg_main:#333;
+
+$c_txt_main: white;
+$c_text_subtle: #ddd;
+
+$c_bg_input: #222;
+
+$c_bg_hollow: #282828;
+$c_bghv_hollow: #2d2d2d;
+
+$c_border_primary: #777;
+$c_border_secondary: #555;
+
+
+/* ALL PAGES */
+body{
+    background: $c_bg_main;
+    color: $c_txt_main;
+    font-family: $f_secondary; 
+}
+
+.body{
+    margin-top: 2rem;
+    font-family: $f_secondary; 
+}
+
+h2{
+    color: $c_branding;
+}
+
+.my-navbar{
+    background: $c_bg_hollow;
+    border-bottom: 1px solid $c_border_secondary;
+}
+
+a.navbar-brand{
+    margin-left: 1rem;
+    padding: 3px 20px;
+
+    font-size: 2.5rem;
+    font-family: $f_branding;
+
+    color: $c_branding;
+    border: 2px solid $c_branding;
+    border-radius: 50%;
+}
+
+.nav-item{
+    padding: 0 0.4rem;
+
+    font-size: 1.3rem;
+    font-family: $f_branding;
+    
+    a{
+        color: $c_links;
+        border: 1px solid $c_bg_hollow;
+    }
+
+    a:hover{
+        color: $c_links_hv;
+        border: 1px solid $c_bghv_hollow;
+        border: 1px solid $c_links;
+        border-radius: 7px;
+        box-shadow: 0 0 4px white;
+    }
+}
+
+textarea, input[type=text], input[type=password], input[type=email]{
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+
+    color: $c_txt_main;
+    background: $c_bg_input;
+
+    border: 1px solid $c_border_primary;
+    border-radius: 4px;
+
+    &:focus, &:active{
+        color: $c_txt_main;
+        background: $c_bg_input;        
+    }
+}
+
+/* posts stuff */
+
+.all-posts{
+    border: none;
+    border-top: 1px solid $c_border_primary;  
+}
+.post{
+    margin-top: 0.2rem;
+    padding: 0.4rem 0.8rem;
+    border-top: 2px solid $c_border_primary;
+}
+
+.pheader{
+    padding: 0.2rem;
+    font-size: 0.85rem;
+    color: $c_text_subtle;
+    border-bottom: 1px solid $c_border_secondary;
+}
+.pbody{
+    margin-top: 0.8rem;
+}
+
+.pcont-user a{
+    font-weight: 1.2rem;
+    font-weight: bold;
+    color: $c_links;
+
+    &:hover{
+        color:$c_txt_main;
+    }
+}
+
+.post-hollow-btn{
+    width: 100%;
+    min-width: 3rem;
+    margin-top: 0.8rem;
+    padding: 0.1rem;
+
+    font-size: 0.9rem;
+
+    color: $c_txt_main;
+    background: $c_bg_hollow;
+
+    border: 1px solid $c_post;
+    border-radius: 3px;
+
+    &:hover{
+        background: $c_bghv_hollow;
+        box-shadow: 0 0 4px 0 $c_post_glow;
+    }
+}
+
+.post-solid-btn{
+    width: 100%;
+    padding: 0.5rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    color: $c_txt_main;
+
+    background: $c_post;
+    border: 1px solid $c_post_dark;
+    border-radius: 3px;
+
+    &:hover {
+        border: 1px solid $c_post_glow_border;
+        box-shadow: 0 0 4px 0 $c_post_glow;
+    }
+}
+
+.pcont-likes{
+    width: 100%;
+    text-align: center;
+    background: $c_bg_hollow;
+    border: 1px solid $c_bg_input;
+    border-radius: 4px;
+}
+
+.like_btn_container{
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: $c_bg_hollow;
+    border: 1px solid $c_bg_hollow;
+    &:hover{
+        background: $c_bghv_hollow;
+        border: 1px solid $c_like;
+        box-shadow: 0 0 4px $c_post_glow;
+    }
+}
+
+.pcont-likecount{
+    /* this is the "heading" of the likes pane */
+    width: 100%;
+    margin-bottom: 0;
+
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+    color: black;
+    background: $c_like;
+
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.num-inc-likes{
+    /* this is the big ol' number of likes, replacing the thumb icon for self and anons */
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.like_btn{
+    /* thumb icon button */
+    width: 100%;
+    height: 2rem;  
+    margin-top: 0.3rem;
+
+    /* Note: the background image for the like icon will be loaded by a "liked" or "unliked" class applied to the same button */
+    background: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    
+    border: none;
+}
+.unliked{
+    background-image: url(thumb_rounded_empty.svg);
+}
+.liked{
+    background-image: url(thumb_rounded_full.svg);
+}
+
+#pagination-nav{
+    margin-top: 2rem;
+}
+
+
+.page-item.disabled .page-link {
+    color: $c_border_primary;
+    background: $c_bg_main;
+    border-color: $c_border_secondary;
+}
+
+.page-item.active .page-link {
+    color: $c_txt_main;
+    border-color: $c_border_secondary;
+    background: $c_bg_main;
+}
+
+a.page-link {
+
+    color: $c_txt_main;
+    background: $c_post;
+    border-color: $c_border_secondary;
+    
+
+    &:hover{
+        color: $c_txt_main;
+        background: $c_post;        
+        border-color:$c_post_glow_border;
+        box-shadow: 0 0 4px $c_post_glow;
+    }
+}
+
+
+
+/* Add post only */
+#add-post{
+    margin-bottom: 2rem;
+}
+
+
+
+/* PROFILE PAGE ONLY */
+.follow-pane{
+    margin: 3rem 1rem 0;
+    padding: 0;
+
+    text-align: center;
+
+    border: 1px solid $c_border_secondary;
+    border-radius: 4px;
+
+    h3{
+        padding: 0.5rem 0;
+        /*padding-bottom: 0.3rem;*/
+        border-bottom: 1px solid $c_follow;
+    }
+}
+
+.follow-count-num{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.follow-btn{
+    /* the button should also have a second class applied, "following" or "notfollowing" */
+    width: 100%;
+    padding: 0.3rem 0;
+
+    font-size: 0.9rem;
+
+    color: $c_txt_main;
+
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    &:hover{
+        box-shadow: 0 0 4px $c_follow_glow;
+    }
+}
+.following{
+    background: $c_follow;
+    border: 1px solid $c_follow_dark;
+
+    &:hover{
+        border: 1px solid $c_follow_glow_border;
+    }
+}
+.notfollowing{
+    background: $c_bg_hollow;
+    border: 1px solid $c_follow;
+
+    &:hover{
+        background: $c_bghv_hollow;
+        border: 1px solid $c_follow_glow;
+    }
+}
+
+#profile-posts{
+    margin-top: 4rem;
+}
