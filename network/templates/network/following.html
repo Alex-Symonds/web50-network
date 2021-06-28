@@ -55,7 +55,7 @@
 
     {% if page.has_other_pages %}
         <nav aria-label="See more posts">
-            <ul class="pagination justify-content-center">
+            <ul class="pagination justify-content-center" id="pagination-nav">
 
         {% if page.paginator.num_pages > 2 %}
             {% if page.number > 1 %}

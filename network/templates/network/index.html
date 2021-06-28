@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="container">
-{% if form %}
+{% if form and user.is_authenticated %}
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 order-1 order-lg-2">
                 <div id="add-post">
@@ -15,9 +15,13 @@
                 </div>
             </div>
 
-{% endif %}
 
             <div class="col-12 col-lg-6 order-2 order-lg-1">
+{% else %}
+            <div class="col-12">
+{% endif %}
+
+            
                 <h2>Discussion</h2>
                 <div id="all-posts">
             

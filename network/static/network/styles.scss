@@ -45,7 +45,7 @@ body{
     font-family: $f_secondary; 
 }
 
-h2{
+h2, h3{
     color: $c_branding;
 }
 
@@ -105,9 +105,10 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 /* posts stuff */
 
-.all-posts{
+#all-posts{
+    margin-top: 1rem;
     border: none;
-    border-top: 1px solid $c_border_primary;  
+    border-bottom: 1px solid $c_border_primary;  
 }
 .post{
     margin-top: 0.2rem;
@@ -242,9 +243,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 
 #pagination-nav{
-    margin-top: 2rem;
+    margin: 2rem 0 2rem;
 }
-
 
 .page-item.disabled .page-link {
     color: $c_border_primary;
@@ -294,6 +294,7 @@ a.page-link {
 
     h3{
         padding: 0.5rem 0;
+        color: $c_txt_main;
         /*padding-bottom: 0.3rem;*/
         border-bottom: 1px solid $c_follow;
     }

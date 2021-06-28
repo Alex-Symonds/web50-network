@@ -36,8 +36,8 @@
         <div class="row" id="profile-posts">
             <div class="col-12">
 
-                <h3>{{ profile_user.username }}'s posts</h3>
-                <div id="profile_posts_cont">
+                <h3>{{ profile_user.username }}'s Posts</h3>
+                <div id="all-posts">
 
 {% for post in page %}
                     <div class="post">
@@ -79,7 +79,7 @@
 
 {% if page.has_other_pages %}
                 <nav aria-label="See more posts">
-                    <ul class="pagination justify-content-center">
+                    <ul class="pagination justify-content-center" id="pagination-nav">
 
     {% if page.paginator.num_pages > 2 %}
         {% if page.number > 1 %}
