@@ -66,6 +66,11 @@ a.navbar-brand{
     border-radius: 50%;
 }
 
+.navbar-nav .nav-link{
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}
+
 .nav-item{
     padding: 0 0.4rem;
 
@@ -79,7 +84,7 @@ a.navbar-brand{
 
     a:hover{
         color: $c_links_hv;
-        border: 1px solid $c_bghv_hollow;
+        background: 1px solid $c_bghv_hollow;
         border: 1px solid $c_links;
         border-radius: 7px;
         box-shadow: 0 0 4px white;
@@ -232,7 +237,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     -moz-background-size: contain;
     -o-background-size: contain;
     background-size: contain;
-    
+
     border: none;
 }
 .unliked{
@@ -295,7 +300,6 @@ a.page-link {
     h3{
         padding: 0.5rem 0;
         color: $c_txt_main;
-        /*padding-bottom: 0.3rem;*/
         border-bottom: 1px solid $c_follow;
     }
 }

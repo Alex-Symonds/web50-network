@@ -5,7 +5,7 @@
     <script>
         num_followers = parseInt('{{followers_count|safe}}');
         user_id = '{{ profile_user.id|safe }}';
-        is_following = '{{ is_following|safe }}'.toLowerCase();
+        str_following = '{{ is_following|safe }}'.toLowerCase();
         user_isauth = '{{ user.is_authenticated }}';
         username = '{{user.username}}';
         profile = '{{ profile_user.username }}';
