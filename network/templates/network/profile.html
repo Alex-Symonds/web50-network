@@ -2,7 +2,18 @@
 
 {% load static %}
 {% block script %}
-    <script src="{% static 'network/follower.js' %}"></script>
+    <script>
+        num_followers = parseInt('{{followers_count|safe}}');
+        user_id = '{{ profile_user.id|safe }}';
+        is_following = '{{ is_following|safe }}'.toLowerCase();
+        user_isauth = '{{ user.is_authenticated }}';
+        username = '{{user.username}}';
+        profile = '{{ profile_user.username }}';
+    </script>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -16,13 +27,10 @@
 
 
         <div class="row">
-
             <div class="col-11 col-sm-5 col-lg-3 follow-pane">
                 <h3>following {{ profile_user.username }}</h3>
-                <span class="follow-count-num" id="num-followers">{{ followers_count }}</span>
-{% if user.is_authenticated and user.username != profile_user.username %}
-                <button id="follower_toggle" class="follow-btn" data-id="{{ profile_user.id }}" data-status="?" data-viewname="follow">loading...</button>
-{% endif %}
+                <div id="followers-react"></div>
+                <script src="{% static 'network/follower_react.js' %}" type="text/babel"></script>
             </div>
 
             <div class="col-11 col-sm-5 col-lg-3 follow-pane">

@@ -88,10 +88,20 @@ def profile(request, user_id):
     page_num = request.GET.get("page")
     req_page = p.get_page(page_num)
 
+    # is_following
+    is_following = False
+    try:
+        user = User.objects.get(username=request.user)
+        if target_user in user.following.all():
+            is_following = True
+    except:
+        pass
+
     return render(request, "network/profile.html", {
         "following_count": target_user.following.count(),
         "followers_count": target_user.followers.all().count(),
         "profile_user": target_user,
+        "is_following": is_following,
         "page": req_page
     })
 
@@ -116,7 +126,6 @@ def follow_toggle(request, user_id):
 
     if request.method == "PUT":
         data = json.loads(request.body)
-        #want_follow = data.get("want_follow") # this is from before my unified toggle function
         want_follow = data.get("toggled_status")
         if want_follow is not None:
             if want_follow:
@@ -181,7 +190,6 @@ def likes(request, post_id):
     if request.method == "PUT":
         # Read in the JSON from the user
         data = json.loads(request.body)
-        #like_now = data.get("is_liked") # this is from before my unified toggle function
         like_now = data.get("toggled_status")
 
         # Set user and previous like status

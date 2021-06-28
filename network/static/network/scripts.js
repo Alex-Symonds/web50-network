@@ -28,10 +28,11 @@ function toggle(e){
     if (previous_status === 'true' || previous_status === 'false'){
         // Toggling, so reverse the current status
         var toggled_status = previous_status === 'false';
-
+    
     } else {
         // Something went wrong with loading the button so .dataset.status is still a default value
         console.log('Error: Toggle button failed to load (status is not a boolean).');
+        console.log('"' + e.target.dataset.status + '" = ' + typeof e.target.dataset.status);
         return;
     }
 
@@ -75,11 +76,7 @@ function update_counter(want_increment, span_id){
 
 // Update the page
 function update_toggled_page(toggle_type, toggled_status, e){
-    if (toggle_type === 'follow'){
-        update_follow_btn(toggled_status);
-        update_counter(toggled_status, 'num-followers');
-
-    } else if (toggle_type === 'likes'){
+    if (toggle_type === 'likes'){
         update_like_button(e.target, toggled_status);
         update_counter(toggled_status, `num_likes_${e.target.dataset.id}`);
     }
