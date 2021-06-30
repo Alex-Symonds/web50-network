@@ -3,7 +3,7 @@ from django.db import models
 import datetime
 
 class User(AbstractUser):
-    following = models.ManyToManyField("self", related_name="followers", symmetrical=False)
+    following = models.ManyToManyField("self", related_name="followers", symmetrical=False, blank=True)
 
 
 class Post(models.Model):
@@ -16,5 +16,5 @@ class Post(models.Model):
         return self.likes.count()
 
     def __str__(self):
-        return f"Post #{self.id}: {self.poster.username} @ {self.created_on - datetime.timedelta(microseconds=self.created_on.microsecond)} "
+        return f"Post #{self.id}: {self.poster.username} @ {self.created_on - datetime.timedelta(microseconds=self.created_on.microsecond)}"
 

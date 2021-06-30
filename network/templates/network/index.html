@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="container">
+
 {% if form and user.is_authenticated %}
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 order-1 order-lg-2">
@@ -21,7 +22,6 @@
             <div class="col-12">
 {% endif %}
 
-            
                 <h2>Discussion</h2>
                 <div id="all-posts">
             
@@ -61,7 +61,7 @@
                         </div>
                     </div>
 {% empty %}
-                    <p> No posts. Yours can be the first! :)</p>
+                    <p> No posts. Yours can be the first! {% if not user.is_authenticated %} <a href="{% url 'register' %}">Register here</a> {% endif %} :)</p>
 {% endfor %}
                 </div>
 

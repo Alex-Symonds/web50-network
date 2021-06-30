@@ -9,7 +9,7 @@ $c_links_hv: rgb(255, 249, 167);
 
 $c_branding: rgb(93, 209, 255);
 
-$c_post: rgb(0, 174, 255);
+$c_post: rgb(0, 149, 218); /*rgb(0, 174, 255);*/
 $c_post_dark: rgb(0, 66, 97);
 $c_post_glow: rgba(220, 244, 255, 0.623);
 $c_post_glow_border: rgba(220, 244, 255, 0.823);
@@ -18,6 +18,9 @@ $c_follow: rgb(174, 0, 255);
 $c_follow_dark: rgb(88, 0, 129);
 $c_follow_glow: rgb(208, 108, 255);
 $c_follow_glow_border: rgb(228, 170, 255);
+
+$c_warning: rgb(182, 0, 0);
+$c_warning_glow: rgb(255, 207, 207);
 
 $c_bg_main:#333;
 
@@ -49,13 +52,18 @@ h2, h3{
     color: $c_branding;
 }
 
-.my-navbar{
+#my-navbar{
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.my-navbar-container{
     background: $c_bg_hollow;
     border-bottom: 1px solid $c_border_secondary;
 }
 
 a.navbar-brand{
-    margin-left: 1rem;
+    margin-left: 0;
     padding: 3px 20px;
 
     font-size: 2.5rem;
@@ -139,6 +147,19 @@ textarea, input[type=text], input[type=password], input[type=email]{
     &:hover{
         color:$c_txt_main;
     }
+}
+
+.edit_failed{
+    margin-bottom: 1rem;
+    padding: 5px 10px;
+
+    font-weight: bold;
+
+    color: $c_txt_main;
+    background: $c_warning;
+    border: 1px solid $c_txt_main;
+    border-radius: 4px;
+    box-shadow: 0 0 4px $c_warning_glow;
 }
 
 .post-hollow-btn{
@@ -239,6 +260,10 @@ textarea, input[type=text], input[type=password], input[type=email]{
     background-size: contain;
 
     border: none;
+
+    &:active, &:focus{
+        outline: none;
+    }
 }
 .unliked{
     background-image: url(thumb_rounded_empty.svg);
@@ -264,12 +289,12 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 
 a.page-link {
+    font-weight: bold;
 
     color: $c_txt_main;
     background: $c_post;
     border-color: $c_border_secondary;
     
-
     &:hover{
         color: $c_txt_main;
         background: $c_post;        

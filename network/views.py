@@ -79,7 +79,12 @@ def register(request):
 
 def profile(request, user_id):
 
-    # Get userobject for profile owner
+    if not User.objects.filter(id=user_id).exists():
+        return render(request, "network/error.html", {
+            "message": "The requested user was not found."
+        }, status=404)
+
+    # Get user object for profile owner
     target_user = User.objects.get(id=user_id)
 
     # Get all posts by the profile owner and paginate
@@ -88,17 +93,17 @@ def profile(request, user_id):
     page_num = request.GET.get("page")
     req_page = p.get_page(page_num)
 
-    # is_following
-    is_following = False
-    try:
+    # Set "is_following"
+    if request.user.is_authenticated:
         user = User.objects.get(username=request.user)
+        is_following = False
         if target_user in user.following.all():
             is_following = True
-    except:
-        pass
-
+    else:
+        is_following = False
+   
     return render(request, "network/profile.html", {
-        "following_count": target_user.following.count(),
+        "following_count": target_user.following.all().count(),
         "followers_count": target_user.followers.all().count(),
         "profile_user": target_user,
         "is_following": is_following,
@@ -109,39 +114,54 @@ def profile(request, user_id):
 
 def following(request):
     user = User.objects.get(username=request.user)
-    fposts = Post.objects.filter(poster__in=user.following.all())
 
-    p = Paginator(fposts, MAX_POSTS_PER_PAGE)
-    page_num = request.GET.get("page")
-    req_page = p.get_page(page_num)
+    if request.user.is_authenticated:
+        fposts = Post.objects.filter(poster__in=user.following.all())
 
-    return render(request, "network/following.html", {
-        "page": req_page
-    })
+        p = Paginator(fposts, MAX_POSTS_PER_PAGE)
+        page_num = request.GET.get("page")
+        req_page = p.get_page(page_num)
+
+        return render(request, "network/following.html", {
+            "page": req_page
+        })
+    else:
+        return render(request, "network/error.html", {
+            "message": "You must be logged in to view this page."
+        }, status=401)        
 
 
 def follow_toggle(request, user_id):
+
+    if not request.user.is_authenticated:
+        return render(request, "network/error.html", {
+            "message": "You must be logged in to follow someone."
+        }, status=401)
+
     target_user = User.objects.get(id=user_id)
     current_user = request.user
 
     if request.method == "PUT":
         data = json.loads(request.body)
         want_follow = data.get("toggled_status")
+
         if want_follow is not None:
             if want_follow:
                 current_user.following.add(target_user)
+                return JsonResponse({
+                    "message": "Follow status toggled successfully."
+                 }, status=201)
             else:
                 current_user.following.remove(target_user)
-                
-            return JsonResponse({
-                "message": "Follow status toggled successfully."
-            }, status=201)
+                return JsonResponse({
+                    "message": "Follow status toggled successfully."
+                }, status=200)
 
     elif request.method == "GET":
         status = target_user in current_user.following.all()
         return JsonResponse({
             "is_followed": status
-        })
+        }, status=100)
 
     else:
         return JsonResponse({
@@ -150,50 +170,65 @@ def follow_toggle(request, user_id):
 
 
 def posts(request):
+    if not request.user.is_authenticated:
+        return render(request, "network/error.html", {
+            "message": "You must be logged in to make or edit a post."
+        }, status=401)
+
+    u = request.user
+
     if request.method == "POST":
         posted_form = NewPostForm(request.POST)
         if posted_form.is_valid():
             new_content = posted_form.cleaned_data["content"]
-            u = request.user
-
             npo = Post(poster=u, content=new_content)
             npo.save()
             return HttpResponseRedirect(reverse("index"))
+      
+    elif request.method == "PUT":       
+        data = json.loads(request.body)
+        post_id = data.get("id")
+        this_post = Post.objects.get(id=post_id)
 
-    elif request.method == "PUT":
-        try:
-            u = request.user
-            data = json.loads(request.body)
-            post_id = data.get("id")
-            this_post = Post.objects.get(id=post_id)
+        if u == this_post.poster:
+            new_content = data.get("editted_content")
+            this_post.content = new_content
 
-            if u == this_post.poster:
-                new_content = data.get("editted_content")
-                this_post.content = new_content
+            try:
                 this_post.save()
+            except:
                 return JsonResponse({
-                    "message": "Post editted successfully."
-                }, status=200)
-            else:
-                return JsonResponse({
-                    "message": "Users can only edit their own posts."
-                }, status=403)                
-
-        except:
+                    "message": "Server problem: post was not saved."
+                }, status=500)
+    
             return JsonResponse({
-                "message": "Server problem: post was not saved."
-            }, status=500)            
+                "message": "Post editted successfully."
+            }, status=200)
+
+        else:
+            return JsonResponse({
+                "message": "Users can only edit their own posts."
+            }, status=403)                
+
+       
 
 
 def likes(request, post_id):
-
+    
     if request.method == "PUT":
+        # Check the user is logged in
+        if not request.user.is_authenticated:
+            return render(request, "network/error.html", {
+                "message": "You must be logged in to like a post."
+            }, status=401)
+
+        user = request.user
+
         # Read in the JSON from the user
         data = json.loads(request.body)
         like_now = data.get("toggled_status")
 
-        # Set user and previous like status
-        user = request.user
+        # Set previous like status
         like_before = user.liked.filter(id=post_id).exists()
 
         if like_now == like_before:
@@ -209,7 +244,7 @@ def likes(request, post_id):
                 user.liked.add(post)
                 return JsonResponse({
                     "message": "Post liked successfully."
-                }, status=200)
+                }, status=201)
 
             # If the user un-likes a previously liked post, remove it from the list
             elif not like_now and like_before:
@@ -219,9 +254,15 @@ def likes(request, post_id):
                 }, status=200)
 
     elif request.method == "GET":
+        # Check the user is logged in
+        if not request.user.is_authenticated:
+            return JsonResponse({
+                "liked": False
+            })
+
+        # Check if the logged-in user liked this post
         user = request.user
         post = Post.objects.get(id=post_id)
-        
         return JsonResponse({
             "liked": post in user.liked.all()
         })

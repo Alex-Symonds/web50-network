@@ -127,6 +127,7 @@ function update_like_button(btn, is_liked){
 // ==========================================================================================
 // EDIT
 // ------------------------------------------------------------------------------------------
+
 function get_edit_div_id(post_id){
     // Format for the content container div ID
     return `#post_content_${post_id}`;
@@ -137,12 +138,16 @@ function get_edit_btn_id(post_id){
     return `#edit_btn_${post_id}`;
 }
 
+
+// Store the original text. Used to restore the post if the edit fails.
+var post_original;
+
 function post_edit_mode(post_id){
     // Replace the post text with a textarea and a save button.
 
     // Grab the div for the contents
     cont_div = document.querySelector(get_edit_div_id(post_id));
-  
+
     // Make a form
     edit_form = document.createElement('form');
 
@@ -150,6 +155,9 @@ function post_edit_mode(post_id){
     txta = document.createElement('textarea');
     txta.innerHTML = cont_div.innerHTML.trim();
     edit_form.append(txta);
+
+    // Save the text in the global variable
+    post_original = txta.innerHTML;
 
     // Make a save button element with an event handler and add it to the form
     save_btn = document.createElement('input');
@@ -196,18 +204,33 @@ function update_post(e, post_id){
         headers: headers,
         credentials: 'include'
     })
-    .then(post_read_mode(post_id, editted_content))
+    .then(response => {
+        post_read_mode(post_id, editted_content, response.status);
+    })
     .catch(error =>{
         console.log('Error: ', error);
     });
    
 }
 
-function post_read_mode(post_id, editted_content){
+function post_read_mode(post_id, editted_content, http_code){
     // Revert the post to "read mode".
     // Replace the insides of the content div with the content
     cont_div = document.querySelector(get_edit_div_id(post_id));
-    cont_div.innerHTML = editted_content;
+    cont_div.innerHTML = '';
+
+    // If User A somehow tried to edit User B's post, show an error and the uneditted post
+    if (http_code === 403){
+        let errmsg = document.createElement('div');
+        errmsg.innerHTML = 'Access denied. You do not own this post.';
+        errmsg.className = 'edit_failed';
+        cont_div.append(errmsg);
+        cont_div.append(post_original);
+
+    // Otherwise, show the editted post
+    } else {
+        cont_div.innerHTML = editted_content;
+    }
 
     // Unhide the edit button
     btn = document.querySelector(get_edit_btn_id(post_id));
