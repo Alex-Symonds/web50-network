@@ -1,6 +1,11 @@
 {% extends "network/layout.html" %}
 
 {% load static %}
+
+{% block title %}
+- Profile for {{ profile_user.username }}
+{% endblock %}
+
 {% block script %}
     <script>
         num_followers = parseInt('{{followers_count|safe}}');

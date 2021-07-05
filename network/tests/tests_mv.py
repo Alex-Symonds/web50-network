@@ -1,7 +1,6 @@
 from django.test import Client, TestCase
 
 from django.db.models import Max
-
 from django.core.paginator import Paginator
 from django.urls import reverse
 
@@ -9,13 +8,11 @@ import json
 import math
 import datetime
 
-from .models import User, Post
-from .views import MAX_POSTS_PER_PAGE
-from .forms import NewPostForm
+from network.models import User, Post
+from network.views import MAX_POSTS_PER_PAGE
+from network.forms import NewPostForm
 
-
-# Create your tests here.
-class ViewsTestCase(TestCase):
+class ModelsAndViewsTestCase(TestCase):
     NUM_TEST_POSTS = 27
     USERNAMES = ["Alice", "Bob", "Chloe", "David"]
 
@@ -261,4 +258,5 @@ class ViewsTestCase(TestCase):
         response = self.client.put(reverse("likes", kwargs={"post_id": like_target.id}), data=json.dumps({"toggled_status": False}))
         self.assertEqual(response.status_code, 200)
         self.assertFalse(liker.liked.filter(id=like_target.id).exists())
+
 
