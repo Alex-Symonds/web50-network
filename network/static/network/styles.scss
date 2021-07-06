@@ -1,8 +1,10 @@
 // Fonts
-$f_branding: 'Lobster', cursive;
-$f_secondary: 'Open Sans', sans-serif;
+$f_branding: 'Antonio', 'Oswald', 'Arial Narrow', 'Avenir Next Condensed', sans-serif;
+$f_secondary: $f_branding;
 
-// Colour pallette
+
+
+// ---------------------------------------
 $c_like: rgb(0, 216, 0);
 $c_links: rgb(255, 238, 0);
 $c_links_hv: rgb(255, 249, 167);
@@ -22,7 +24,7 @@ $c_follow_glow_border: rgb(228, 170, 255);
 $c_warning: rgb(182, 0, 0);
 $c_warning_glow: rgb(255, 207, 207);
 
-$c_bg_main:#333;
+$c_bg_main:black;
 
 $c_txt_main: white;
 $c_text_subtle: #ddd;
@@ -35,12 +37,88 @@ $c_bghv_hollow: #2d2d2d;
 $c_border_primary: #777;
 $c_border_secondary: #555;
 
+// Colour pallette
+
+$lcars_0: #ff9900;
+$lcars_1: #ff9966;
+$lcars_2: #ffcc99;
+
+$lcars_3: #cc99cc;
+$lcars_4: #9999ff;
+
+$lcars_purple: $lcars_3;
+$lcars_blue: $lcars_4;
+
+$lcars_5: #cc6666;
+$lcars_6: #f8fbdb;
+
+$lcars_body_h_top: #abcaff; // body headings
+$lcars_body_h_side: #cad1ff; // edit button, date
+$lcars_username: #aba3ff; // usernames
+$lcars_text: #72efff; // text
+
+
+$page_width: 98%;
+$max_page: 80rem;
+$min_page: 20rem;
+
+$main_title_height: 3.5rem;
+$left_panel_width: 15%;
+
+
+$breakpoint_title_twolines: 500px;
+$panel_border: 4px solid black;
+
 
 /* ALL PAGES */
+.lcars_btn{
+    position: relative;
+    height: 3rem;
+    border-radius: 1.5rem;
+    color: black;
+    margin: 5px;
+    padding: 0;
+
+    a{
+        color: black;
+        position: absolute;
+        bottom: 0.25rem;
+        right: 1.25rem;
+    }
+}
+
+
+.lcars_0{
+    color: black;
+    background: $lcars_0;
+}
+.lcars_1{
+    color: black;
+    background: $lcars_1;
+}
+.lcars_2{
+    color: black;
+    background: $lcars_2;
+}
+.lcars_3{
+    color: black;
+    background: $lcars_3;
+}
+.lcars_4{
+    color: black;
+    background: $lcars_4;
+}
+.lcars_5{
+    color: black;
+    background: $lcars_5;
+}
+
+
 body{
     background: $c_bg_main;
-    color: $c_txt_main;
+    color: $lcars_text;
     font-family: $f_secondary; 
+    font-size: 1.25rem;
 }
 
 .body{
@@ -49,55 +127,205 @@ body{
 }
 
 h2, h3{
-    color: $c_branding;
+    color: $lcars_body_h_top;
 }
 
-#my-navbar{
-    padding-left: 0;
-    margin-left: 0;
+.left_panels{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
 }
 
-.my-navbar-container{
-    background: $c_bg_hollow;
-    border-bottom: 1px solid $c_border_secondary;
+.header_container{
+    width: 100%;
+    max-width: $max_page;
+    margin: 1.5rem auto 0;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: right;
+    text-align: right; 
 }
 
-a.navbar-brand{
-    margin-left: 0;
-    padding: 3px 20px;
 
-    font-size: 2.5rem;
+.left_container{
+    width: 15%;
+}
+.right_container{
+    width: 85%;
+}
+
+.header_0{
+    width: 100%;
+    background: $lcars_0;
+    border-top-left-radius: 5.5rem;
+    flex-grow: 2;
+}
+.header_1{
+    height: 1rem;
+    width: 100%;
+    border-top: $panel_border;
+    background: $lcars_3;
+}
+.header_2{
+    border-top: $panel_border;
+    background: $lcars_4;
+    border-bottom-left-radius: 3rem;
+    width: 100%;
+    flex-grow: 1;
+}
+
+
+
+.header_top_corner_box{
+    width: 1rem;
+    height: 1rem;
+    background: $lcars_0;
+}
+.header_top_corner{
+    background: black;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 1rem;
+}
+.header_bottom_corner_box{
+    width: 1rem;
+    height: 1rem;
+    background: $lcars_4;
+}
+.header_bottom_corner{
+    background: black;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 1rem;
+}
+
+.end_header{
+    height: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
+    text-align: right; 
+}
+
+.eh_panel{
+    height: 1rem;
+    min-width: 1rem;
+    border-right: $panel_border;
+}
+.eh_panel_0{
+    flex-grow: 2;
+    background: $lcars_4; 
+}
+.eh_panel_1{
+    width: 2rem;
+    background: $lcars_0;
+}
+.eh_panel_2{
+    width: 5rem;
+    background: $lcars_3;
+}
+.eh_panel_3{
+    width: 2rem;
+    background: $lcars_2;
+}
+.eh_panel_4{
+    flex-grow: 2; 
+    background: $lcars_3; 
+}
+.eh_panel_5{
+    width: 2rem;
+    background: $lcars_2;
+}
+
+
+
+
+
+.heading_panel{
+    width: 100%;
+    height: 3.5rem;
+    position: relative;
+    background: $lcars_0;
+    border-top-right-radius: 1.75rem;
+    border-bottom-right-radius: 1.75rem; 
+}
+
+.main_title_container{
+    display: flex;
+    width: 100%;
+}
+.main_title_before{
+    background: $lcars_0;
+    min-height:$main_title_height;
+    flex-grow: 2;
+}
+.main_title{
+    padding: 0rem 1rem 0.4rem;
+    margin: 0;
+    line-height: 100%;
+    background: black;
+    font-size: $main_title_height;
     font-family: $f_branding;
-
-    color: $c_branding;
-    border: 2px solid $c_branding;
-    border-radius: 50%;
+    color: $lcars_0; 
 }
 
-.navbar-nav .nav-link{
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+@media (max-width: $breakpoint_title_twolines){
+    .main_title{
+        width: 12rem;
+    } 
 }
 
-.nav-item{
-    padding: 0 0.4rem;
+.main_title_after{
+    width: 3rem;
+    margin-right: 5px;
+    background: $lcars_0;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
 
-    font-size: 1.3rem;
+
+/*
+This works ok until you shrink the page. Then the end cap gets teeny and the text doubles up over itself, which isn't great.
+a.main_title{
+    padding: 0.75rem 1rem;
+    margin: 0;
+    line-height: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 5%;
+    height: 3.5rem;
+
+    background: black;
+    font-size: 3.5rem;
     font-family: $f_branding;
-    
-    a{
-        color: $c_links;
-        border: 1px solid $c_bg_hollow;
-    }
-
-    a:hover{
-        color: $c_links_hv;
-        background: 1px solid $c_bghv_hollow;
-        border: 1px solid $c_links;
-        border-radius: 7px;
-        box-shadow: 0 0 4px white;
-    }
+    color: $lcars_0;
 }
+*/
+
+.lcars_nav_container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+ul.lcars_nav{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.lcars_nav_btn{
+    list-style: none;
+    width: 10rem;
+}
+
+
 
 textarea, input[type=text], input[type=password], input[type=email]{
     width: 100%;
@@ -142,7 +370,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
 .pcont-user a{
     font-weight: 1.2rem;
     font-weight: bold;
-    color: $c_links;
+    color: $lcars_username;
 
     &:hover{
         color:$c_txt_main;
