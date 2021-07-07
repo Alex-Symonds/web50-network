@@ -2,86 +2,68 @@
 
 {% block body %}
 {% if form and user.is_authenticated %}
-    <div class="left-panels">
-        <div class="side-0 lcars-top-left"></div>
-        <div class="side-1 vt-panel"></div>
-        <div class="side-2 vt-panel"></div>
-        <div class="side-3 vt-panel"></div>
-        <div class="side-4 vt-panel"></div>
-        <div class="side-5 vt-panel"></div>
-    </div>
+    <div class="response-container">
+        <div class="respond-v-panels">
+            <div class="mid-0 lcars-top-left"></div>
+            <div class="mid-1 vt-panel"></div>
+            <div class="mid-2 vt-panel"></div>
+            <div class="mid-3 vt-panel"></div>
+            <div class="mid-4 vt-panel"></div>
+            <div class="mid-5 vt-panel"></div>
+        </div>
 
-    <div class="right-container">
-        <div class="index-container">
+        <div class="response-inner">
+            <div class="hz-panel-container">
+                <div class="hz-panel p-resp-0 hz-p0"></div>
+                <div class="hz-panel p-resp-1 hz-p1"></div>
+                <div class="hz-panel p-resp-2 hz-p2"></div>
+                <div class="hz-panel p-resp-3 hz-p3"></div>
+                <div class="hz-panel p-resp-4 hz-p4"></div>
+                <div class="hz-panel p-resp-5 hz-p5"></div>
+            </div>
 
-            <div class="response-container">
-                <div class="middle-panels">
-                    <div class="mid-0 lcars-top-left"></div>
-                    <div class="mid-1 vt-panel"></div>
-                    <div class="mid-2 vt-panel"></div>
-                    <div class="mid-3 vt-panel"></div>
-                    <div class="mid-4 vt-panel"></div>
-                    <div class="mid-5 vt-panel"></div>
-                </div>
-
-                <div class="response-inner">
-                    <div class="hz-panel-container">
-                        <div class="hz-panel tb-panel-4 hz-p4"></div>
-                        <div class="hz-panel tb-panel-5 hz-p5"></div>
-                    </div>
-
-                    <div class="response-left-corner-box">
-                        <div class="corner body-left-corner">
-                        </div>
-                    </div>
-
-                    <div id="add-post">
-                        <h2>RESPOND</h2>
-                        <form action="{% url 'posts' %}" method="POST">
-                            {% csrf_token %}
-                            {{ form }}
-                            <input value="TRANSMIT" type="submit" class="post-btn lcars-btn" id="new-post-btn">
-                        </form>
-                    </div>
+            <div class="response-left-corner-box">
+                <div class="corner body-left-corner">
                 </div>
             </div>
 
-            <div class="posts-container-shared">
-                <div class="hz-panel-container">
-                    <div class="hz-panel tb-panel-0 hz-p0"></div>
-                    <div class="hz-panel tb-panel-1 hz-p1"></div>
-                    <div class="hz-panel tb-panel-2 hz-p2"></div>
-                    <div class="hz-panel tb-panel-3 hz-p3"></div>
-                </div>
-{% else %}
-    <div class="left-panels">
-        <div class="side-0 lcars-top-left"></div>
-        <div class="side-1 vt-panel"></div>
-        <div class="side-2 vt-panel"></div>
-        <div class="side-3 vt-panel"></div>
-        <div class="side-4 vt-panel"></div>
-        <div class="side-5 vt-panel"></div>
+            <div id="add-post">
+                <h2>RESPOND</h2>
+                <form action="{% url 'posts' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input value="TRANSMIT" type="submit" class="post-btn lcars-btn" id="new-post-btn">
+                </form>
+            </div>
+        </div>
     </div>
-
-    <div class="right-container">
-        <div class="index-container">
-            <div class="posts-container-full">
-                <div class="hz-panel-container">
-                    <div class="hz-panel tb-panel-0 hz-p0"></div>
-                    <div class="hz-panel tb-panel-1 hz-p1"></div>
-                    <div class="hz-panel tb-panel-2 hz-p2"></div>
-                    <div class="hz-panel tb-panel-3 hz-p3"></div>
-                    <div class="hz-panel tb-panel-4 hz-p4"></div>
-                    <div class="hz-panel tb-panel-5 hz-p5"></div>
-                </div>
-
 {% endif %}
-                <div class="body-left-corner-box">
-                    <div class="corner body-left-corner">
-                    </div>
-                </div>
 
-                <div class="all-posts">
+    <div class="conference-container">
+        <div class="conference-v-panels">
+            <div class="side-0 lcars-top-left"></div>
+            <div class="side-1 vt-panel"></div>
+            <div class="side-2 vt-panel"></div>
+            <div class="side-3 vt-panel"></div>
+            <div class="side-4 vt-panel"></div>
+            <div class="side-5 vt-panel"></div>
+        </div>
+
+        <div class="conference-content">
+            <div class="hz-panel-container">
+                <div class="hz-panel p-conf-0 hz-p0"></div>
+                <div class="hz-panel p-conf-1 hz-p1"></div>
+                <div class="hz-panel p-conf-2 hz-p2"></div>
+                <div class="hz-panel p-conf-3 hz-p3"></div>
+                <div class="hz-panel p-conf-4 hz-p4"></div>
+                <div class="hz-panel p-conf-5 hz-p5"></div>
+            </div>
+            <div class="body-left-corner-box">
+                <div class="corner body-left-corner">
+                </div>
+            </div>
+
+            <div class="all-posts">
                     <h2>CONFERENCE</h2>
             
 {% for post in page %}
@@ -112,9 +94,9 @@
 {% empty %}
                     <p> No posts. Yours can be the first! {% if not user.is_authenticated %} <a href="{% url 'register' %}">Register here</a> {% endif %} :)</p>
 {% endfor %}
-                </div>
-            </div>
+            </div> <!-- all posts-->
         </div>
+    </div>
 
 
 {% if page.has_other_pages %}

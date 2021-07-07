@@ -76,7 +76,7 @@ $max_page: 85rem;
 $min_page: 20rem;
 
 $main_title_height: 3.5rem;
-$left_panel_width: 15%;
+$side_panel_width: 15%;
 
 
 $breakpoint_title_twolines: 500px;
@@ -110,6 +110,7 @@ body{
     margin: 10px auto 0;
 
     display: flex;
+    flex-wrap: wrap;
     //justify-content: flex-end;
     //align-items: right;
     //text-align: right; 
@@ -146,33 +147,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 
 
-// ----------------------------------------------------------------------------------------------------------------------- 
-// Page layout
-// -----------------------------------------------------------------------------------------------------------------------
 
-.left-panels{
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-}
-
-.header-container{
-    width: 100%;
-    max-width: $max_page;
-    margin: 1.5rem auto 0;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: right;
-    text-align: right; 
-}
-
-.left-container{
-    width: 15%;
-}
-.right-container{
-    width: 85%;
-}
 
 
 
@@ -316,21 +291,45 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 
 // "Top body" horizontal strip: widths should match "end header"
-.tb-panel-0{
+.p-conf-0{
     background: $lcars_body_top_left;
 }
-.tb-panel-1, .tb-panel-2{
+
+.p-conf-1, .p-conf-2{
     background: $lcars_2;
 }
-.tb-panel-3{
+.p-conf-3{
     background: $lcars_1;
 }
-.tb-panel-4{
+.p-conf-4{
     background: $lcars_blue;
 }
-.tb-panel-5{
+.p-conf-5{
     background: $lcars_purple;
 }
+
+.p-resp-0 {
+    // @ Half page, this is hidden
+    background: $lcars_response_top_left;
+}
+.p-resp-1{
+    background: $lcars_0;
+}
+.p-resp-2{
+    background: $lcars_5;
+}
+.p-resp-3{
+    background: $lcars_2;
+}
+.p-resp-4{
+    // @ Half page, this is the "linker". Change the colour at full page
+    background: $lcars_response_top_left;
+}
+.p-resp-5{
+    background: $lcars_purple;
+}
+
+
 
 // Side of "conference" panels
 .side-0{
@@ -530,37 +529,59 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 
 
+// ----------------------------------------------------------------------------------------------------------------------- 
+// Page layout
+// -----------------------------------------------------------------------------------------------------------------------
 
-
-
-
-// -----------------------------------------------------------------------------------------------------------------------------------------------------
-// Posts
-// -----------------------------------------------------------------------------------------------------------------------------------------------------
-.index-container{
+.header-v-panels, .response-v-panels{
+    width: $side_panel_width;
     display: flex;
-    width: 100%;
+    flex-direction: column; 
 }
 
-.posts-container-full{
+.header-container{
     width: 100%;
+    max-width: $max_page;
+    margin: 1.5rem auto 0;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: right;
+    text-align: right; 
 }
 
-.posts-container-shared{
+.left-container{
+    width: $side_panel_width;
+}
+.right-container{
+    width: 85%;
+}
+
+
+.conference-container{
+    display:flex;
+    width: 61.65%;
     order: 1;
-    width: 55%;
 }
-
-
-
+.conference-v-panels{
+    width: 24.3%;
+    display: flex;
+    flex-direction: column;
+}
+.conference-content{  
+    flex-grow: 2;
+}
+.p-conf-4, .p-conf-5{
+    display: none;
+}
 
 
 .response-container{
     order: 2;
-    width: 45%;
+    flex-grow: 2;
     display: flex;
 }
-.middle-panels{
+.respond-v-panels{
     width: 10%;
     height: 100%;
     display: flex;
@@ -570,19 +591,39 @@ textarea, input[type=text], input[type=password], input[type=email]{
     height: 100%;
     flex-grow:2;
 }
+.p-resp-0, .p-resp-1, .p-resp-2, .p-resp-3{
+    display: none;
+}
+
+
+
 
 @media (max-width: $max_page){
-    .response-container{
-        order: 1;
+    .conference-container{
         width: 100%;
-    }  
-    .posts-container-half{
         order: 2;
+    }
+    .conference-v-panels, .respond-v-panels{
+        width: $side_panel_width;
+    }
+    .p-conf-2, .p-conf-3, .p-conf-4, .p-conf-5{
+        display: inline;
+    }
+
+    .response-container{
         width: 100%;
+        order: 1;
     }
-    .response-left-corner-box{
-        background: $lcars_body_top_left;
+    .p-resp-0, .p-resp-1, .p-resp-2, .p-resp-3{
+        display: inline;
     }
+    .p-resp-4{
+        background: $lcars_rust;
+    }
+    #id_content{
+        height: 7rem;
+    }
+
 }
 
 
