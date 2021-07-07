@@ -2,28 +2,27 @@
 
 {% block body %}
 {% if form and user.is_authenticated %}
-    <div class="response-container">
+<div class="two-column-body">
+    <div class="respond-container">
         <div class="respond-v-panels">
-            <div class="mid-0 lcars-top-left"></div>
-            <div class="mid-1 vt-panel"></div>
-            <div class="mid-2 vt-panel"></div>
-            <div class="mid-3 vt-panel"></div>
-            <div class="mid-4 vt-panel"></div>
-            <div class="mid-5 vt-panel"></div>
+            <div class="p-resp-lv-0 lcars-top-left"></div>
+            <div class="p-resp-lv-1 vt-panel"></div>
+            <div class="p-resp-lv-2 vt-panel"></div>
         </div>
 
-        <div class="response-inner">
+        <div class="respond-content">
+
             <div class="hz-panel-container">
-                <div class="hz-panel p-resp-0 hz-p0"></div>
-                <div class="hz-panel p-resp-1 hz-p1"></div>
-                <div class="hz-panel p-resp-2 hz-p2"></div>
-                <div class="hz-panel p-resp-3 hz-p3"></div>
-                <div class="hz-panel p-resp-4 hz-p4"></div>
-                <div class="hz-panel p-resp-5 hz-p5"></div>
+                <div class="hz-panel p-resp-th-0 hz-p0"></div>
+                <div class="hz-panel p-resp-th-1 hz-p1"></div>
+                <div class="hz-panel p-resp-th-2 hz-p2"></div>
+                <div class="hz-panel p-resp-th-3 hz-p3"></div>
+                <div class="hz-panel p-resp-th-4 hz-p4"></div>
+                <div class="hz-panel p-resp-th-5 hz-p5"></div>
             </div>
 
-            <div class="response-left-corner-box">
-                <div class="corner body-left-corner">
+            <div class="respond-left-corner-box">
+                <div class="corner top-left-corner">
                 </div>
             </div>
 
@@ -35,6 +34,20 @@
                     <input value="TRANSMIT" type="submit" class="post-btn lcars-btn" id="new-post-btn">
                 </form>
             </div>
+
+            <div class="respond-bottom-corner-box">
+                <div class="corner header-bottom-corner">
+                </div>
+            </div>
+            <div class="hz-panel-container">
+                <div class="hz-panel p-resp-bh-0 hz-p0"></div>
+                <div class="hz-panel p-resp-bh-1 hz-p1"></div>
+                <div class="hz-panel p-resp-bh-2 hz-p2"></div>
+                <div class="hz-panel p-resp-bh-3 hz-p3"></div>
+                <div class="hz-panel p-resp-bh-4 hz-p4"></div>
+                <div class="hz-panel p-resp-bh-5 hz-p5"></div>
+            </div>
+
         </div>
     </div>
 {% endif %}
@@ -47,19 +60,23 @@
             <div class="side-3 vt-panel"></div>
             <div class="side-4 vt-panel"></div>
             <div class="side-5 vt-panel"></div>
+            <div class="side-6 vt-panel"></div>
+            <div class="side-7 vt-panel"></div>
+            <div class="side-8 vt-panel"></div>
+            <div class="side-9 vt-panel"></div>
         </div>
 
         <div class="conference-content">
             <div class="hz-panel-container">
-                <div class="hz-panel p-conf-0 hz-p0"></div>
-                <div class="hz-panel p-conf-1 hz-p1"></div>
-                <div class="hz-panel p-conf-2 hz-p2"></div>
-                <div class="hz-panel p-conf-3 hz-p3"></div>
-                <div class="hz-panel p-conf-4 hz-p4"></div>
-                <div class="hz-panel p-conf-5 hz-p5"></div>
+                <div class="p-conf-0 hz-panel hz-p0"></div>
+                <div class="p-conf-1 hz-panel hz-p1"></div>
+                <div class="p-conf-2 hz-panel hz-p2"></div>
+                <div class="p-conf-3 hz-panel hz-p3"></div>
+                <div class="p-conf-4 hz-panel hz-p4"></div>
+                <div class="p-conf-5 hz-panel hz-p5"></div>
             </div>
             <div class="body-left-corner-box">
-                <div class="corner body-left-corner">
+                <div class="corner top-left-corner">
                 </div>
             </div>
 
@@ -152,4 +169,7 @@
             </div>
         </div>
     </div>
+{% if form and user.is_authenticated %}
+</div>
+{% endif %}
 {% endblock %}

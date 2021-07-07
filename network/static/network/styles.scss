@@ -45,28 +45,36 @@ $c_border_secondary: #555;
 // -----------------------------------------------------------------------------------------------------------------------
 
 $lcars_0: #ff9900;
+$lcars_0_hover: #ffd597;
+
 $lcars_1: #ff9966;
+$lcars_1_hover: #ffc3a4;
+
 $lcars_2: #ffcc99;
+$lcars_2_hover: #ffe4ca;
 
 $lcars_3: #cc99cc;
+$lcars_3_hover: #e9cfe9;
+
 $lcars_4: #9999ff;
+$lcars_4_hover: #c5c5fc;
 
 $lcars_purple: $lcars_3;
 $lcars_blue: $lcars_4;
 
-$lcars_5: #cc6666;
-$lcars_6: #f8fbdb;
-$lcars_rust: $lcars_5;
-$lcars_likes: $lcars_6;
+$lcars_rust: #cc6666;
+$lcars_likes: #f8fbdb;
 
 $lcars_header_top_left: $lcars_0;
 $lcars_header_bottom_left: $lcars_blue;
 
-$lcars_body_top_left: $lcars_rust;
+$lcars_conference_top_left: $lcars_rust;
 $lcars_response_top_left: $lcars_blue;
+$lcars_response_bottom_left: $lcars_2;
 
 $lcars_body_h_top: #abcaff; // body headings
-$lcars_body_h_side: #cad1ff; // edit button, date
+$lcars_edit_date: #cad1ff; // edit button, date
+$lcars_edit_date_hover: #e7eaff; 
 $lcars_username: #aba3ff; // usernames
 $lcars_text: #72efff; // text
 
@@ -75,11 +83,13 @@ $page_width: 98%;
 $max_page: 85rem;
 $min_page: 20rem;
 
+$h_divider_margin: 10px;
+
 $main_title_height: 3.5rem;
 $side_panel_width: 15%;
 
 
-$breakpoint_title_twolines: 500px;
+$breakpoint_title_twolines: 484px;
 $panel_border: 4px solid black;
 
 
@@ -107,7 +117,7 @@ body{
     width: 100%;
     max-width: $max_page;
     min-width: $min_page;
-    margin: 10px auto 0;
+    margin: 0 auto;
 
     display: flex;
     flex-wrap: wrap;
@@ -128,7 +138,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     color: $c_txt_main;
     background: $c_bg_input;
 
-    border: 1px solid $lcars_body_h_side;
+    border: 1px solid $lcars_edit_date;
     border-radius: 4px;
 
     &:focus, &:active{
@@ -188,15 +198,21 @@ textarea, input[type=text], input[type=password], input[type=email]{
     border-bottom-left-radius: 2rem;
 }
 
+.respond-bottom-corner-box{
+    width: 2rem;
+    height: 2rem;
+    background: $lcars_response_bottom_left;
+}
+
 .body-left-corner-box{
     width: 2rem;
     height: 2rem;   
-    background: $lcars_body_top_left;
+    background: $lcars_conference_top_left;
 }
-.body-left-corner, .response-left-corner{
+.top-left-corner{
     border-top-left-radius: 2rem;
 }
-.response-left-corner-box{
+.respond-left-corner-box{
     width: 2rem;
     height: 2rem;   
     background: $lcars_response_top_left;
@@ -229,13 +245,14 @@ textarea, input[type=text], input[type=password], input[type=email]{
     border-right: $panel_border;    
 }
 .hz-p0{
-    flex-grow: 2;    
+    flex-grow: 2.8;    
 }
 .hz-p1{
     width: 2rem;    
 }
 .hz-p2{
-    width: 5rem;    
+    //width: 5rem;    // this was before thinning out the response panel
+    width: 10rem;
 }
 .hz-p3{
     width: 2rem;
@@ -292,7 +309,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 // "Top body" horizontal strip: widths should match "end header"
 .p-conf-0{
-    background: $lcars_body_top_left;
+    background: $lcars_conference_top_left;
 }
 
 .p-conf-1, .p-conf-2{
@@ -308,24 +325,45 @@ textarea, input[type=text], input[type=password], input[type=email]{
     background: $lcars_purple;
 }
 
-.p-resp-0 {
+.p-resp-th-0 {
     // @ Half page, this is hidden
     background: $lcars_response_top_left;
 }
-.p-resp-1{
+.p-resp-th-1{
+    background: $lcars_rust;
+}
+.p-resp-th-2{
     background: $lcars_0;
 }
-.p-resp-2{
-    background: $lcars_5;
+.p-resp-th-3{
+    background: $lcars_3;
 }
-.p-resp-3{
-    background: $lcars_2;
-}
-.p-resp-4{
+.p-resp-th-4{
     // @ Half page, this is the "linker". Change the colour at full page
     background: $lcars_response_top_left;
 }
-.p-resp-5{
+.p-resp-th-5{
+    background: $lcars_2;
+}
+
+.p-resp-bh-0 {
+    // @ Half page, this is hidden
+    background: $lcars_response_bottom_left;
+}
+.p-resp-bh-1{
+    background: $lcars_0;
+}
+.p-resp-bh-2{
+    background: $lcars_rust;
+}
+.p-resp-bh-3{
+    background: $lcars_2;
+}
+.p-resp-bh-4{
+    // @ Half page, this is the "linker". Change the colour at full page
+    background: $lcars_response_bottom_left;
+}
+.p-resp-bh-5{
     background: $lcars_purple;
 }
 
@@ -333,31 +371,58 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 // Side of "conference" panels
 .side-0{
-    background: $lcars_rust;
+    background: $lcars_conference_top_left;
 }
 .side-1{
-    background: $lcars_rust;
+    background: $lcars_conference_top_left;
     flex-grow: 2;
 }
 .side-2{
     background: $lcars_1;
     flex-grow: 3;
 }
-
-// Side of "respond" panels
-.mid-0{
-    background: $lcars_response_top_left;
+.side-3{
+    background: $lcars_4;
+    height: 1rem;
 }
-.mid-1{
-    background: $lcars_1;
+.side-4{
+    background: $lcars_0;
     flex-grow: 2;
 }
-.mid-2{
+.side-5{
     background: $lcars_rust;
+    height: 1rem;
+}
+.side-6{
+    background: $lcars_4;
+    flex-grow: 3;
+}
+.side-7{
+    background: $lcars_3;
+    flex-grow: 2;
+}
+.side-8{
+    background: $lcars_3;
+    height: 1rem;
+}
+.side-9{
+    background: $lcars_1;
     flex-grow: 3;
 }
 
-
+// Side of "respond" panels
+.p-resp-lv-0{
+    background: $lcars_response_top_left;
+}
+.p-resp-lv-1{
+    background: $lcars_1;
+    flex-grow: 2;
+}
+.p-resp-lv-2{
+    background: $lcars_response_bottom_left;
+    flex-grow: 3;
+    border-bottom-left-radius: 3rem;
+}
 
 
 
@@ -381,8 +446,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
-.post-solid-btn{
-    background: $lcars_body_h_side;
+.edit-btn{
+    background: $lcars_edit_date;
     color: black;
     height: 2rem;
     width: 100%;
@@ -394,15 +459,57 @@ textarea, input[type=text], input[type=password], input[type=email]{
         bottom: 0.1rem;
         right: 1rem;
     }
+
+    &:hover{
+        background: $lcars_edit_date_hover;
+    }
 }
+
+.post-btn{
+    float: right;
+    max-width: 10rem;
+    width: 100%;
+    padding: 0.5rem 1.5rem 0;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    text-align: right;
+    vertical-align: bottom;
+
+    color: black;
+
+    background: $lcars_edit_date;
+    border: 1px solid $lcars_edit_date;
+
+    &:hover{
+        background: $lcars_edit_date_hover;
+    }
+}
+
+/*
+.post-solid-btn{
+    background: $lcars_edit_date;
+    color: black;
+    height: 2rem;
+    width: 100%;
+    max-width: 7rem;
+    margin: 0.5rem 0.1rem;
+    border: none;
+
+    span{
+        bottom: 0.1rem;
+        right: 1rem;
+    }
+}*/
 .like-btn{
     width: 100%;
     margin-top: 0.3rem;
-    height: 2rem;
+    height: 2.5rem;
 
     span{
         position: absolute;
-        bottom: -0.1rem;
+        bottom: 0;
         right: 0.9rem;
         pointer-events: none;
     }
@@ -418,11 +525,17 @@ textarea, input[type=text], input[type=password], input[type=email]{
     span{
         color: $lcars_0;
     }
+    &:hover{
+        background: $c_bg_hollow;
+    }
 }
 .liked{
     border: 1px solid $lcars_0;
     color: black;
     background: $lcars_0;
+    &:hover{
+        background: $lcars_0_hover;
+    }
 }
 
 
@@ -465,7 +578,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     color: $lcars_0; 
 }
 @media (max-width: $breakpoint_title_twolines){
-    .main_title{
+    .main-title{
         width: 12rem;
     } 
 }
@@ -513,18 +626,34 @@ textarea, input[type=text], input[type=password], input[type=email]{
         bottom: 0.25rem;
         right: 1.25rem;
     }
+
+    &:hover{
+        color: black;
+    }
 }
 .nav-user, .nav-following, .nav-register{
-    background: $lcars_4;  
+    background: $lcars_4;
+    &:hover{
+        background: $lcars_4_hover;
+    }
 }
 .nav-allposts{
-    background: $lcars_0;  
+    background: $lcars_0; 
+    &:hover{
+        background: $lcars_0_hover;
+    } 
 }
 .nav-logout{
     background: $lcars_1;  
+    &:hover{
+        background: $lcars_1_hover;
+    }
 }
 .nav-login{
     background: $lcars_1;  
+    &:hover{
+        background: $lcars_1_hover;
+    }
 }
 
 
@@ -532,12 +661,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
 // ----------------------------------------------------------------------------------------------------------------------- 
 // Page layout
 // -----------------------------------------------------------------------------------------------------------------------
-
-.header-v-panels, .response-v-panels{
-    width: $side_panel_width;
-    display: flex;
-    flex-direction: column; 
-}
 
 .header-container{
     width: 100%;
@@ -549,49 +672,63 @@ textarea, input[type=text], input[type=password], input[type=email]{
     align-items: right;
     text-align: right; 
 }
-
-.left-container{
-    width: $side_panel_width;
-}
-.right-container{
+.header-content{
     width: 85%;
 }
 
-
-.conference-container{
-    display:flex;
-    width: 61.65%;
-    order: 1;
+.header-v-panels, .conference-v-panels{
+    width: $side_panel_width;
+    display: flex;
+    flex-direction: column; 
 }
 .conference-v-panels{
-    width: 24.3%;
+    min-height: 50rem;
+}
+.respond-v-panels{
+    width: 10%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+}
+
+.two-column-body{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .conference-v-panels{
+        width: 21.5%;
+    }
+    .p-conf-4, .p-conf-5{
+        display: none;
+    }
+}
+
+.conference-container{
+    order: 1;
+
+    margin-top: $h_divider_margin;
+
+    display:flex;
+    flex-grow: 2;
 }
 .conference-content{  
     flex-grow: 2;
 }
-.p-conf-4, .p-conf-5{
-    display: none;
-}
 
-
-.response-container{
+.respond-container{
     order: 2;
-    flex-grow: 2;
+    width: 30%;
+    align-self: flex-start; 
+
+    margin-top: $h_divider_margin;
+
     display: flex;
 }
-.respond-v-panels{
-    width: 10%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-.response-inner{
-    height: 100%;
+.respond-content{
     flex-grow:2;
 }
-.p-resp-0, .p-resp-1, .p-resp-2, .p-resp-3{
+.p-resp-th-0, .p-resp-th-1, .p-resp-th-2, .p-resp-th-3,
+.p-resp-bh-0, .p-resp-bh-1, .p-resp-bh-2, .p-resp-bh-3{
     display: none;
 }
 
@@ -603,27 +740,34 @@ textarea, input[type=text], input[type=password], input[type=email]{
         width: 100%;
         order: 2;
     }
-    .conference-v-panels, .respond-v-panels{
-        width: $side_panel_width;
-    }
-    .p-conf-2, .p-conf-3, .p-conf-4, .p-conf-5{
-        display: inline;
-    }
-
-    .response-container{
+    .respond-container{
         width: 100%;
         order: 1;
-    }
-    .p-resp-0, .p-resp-1, .p-resp-2, .p-resp-3{
-        display: inline;
-    }
-    .p-resp-4{
-        background: $lcars_rust;
-    }
-    #id_content{
-        height: 7rem;
+        textarea{
+            height: 7rem;
+        }
     }
 
+    .two-column-body{
+        .p-conf-4, .p-conf-5{
+            display: inline;
+        }
+    }
+
+    .two-column-body .conference-v-panels, .respond-v-panels{
+        width: $side_panel_width;
+    }
+
+    .p-resp-th-0, .p-resp-th-1, .p-resp-th-2, .p-resp-th-3,
+    .p-resp-bh-0, .p-resp-bh-1, .p-resp-bh-2, .p-resp-bh-3{
+        display: inline;
+    }
+    .p-resp-th-4{
+        background: $lcars_rust;
+    }
+    .p-resp-bh-4{
+        background: $lcars_1;
+    }
 }
 
 
@@ -637,7 +781,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     min-width: 8.5rem;
     font-size: 1.1rem;
     padding-top: 0.6rem;
-    color: $lcars_body_h_side;
+    color: $lcars_edit_date;
 }
 .post-section-content{
     flex-grow: 1;
@@ -658,52 +802,32 @@ textarea, input[type=text], input[type=password], input[type=email]{
     text-align: right;
 }
 
-.edit-btn{
-    background: $lcars_body_h_side;
-    color: black;
-    height: 2rem;
-    width: 100%;
-    max-width: 7rem;
-    margin: 0.5rem 0.1rem;
-    border: none;
-
-    span{
-        bottom: 0.1rem;
-        right: 1rem;
-    }
-}
-.post-btn{
-    float: right;
-    max-width: 10rem;
-    width: 100%;
-    padding: 0.5rem 1.5rem 0;
-
-    font-size: 1.2rem;
-    font-weight: bold;
-
-    text-align: right;
-    vertical-align: bottom;
-
-    color: black;
-
-    background: $lcars_body_h_side;
-    border: 1px solid $lcars_body_h_side;
-
-    &:hover {
-        border: 1px solid $c_post_glow_border;
-        box-shadow: 0 0 4px 0 $c_post_glow;
-    }    
-}
-
-
-
-
 
 
 
 .all-posts{
-    padding: 0 3%;
+    padding: 0 2rem;
 }
+.edit-failed{
+    width: 18rem;
+    margin: 0 auto 1rem;
+    padding: 5px 10px 10px;
+
+    font-weight: bold;
+    text-align: center;
+
+    font-size: 1.4rem;
+
+    color: red;
+    background: none;
+    border: 1px solid red;
+    border-radius: 4px;
+
+    span{
+        font-size: 3rem;
+    }
+}
+
 
 .edit_failed{
     margin-bottom: 1rem;
@@ -874,7 +998,7 @@ a.page-link {
 
 /* Add post only */
 #add-post{
-    padding: 0 1rem;
+    padding: 0 2rem;
     margin-bottom: 2rem;
 }
 
