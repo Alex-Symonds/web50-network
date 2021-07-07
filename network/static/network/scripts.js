@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners to any/all edit buttons
-    document.querySelectorAll('.edit_btn').forEach(btn => {
+    document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             post_edit_mode(this.dataset.id);
         });
     });
 
     // Add event listeners to any/all like buttons
-    document.querySelectorAll('.like_btn').forEach(btn => {
+    document.querySelectorAll('.like-btn').forEach(btn => {
         load_like_button(btn);
     })
 })
@@ -115,9 +115,11 @@ function update_like_button(btn, is_liked){
     if (is_liked){
         btn.classList.remove('unliked');
         btn.classList.add('liked');
+        btn.innerHTML = '<span>LIKED</span>';
     } else {
         btn.classList.remove('liked');
-        btn.classList.add('unliked');       
+        btn.classList.add('unliked'); 
+        btn.innerHTML = '<span>LIKE</span>';      
     }  
     btn.blur();
 }
@@ -162,8 +164,9 @@ function post_edit_mode(post_id){
     // Make a save button element with an event handler and add it to the form
     save_btn = document.createElement('input');
     save_btn.type = 'submit';
-    save_btn.value = 'save';
-    save_btn.className = 'post-solid-btn';
+    save_btn.value = 'SAVE';
+    save_btn.classList.add('post-btn');
+    save_btn.classList.add('lcars-btn');
     save_btn.id = 'save-post-btn';
     save_btn.addEventListener('click', function(e){
         update_post(e, post_id);

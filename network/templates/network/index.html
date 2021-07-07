@@ -1,78 +1,120 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    <div class="container">
-
-        <div class="left_panels">
-            <div class="header_0"></div>
-            <div class="header_1"></div>
-            <div class="header_2"></div>
-        </div>
-
 {% if form and user.is_authenticated %}
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-5 order-1 order-lg-2">
-                <div id="add-post">
-                    <h2>RESPOND</h2>
-                    <form action="{% url 'posts' %}" method="POST">
-                        {% csrf_token %}
-                        {{ form }}
-                        <input value="TRANSMIT" type="submit" class="post-solid-btn" id="new-post-btn">
-                    </form>
+    <div class="left-panels">
+        <div class="side-0 lcars-top-left"></div>
+        <div class="side-1 vt-panel"></div>
+        <div class="side-2 vt-panel"></div>
+        <div class="side-3 vt-panel"></div>
+        <div class="side-4 vt-panel"></div>
+        <div class="side-5 vt-panel"></div>
+    </div>
+
+    <div class="right-container">
+        <div class="index-container">
+
+            <div class="response-container">
+                <div class="middle-panels">
+                    <div class="mid-0 lcars-top-left"></div>
+                    <div class="mid-1 vt-panel"></div>
+                    <div class="mid-2 vt-panel"></div>
+                    <div class="mid-3 vt-panel"></div>
+                    <div class="mid-4 vt-panel"></div>
+                    <div class="mid-5 vt-panel"></div>
                 </div>
-            </div>
 
+                <div class="response-inner">
+                    <div class="hz-panel-container">
+                        <div class="hz-panel tb-panel-4 hz-p4"></div>
+                        <div class="hz-panel tb-panel-5 hz-p5"></div>
+                    </div>
 
-            <div class="col-12 col-lg-7 order-2 order-lg-1">
-{% else %}
-            <div class="col-12">
-{% endif %}
-
-                <h2>CONFERENCE</h2>
-                <div id="all-posts">
-            
-{% for post in page %}
-                    <div class="post">
-                        <div class="row">
-                            <div class="col-3">
-                                {{  post.created_on }}
-    {% if user.is_authenticated and user.username == post.poster.username %}
-                                <button class="edit_btn post-hollow-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}">edit</button>
-    {% endif %}
-                            </div>
-                            <div class="col-6 pcont-user">
-                                <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username }}</a>
-                                <div class="pcont-content" id="post_content_{{ post.id }}">
-                                    {{ post.content }}
-                                </div>
-                            </div>
-
-                            <div class="col-3 col-sm-2 col-lg-3 col-xl-2">
-                                <div class="pcont-likes">
-    {% if user.is_authenticated and user.username != post.poster.username %}
-                                    <p class="pcont-likecount">
-                    
-                                        <span class="likes_count" id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> likes
-                                    </p>
-                                    <div class="like_btn_container">
-                                        <button class="like_btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
-                                    </div>
-    {% else %}
-                                    <div class="like_pane_replacement">
-                                        <p class="pcont-likecount">likes</p>
-                                        <p class="num-inc-likes">{{ post.count_likes }}</p>
-                                    </div>
-    {% endif %} 
-                                </div>
-                            </div>
+                    <div class="response-left-corner-box">
+                        <div class="corner body-left-corner">
                         </div>
                     </div>
 
+                    <div id="add-post">
+                        <h2>RESPOND</h2>
+                        <form action="{% url 'posts' %}" method="POST">
+                            {% csrf_token %}
+                            {{ form }}
+                            <input value="TRANSMIT" type="submit" class="post-btn lcars-btn" id="new-post-btn">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="posts-container-shared">
+                <div class="hz-panel-container">
+                    <div class="hz-panel tb-panel-0 hz-p0"></div>
+                    <div class="hz-panel tb-panel-1 hz-p1"></div>
+                    <div class="hz-panel tb-panel-2 hz-p2"></div>
+                    <div class="hz-panel tb-panel-3 hz-p3"></div>
+                </div>
+{% else %}
+    <div class="left-panels">
+        <div class="side-0 lcars-top-left"></div>
+        <div class="side-1 vt-panel"></div>
+        <div class="side-2 vt-panel"></div>
+        <div class="side-3 vt-panel"></div>
+        <div class="side-4 vt-panel"></div>
+        <div class="side-5 vt-panel"></div>
+    </div>
+
+    <div class="right-container">
+        <div class="index-container">
+            <div class="posts-container-full">
+                <div class="hz-panel-container">
+                    <div class="hz-panel tb-panel-0 hz-p0"></div>
+                    <div class="hz-panel tb-panel-1 hz-p1"></div>
+                    <div class="hz-panel tb-panel-2 hz-p2"></div>
+                    <div class="hz-panel tb-panel-3 hz-p3"></div>
+                    <div class="hz-panel tb-panel-4 hz-p4"></div>
+                    <div class="hz-panel tb-panel-5 hz-p5"></div>
+                </div>
+
+{% endif %}
+                <div class="body-left-corner-box">
+                    <div class="corner body-left-corner">
+                    </div>
+                </div>
+
+                <div class="all-posts">
+                    <h2>CONFERENCE</h2>
+            
+{% for post in page %}
+                    <div class="post-container">
+                        <div class="post-section-date-edit">
+                            {{  post.created_on|date:"Ymd.Hms" }}
+    {% if user.is_authenticated and user.username == post.poster.username %}
+                            <button class="edit-btn lcars-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}"><span>EDIT</span></button>
+    {% endif %}
+                        </div>
+
+                        <div class="post-section-content">    
+                            <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username|upper }}</a>
+                            <div class="pcont-content" id="post_content_{{ post.id }}">
+                                {{ post.content|upper }}
+                            </div>
+                        </div>
+
+                        <div class="post-section-likes"> 
+                            <p><span id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> LIKES</p>
+
+    {% if user.is_authenticated and user.username != post.poster.username %}
+                            <button class="like-btn lcars-btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
+    {% endif %} 
+                        </div>
+                    </div>
+                    
 {% empty %}
                     <p> No posts. Yours can be the first! {% if not user.is_authenticated %} <a href="{% url 'register' %}">Register here</a> {% endif %} :)</p>
 {% endfor %}
                 </div>
-
+            </div>
+        </div>
 
 
 {% if page.has_other_pages %}

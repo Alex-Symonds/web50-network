@@ -2,8 +2,6 @@
 $f_branding: 'Antonio', 'Oswald', 'Arial Narrow', 'Avenir Next Condensed', sans-serif;
 $f_secondary: $f_branding;
 
-
-
 // ---------------------------------------
 $c_like: rgb(0, 216, 0);
 $c_links: rgb(255, 238, 0);
@@ -37,7 +35,14 @@ $c_bghv_hollow: #2d2d2d;
 $c_border_primary: #777;
 $c_border_secondary: #555;
 
-// Colour pallette
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------- 
+// Variables for LCARS layout
+// -----------------------------------------------------------------------------------------------------------------------
 
 $lcars_0: #ff9900;
 $lcars_1: #ff9966;
@@ -51,6 +56,14 @@ $lcars_blue: $lcars_4;
 
 $lcars_5: #cc6666;
 $lcars_6: #f8fbdb;
+$lcars_rust: $lcars_5;
+$lcars_likes: $lcars_6;
+
+$lcars_header_top_left: $lcars_0;
+$lcars_header_bottom_left: $lcars_blue;
+
+$lcars_body_top_left: $lcars_rust;
+$lcars_response_top_left: $lcars_blue;
 
 $lcars_body_h_top: #abcaff; // body headings
 $lcars_body_h_side: #cad1ff; // edit button, date
@@ -59,7 +72,7 @@ $lcars_text: #72efff; // text
 
 
 $page_width: 98%;
-$max_page: 80rem;
+$max_page: 85rem;
 $min_page: 20rem;
 
 $main_title_height: 3.5rem;
@@ -70,49 +83,17 @@ $breakpoint_title_twolines: 500px;
 $panel_border: 4px solid black;
 
 
-/* ALL PAGES */
-.lcars_btn{
-    position: relative;
-    height: 3rem;
-    border-radius: 1.5rem;
-    color: black;
-    margin: 5px;
-    padding: 0;
-
-    a{
-        color: black;
-        position: absolute;
-        bottom: 0.25rem;
-        right: 1.25rem;
-    }
-}
 
 
-.lcars_0{
-    color: black;
-    background: $lcars_0;
-}
-.lcars_1{
-    color: black;
-    background: $lcars_1;
-}
-.lcars_2{
-    color: black;
-    background: $lcars_2;
-}
-.lcars_3{
-    color: black;
-    background: $lcars_3;
-}
-.lcars_4{
-    color: black;
-    background: $lcars_4;
-}
-.lcars_5{
-    color: black;
-    background: $lcars_5;
-}
 
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------- 
+// Tag-level stuff
+// -----------------------------------------------------------------------------------------------------------------------
 
 body{
     background: $c_bg_main;
@@ -120,23 +101,62 @@ body{
     font-family: $f_secondary; 
     font-size: 1.25rem;
 }
-
 .body{
-    margin-top: 2rem;
-    font-family: $f_secondary; 
+    font-family: $f_secondary;
+
+    width: 100%;
+    max-width: $max_page;
+    min-width: $min_page;
+    margin: 10px auto 0;
+
+    display: flex;
+    //justify-content: flex-end;
+    //align-items: right;
+    //text-align: right; 
 }
 
 h2, h3{
     color: $lcars_body_h_top;
 }
 
-.left_panels{
+textarea, input[type=text], input[type=password], input[type=email]{
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+
+    color: $c_txt_main;
+    background: $c_bg_input;
+
+    border: 1px solid $lcars_body_h_side;
+    border-radius: 4px;
+
+    &:focus, &:active{
+        color: $c_txt_main;
+        background: $c_bg_input;  
+        box-shadow: 0 0 4px $lcars_2;      
+    }
+}
+
+
+
+
+
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------- 
+// Page layout
+// -----------------------------------------------------------------------------------------------------------------------
+
+.left-panels{
     width: 15%;
     display: flex;
     flex-direction: column;
 }
 
-.header_container{
+.header-container{
     width: 100%;
     max-width: $max_page;
     margin: 1.5rem auto 0;
@@ -147,60 +167,79 @@ h2, h3{
     text-align: right; 
 }
 
-
-.left_container{
+.left-container{
     width: 15%;
 }
-.right_container{
+.right-container{
     width: 85%;
 }
 
-.header_0{
-    width: 100%;
-    background: $lcars_0;
-    border-top-left-radius: 5.5rem;
-    flex-grow: 2;
-}
-.header_1{
-    height: 1rem;
-    width: 100%;
-    border-top: $panel_border;
-    background: $lcars_3;
-}
-.header_2{
-    border-top: $panel_border;
-    background: $lcars_4;
-    border-bottom-left-radius: 3rem;
-    width: 100%;
-    flex-grow: 1;
-}
 
 
 
-.header_top_corner_box{
-    width: 1rem;
-    height: 1rem;
-    background: $lcars_0;
-}
-.header_top_corner{
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------- 
+// LCARS panels
+// -----------------------------------------------------------------------------------------------------------------------
+
+// Corner boxes
+.corner{
+    // Shared class: all the corners need this on the internal div
     background: black;
     width: 100%;
-    height: 100%;
+    height: 100%;    
+}
+
+.header-top-corner-box{
+    width: 1rem;
+    height: 1rem;
+    // Note: Corners use three separate divs. Assign a variable to store the colour for each corner so it can be reused.
+    background: $lcars_header_top_left;
+}
+.header-top-corner{
     border-top-left-radius: 1rem;
 }
-.header_bottom_corner_box{
-    width: 1rem;
-    height: 1rem;
-    background: $lcars_4;
+
+.header-bottom-corner-box{
+    width: 2rem;
+    height: 2rem;
+    background: $lcars_header_bottom_left;
 }
-.header_bottom_corner{
-    background: black;
-    width: 100%;
-    height: 100%;
-    border-bottom-left-radius: 1rem;
+.header-bottom-corner{
+    border-bottom-left-radius: 2rem;
 }
 
-.end_header{
+.body-left-corner-box{
+    width: 2rem;
+    height: 2rem;   
+    background: $lcars_body_top_left;
+}
+.body-left-corner, .response-left-corner{
+    border-top-left-radius: 2rem;
+}
+.response-left-corner-box{
+    width: 2rem;
+    height: 2rem;   
+    background: $lcars_response_top_left;
+}
+
+// ---- General containers and sizings -----------------------------------------------------------------------------------------------------------------------
+// --- vertical panels
+.lcars-top-left{
+    border-top-left-radius: 5.5rem;
+    flex-grow: 3;
+}
+.vt-panel{
+    width: 100%;
+    border-top: $panel_border;
+}
+
+// -- horizontal panels
+.hz-panel-container{
     height: 1rem;
     width: 100%;
     display: flex;
@@ -209,41 +248,197 @@ h2, h3{
     text-align: right; 
 }
 
-.eh_panel{
+.hz-panel{
+    height: 1rem;
+    min-width: 1rem;
+    border-right: $panel_border;    
+}
+.hz-p0{
+    flex-grow: 2;    
+}
+.hz-p1{
+    width: 2rem;    
+}
+.hz-p2{
+    width: 5rem;    
+}
+.hz-p3{
+    width: 2rem;
+}
+.hz-p4{
+    flex-grow: 2; 
+}
+.hz-p5{
+    width: 2rem;
+}
+
+// Panels: colours and (sometimes) sizes for specific panels -----------------------------------------------------------------------------------------------------
+// Header, vertical strip down the side
+.header-0{
+    width: 100%;
+    background: $lcars_header_top_left;
+    border-top-left-radius: 5.5rem;
+    flex-grow: 2;
+}
+.header-1{
+    height: 1rem;
+    background: $lcars_3;
+}
+.header-2{
+    background: $lcars_header_bottom_left;
+    border-bottom-left-radius: 3rem;
+    flex-grow: 1;
+}
+
+// "End header" horizontal strip: widths should match "top body"
+.eh-panel{
     height: 1rem;
     min-width: 1rem;
     border-right: $panel_border;
 }
-.eh_panel_0{
-    flex-grow: 2;
+.eh-panel-0{
     background: $lcars_4; 
 }
-.eh_panel_1{
-    width: 2rem;
+.eh-panel-1{
     background: $lcars_0;
 }
-.eh_panel_2{
-    width: 5rem;
+.eh-panel-2{
     background: $lcars_3;
 }
-.eh_panel_3{
-    width: 2rem;
+.eh-panel-3{
     background: $lcars_2;
 }
-.eh_panel_4{
-    flex-grow: 2; 
+.eh-panel-4{
     background: $lcars_3; 
 }
-.eh_panel_5{
-    width: 2rem;
+.eh-panel-5{
     background: $lcars_2;
+}
+
+// "Top body" horizontal strip: widths should match "end header"
+.tb-panel-0{
+    background: $lcars_body_top_left;
+}
+.tb-panel-1, .tb-panel-2{
+    background: $lcars_2;
+}
+.tb-panel-3{
+    background: $lcars_1;
+}
+.tb-panel-4{
+    background: $lcars_blue;
+}
+.tb-panel-5{
+    background: $lcars_purple;
+}
+
+// Side of "conference" panels
+.side-0{
+    background: $lcars_rust;
+}
+.side-1{
+    background: $lcars_rust;
+    flex-grow: 2;
+}
+.side-2{
+    background: $lcars_1;
+    flex-grow: 3;
+}
+
+// Side of "respond" panels
+.mid-0{
+    background: $lcars_response_top_left;
+}
+.mid-1{
+    background: $lcars_1;
+    flex-grow: 2;
+}
+.mid-2{
+    background: $lcars_rust;
+    flex-grow: 3;
 }
 
 
 
 
 
-.heading_panel{
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+// Buttons
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+.lcars-btn{
+    position: relative;
+    height: 3rem;
+    border-radius: 1.5rem;
+    margin: 5px;
+    padding: 0;
+
+    a, span{
+        position: absolute;
+        bottom: 0.25rem;
+        right: 1.25rem;
+        color: black;
+    }
+}
+
+.post-solid-btn{
+    background: $lcars_body_h_side;
+    color: black;
+    height: 2rem;
+    width: 100%;
+    max-width: 7rem;
+    margin: 0.5rem 0.1rem;
+    border: none;
+
+    span{
+        bottom: 0.1rem;
+        right: 1rem;
+    }
+}
+.like-btn{
+    width: 100%;
+    margin-top: 0.3rem;
+    height: 2rem;
+
+    span{
+        position: absolute;
+        bottom: -0.1rem;
+        right: 0.9rem;
+        pointer-events: none;
+    }
+
+    &:active, &:focus{
+        outline: none;
+    }
+}
+.unliked{
+    border: 2px solid $lcars_0;
+    color: $lcars_0;
+    background: black;
+    span{
+        color: $lcars_0;
+    }
+}
+.liked{
+    border: 1px solid $lcars_0;
+    color: black;
+    background: $lcars_0;
+}
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------
+// Heading and navigation
+// --------------------------------------------------------------------------------------------------------------------------------------------------------
+.heading-panel{
     width: 100%;
     height: 3.5rem;
     position: relative;
@@ -252,16 +447,16 @@ h2, h3{
     border-bottom-right-radius: 1.75rem; 
 }
 
-.main_title_container{
+.main-title-container{
     display: flex;
     width: 100%;
 }
-.main_title_before{
+.main-title-before{
     background: $lcars_0;
     min-height:$main_title_height;
     flex-grow: 2;
 }
-.main_title{
+.main-title{
     padding: 0rem 1rem 0.4rem;
     margin: 0;
     line-height: 100%;
@@ -270,14 +465,12 @@ h2, h3{
     font-family: $f_branding;
     color: $lcars_0; 
 }
-
 @media (max-width: $breakpoint_title_twolines){
     .main_title{
         width: 12rem;
     } 
 }
-
-.main_title_after{
+.main-title-after{
     width: 3rem;
     margin-right: 5px;
     background: $lcars_0;
@@ -285,96 +478,190 @@ h2, h3{
     border-bottom-right-radius: 50%;
 }
 
-
-/*
-This works ok until you shrink the page. Then the end cap gets teeny and the text doubles up over itself, which isn't great.
-a.main_title{
-    padding: 0.75rem 1rem;
-    margin: 0;
-    line-height: 1.5rem;
-    position: absolute;
-    top: 0;
-    right: 5%;
-    height: 3.5rem;
-
-    background: black;
-    font-size: 3.5rem;
-    font-family: $f_branding;
-    color: $lcars_0;
-}
-*/
-
-.lcars_nav_container{
+.lcars-nav-container{
     width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    ul{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin: 0;
+    }
+
+    li {
+        list-style: none;
+    }
 }
 
-
-ul.lcars_nav{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    margin: 0;
-}
-
-.lcars_nav_btn{
-    list-style: none;
+.lcars-nav-btn{
+    position: relative;
+    display: inline-block;
+    height: 3rem;
     width: 10rem;
+
+    border-radius: 1.5rem;
+    margin: 5px;
+    padding: 0;
+
+    color: black;
+
+    span {
+        position: absolute;
+        bottom: 0.25rem;
+        right: 1.25rem;
+    }
+}
+.nav-user, .nav-following, .nav-register{
+    background: $lcars_4;  
+}
+.nav-allposts{
+    background: $lcars_0;  
+}
+.nav-logout{
+    background: $lcars_1;  
+}
+.nav-login{
+    background: $lcars_1;  
 }
 
 
 
-textarea, input[type=text], input[type=password], input[type=email]{
+
+
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+// Posts
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+.index-container{
+    display: flex;
     width: 100%;
+}
+
+.posts-container-full{
+    width: 100%;
+}
+
+.posts-container-shared{
+    order: 1;
+    width: 55%;
+}
+
+
+
+
+
+.response-container{
+    order: 2;
+    width: 45%;
+    display: flex;
+}
+.middle-panels{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.response-inner{
+    height: 100%;
+    flex-grow:2;
+}
+
+@media (max-width: $max_page){
+    .response-container{
+        order: 1;
+        width: 100%;
+    }  
+    .posts-container-half{
+        order: 2;
+        width: 100%;
+    }
+    .response-left-corner-box{
+        background: $lcars_body_top_left;
+    }
+}
+
+
+
+.post-container{
+    display: flex;
+    width: 100%;
+    margin-top: 2rem;
+}
+.post-section-date-edit{
+    min-width: 8.5rem;
+    font-size: 1.1rem;
+    padding-top: 0.6rem;
+    color: $lcars_body_h_side;
+}
+.post-section-content{
+    flex-grow: 1;
     padding: 0.5rem;
-    margin-bottom: 1rem;
-
-    color: $c_txt_main;
-    background: $c_bg_input;
-
-    border: 1px solid $c_border_primary;
-    border-radius: 4px;
-
-    &:focus, &:active{
-        color: $c_txt_main;
-        background: $c_bg_input;        
+    a{
+        font-size: 1.7rem;
+        font-weight: bold;
+        color: $lcars_username;
+    
+        &:hover{
+            color:white;
+        }
     }
 }
+.post-section-likes{
+    min-width: 7.5rem;
+    color: $lcars_likes;
+    text-align: right;
+}
 
-/* posts stuff */
-
-#all-posts{
-    margin-top: 1rem;
+.edit-btn{
+    background: $lcars_body_h_side;
+    color: black;
+    height: 2rem;
+    width: 100%;
+    max-width: 7rem;
+    margin: 0.5rem 0.1rem;
     border: none;
-    border-bottom: 1px solid $c_border_primary;  
-}
-.post{
-    margin-top: 0.2rem;
-    padding: 0.4rem 0.8rem;
-    border-top: 2px solid $c_border_primary;
-}
 
-.pheader{
-    padding: 0.2rem;
-    font-size: 0.85rem;
-    color: $c_text_subtle;
-    border-bottom: 1px solid $c_border_secondary;
-}
-.pbody{
-    margin-top: 0.8rem;
-}
-
-.pcont-user a{
-    font-weight: 1.2rem;
-    font-weight: bold;
-    color: $lcars_username;
-
-    &:hover{
-        color:$c_txt_main;
+    span{
+        bottom: 0.1rem;
+        right: 1rem;
     }
+}
+.post-btn{
+    float: right;
+    max-width: 10rem;
+    width: 100%;
+    padding: 0.5rem 1.5rem 0;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    text-align: right;
+    vertical-align: bottom;
+
+    color: black;
+
+    background: $lcars_body_h_side;
+    border: 1px solid $lcars_body_h_side;
+
+    &:hover {
+        border: 1px solid $c_post_glow_border;
+        box-shadow: 0 0 4px 0 $c_post_glow;
+    }    
+}
+
+
+
+
+
+
+
+.all-posts{
+    padding: 0 3%;
 }
 
 .edit_failed{
@@ -389,6 +676,30 @@ textarea, input[type=text], input[type=password], input[type=email]{
     border-radius: 4px;
     box-shadow: 0 0 4px $c_warning_glow;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .post-hollow-btn{
     width: 100%;
@@ -410,32 +721,15 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
-.post-solid-btn{
-    width: 100%;
-    padding: 0.5rem;
 
-    font-size: 1.2rem;
-    font-weight: bold;
 
-    color: $c_txt_main;
-
-    background: $c_post;
-    border: 1px solid $c_post_dark;
-    border-radius: 3px;
-
-    &:hover {
-        border: 1px solid $c_post_glow_border;
-        box-shadow: 0 0 4px 0 $c_post_glow;
-    }
-}
-
-.pcont-likes{
+/*.pcont-likes{
     width: 100%;
     text-align: center;
     background: $c_bg_hollow;
     border: 1px solid $c_bg_input;
     border-radius: 4px;
-}
+}*/
 
 .like_btn_container{
     border-bottom-left-radius: 4px;
@@ -451,18 +745,19 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 .pcont-likecount{
     /* this is the "heading" of the likes pane */
-    width: 100%;
+    //width: 100%;
+    color: $lcars_likes;
     margin-bottom: 0;
 
     text-align: center;
     font-size: 0.8rem;
     font-weight: bold;
 
-    color: black;
-    background: $c_like;
+    //color: black;
+    //background: $c_like;
 
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    //border-top-left-radius: 4px;
+    //border-top-right-radius: 4px;
 }
 
 .num-inc-likes{
@@ -472,7 +767,10 @@ textarea, input[type=text], input[type=password], input[type=email]{
     margin-bottom: 0;
 }
 
-.like_btn{
+
+
+
+.OLD_like_btn{
     /* thumb icon button */
     width: 100%;
     height: 2rem;  
@@ -493,10 +791,10 @@ textarea, input[type=text], input[type=password], input[type=email]{
         outline: none;
     }
 }
-.unliked{
+.OLD_unliked{
     background-image: url(thumb_rounded_empty.svg);
 }
-.liked{
+.OLD_liked{
     background-image: url(thumb_rounded_full.svg);
 }
 
@@ -535,6 +833,7 @@ a.page-link {
 
 /* Add post only */
 #add-post{
+    padding: 0 1rem;
     margin-bottom: 2rem;
 }
 

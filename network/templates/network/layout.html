@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Blather{% block title %}{% endblock %}</title>
+        <title>Starfleet Secure Comms{% block title %}{% endblock %}</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,62 +21,62 @@
         {% endblock %}
     </head>
     <body>
-        <div class="header_container">
-            <div class="left_panels">
-                <div class="header_0"></div>
-                <div class="header_1"></div>
-                <div class="header_2"></div>
+        <div class="header-container">
+            <div class="left-panels">
+                <div class="header-0"></div>
+                <div class="header-1 vt-panel"></div>
+                <div class="header-2 vt-panel"></div>
             </div>
-            <div class="right_container">
+            <div class="right-container">
                 <nav>
-                    <div class="main_title_container">
-                        <div class="main_title_before"></div>
-                        <a class="main_title" href="#">SECURE COMMS</a>
-                        <div class="main_title_after"></div>
+                    <div class="main-title-container">
+                        <div class="main-title-before"></div>
+                        <a class="main-title" href="#">SECURE COMMS</a>
+                        <div class="main-title-after"></div>
                     </div>
-                    <div class="header_top_corner_box">
-                        <div class="header_top_corner">
+                    <div class="header-top-corner-box">
+                        <div class="header-top-corner corner">
                         </div>
                     </div>
-                    <div class="lcars_nav_container">
-                        <ul class="lcars_nav">  
+                    <div class="lcars-nav-container">
+                        <ul>  
                         {% if user.is_authenticated %}
-                            <li class="lcars_btn lcars_4 lcars_nav_btn">
-                                <a href="{% url 'profile' user.id %}"><strong>{{ user.username }}</strong></a>
+                            <li>
+                                <a class="lcars-nav-btn nav-user" href="{% url 'profile' user.id %}"><span><strong>{{ user.username|upper }}</strong></span></a>
                             </li>
                         {% endif %}
-                            <li class="lcars_btn lcars_0 lcars_nav_btn">
-                                <a href="{% url 'index' %}">ALL POSTS</a>
+                            <li>
+                                <a class="lcars-nav-btn nav-allposts" href="{% url 'index' %}"><span>ALL POSTS</span></a>
                             </li>
                         {% if user.is_authenticated %}
-                            <li class="lcars_btn lcars_4 lcars_nav_btn">
-                                <a href="{% url 'following' %}">FOLLOWING</a>
+                            <li>
+                                <a class="lcars-nav-btn nav-following" href="{% url 'following' %}"><span>FOLLOWING</span></a>
                             </li>
-                            <li class="lcars_btn lcars_1 lcars_nav_btn">
-                                <a href="{% url 'logout' %}">LOG OUT</a>
+                            <li>
+                                <a class="lcars-nav-btn nav-logout" href="{% url 'logout' %}"><span>LOG OUT</span></a>
                             </li>
                         {% else %}
-                            <li class="lcars_btn lcars_1 lcars_nav_btn">
-                                <a href="{% url 'login' %}">LOG IN</a>
+                            <li>
+                                <a class="lcars-nav-btn nav-login" href="{% url 'login' %}"><span>LOG IN</span></a>
                             </li>
-                            <li class="lcars_btn lcars_4 lcars_nav_btn">
-                                <a href="{% url 'register' %}">REGISTER</a>
+                            <li>
+                                <a class="lcars-nav-btn nav-register" href="{% url 'register' %}"><span>REGISTER</span></a>
                             </li>
                         {% endif %}
                         </ul>
                     </div>
                 </nav>
-                <div class="header_bottom_corner_box">
-                    <div class="header_bottom_corner">
+                <div class="header-bottom-corner-box">
+                    <div class="corner header-bottom-corner">
                     </div>
                 </div>
-                <div class="end_header">
-                    <div class="eh_panel eh_panel_0"></div>
-                    <div class="eh_panel eh_panel_1"></div>
-                    <div class="eh_panel eh_panel_2"></div>
-                    <div class="eh_panel eh_panel_3"></div>
-                    <div class="eh_panel eh_panel_4"></div>
-                    <div class="eh_panel eh_panel_5"></div>
+                <div class="hz-panel-container">
+                    <div class="hz-panel eh-panel-0 hz-p0"></div>
+                    <div class="hz-panel eh-panel-1 hz-p1"></div>
+                    <div class="hz-panel eh-panel-2 hz-p2"></div>
+                    <div class="hz-panel eh-panel-3 hz-p3"></div>
+                    <div class="hz-panel eh-panel-4 hz-p4"></div>
+                    <div class="hz-panel eh-panel-5 hz-p5"></div>
                 </div>
             </div>
         </div>
