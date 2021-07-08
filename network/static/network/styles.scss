@@ -88,9 +88,13 @@ $h_divider_margin: 10px;
 $main_title_height: 3.5rem;
 $side_panel_width: 15%;
 
-
+$breakpoint_lose_post_columns: 700px;
 $breakpoint_title_twolines: 484px;
+$breakpoint_corners_tighten: 385px;
+
 $panel_border: 4px solid black;
+
+
 
 
 
@@ -182,40 +186,57 @@ textarea, input[type=text], input[type=password], input[type=email]{
 .header-top-corner-box{
     width: 1rem;
     height: 1rem;
-    // Note: Corners use three separate divs. Assign a variable to store the colour for each corner so it can be reused.
-    background: $lcars_header_top_left;
-}
-.header-top-corner{
-    border-top-left-radius: 1rem;
 }
 
-.header-bottom-corner-box{
+.header-bottom-corner-box,
+.respond-bottom-corner-box,
+.body-left-corner-box,
+.respond-left-corner-box{
     width: 2rem;
     height: 2rem;
-    background: $lcars_header_bottom_left;
+}
+
+.header-top-corner{
+    border-top-left-radius: 1rem;
 }
 .header-bottom-corner{
     border-bottom-left-radius: 2rem;
 }
-
-.respond-bottom-corner-box{
-    width: 2rem;
-    height: 2rem;
-    background: $lcars_response_bottom_left;
-}
-
-.body-left-corner-box{
-    width: 2rem;
-    height: 2rem;   
-    background: $lcars_conference_top_left;
-}
 .top-left-corner{
     border-top-left-radius: 2rem;
 }
-.respond-left-corner-box{
-    width: 2rem;
-    height: 2rem;   
+
+.header-top-corner-box{
+    // Note: Corners use three separate divs. Assign a variable to store the colour for each corner so it can be reused.
+    background: $lcars_header_top_left;
+}
+.header-bottom-corner-box{
+    background: $lcars_header_bottom_left;
+}
+.body-left-corner-box{ 
+    background: $lcars_conference_top_left;
+}
+.respond-left-corner-box{ 
     background: $lcars_response_top_left;
+}
+.respond-bottom-corner-box{
+    background: $lcars_response_bottom_left;
+}
+
+@media (max-width: $breakpoint_corners_tighten){
+    .header-bottom-corner-box,
+    .respond-bottom-corner-box,
+    .body-left-corner-box,
+    .respond-left-corner-box{
+        width: 1rem;
+        height: 1rem;
+    }
+    .header-bottom-corner{
+        border-bottom-left-radius: 1rem;
+    }
+    .top-left-corner{
+        border-top-left-radius: 1rem;
+    }
 }
 
 // ---- General containers and sizings -----------------------------------------------------------------------------------------------------------------------
@@ -428,6 +449,18 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
 // Buttons
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -487,22 +520,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
-/*
-.post-solid-btn{
-    background: $lcars_edit_date;
-    color: black;
-    height: 2rem;
-    width: 100%;
-    max-width: 7rem;
-    margin: 0.5rem 0.1rem;
-    border: none;
-
-    span{
-        bottom: 0.1rem;
-        right: 1rem;
-    }
-}*/
 .like-btn{
+    max-width: 7rem;
     width: 100%;
     margin-top: 0.3rem;
     height: 2.5rem;
@@ -515,7 +534,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 
     &:active, &:focus{
-        outline: none;
+        outline: thin dotted;
     }
 }
 .unliked{
@@ -537,13 +556,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
         background: $lcars_0_hover;
     }
 }
-
-
-
-
-
-
-
 
 
 
@@ -658,6 +670,14 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 
 
+
+
+
+
+
+
+
+
 // ----------------------------------------------------------------------------------------------------------------------- 
 // Page layout
 // -----------------------------------------------------------------------------------------------------------------------
@@ -727,14 +747,23 @@ textarea, input[type=text], input[type=password], input[type=email]{
 .respond-content{
     flex-grow:2;
 }
-.p-resp-th-0, .p-resp-th-1, .p-resp-th-2, .p-resp-th-3,
-.p-resp-bh-0, .p-resp-bh-1, .p-resp-bh-2, .p-resp-bh-3{
-    display: none;
+
+#add-post{
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    form{
+        width: 100%;
+    }
 }
 
 
 
-
+.p-resp-th-0, .p-resp-th-1, .p-resp-th-2, .p-resp-th-3,
+.p-resp-bh-0, .p-resp-bh-1, .p-resp-bh-2, .p-resp-bh-3{
+    display: none;
+}
 @media (max-width: $max_page){
     .conference-container{
         width: 100%;
@@ -778,11 +807,16 @@ textarea, input[type=text], input[type=password], input[type=email]{
     margin-top: 2rem;
 }
 .post-section-date-edit{
-    min-width: 8.5rem;
+    width: 8rem;
     font-size: 1.1rem;
     padding-top: 0.6rem;
     color: $lcars_edit_date;
+
+    small{
+        white-space: nowrap;
+    }
 }
+
 .post-section-content{
     flex-grow: 1;
     padding: 0.5rem;
@@ -829,6 +863,134 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 
 
+
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Pagination --------------------------------
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#pagination-nav{
+    margin: 2rem 0 2rem;
+}
+
+.page-item{
+    width: 18%;
+    max-width: 8rem;
+}
+
+.page-item.active .page-link {
+    color: $lcars_blue;
+    background: $c_bg_main;
+    border: none;
+    text-align: center;
+    padding: 0;
+    line-height: 2rem;
+    z-index: -2;
+}
+.page-item.disabled .page-link {
+    color: $c_border_primary;
+    background: $c_bg_main;
+    border: 1px solid $c_border_secondary;
+
+    text-align: right;
+    padding: 0.9rem 0.7rem 0 0.1rem;
+}
+
+a.page-link {
+    font-weight: bold;
+    color: black;  
+    border: none;
+    text-align: right;
+    padding: 0.9rem 0.7rem 0 0.1rem;
+    
+    &:hover{
+        color: black;   
+    }
+}
+
+a.page-next{
+    background: $lcars_2;
+    &:hover{
+        background: $lcars_2_hover;   
+    }
+}
+a.page-oldest{
+    border-left: $panel_border;
+    background: $lcars_0;
+    &:hover{
+        background: $lcars_0_hover;   
+    }
+}
+a.page-previous{
+    background: $lcars_3;
+    &:hover{
+        background: $lcars_3_hover;   
+    }
+}
+a.page-newest{
+    border-right: $panel_border;
+    background: $lcars_4;
+    &:hover{
+        background: $lcars_4_hover;   
+    }
+}
+
+.page-item:first-child .page-link{
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+.page-item:last-child .page-link {
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    padding-right: 1rem;
+}
+
+
+
+@media (max-width: $breakpoint_lose_post_columns){
+    .all-posts{
+        padding: 0 1rem;
+    }
+    .post-container{
+        flex-wrap: wrap;
+    }
+    .post-section-date-edit,
+    .post-section-content,
+    .post-section-likes{
+        width: 100%;
+    }
+    #pagination-nav{
+        font-size: 1.1rem;
+    }
+    .post-btn{
+        padding: 0.5rem 1rem 0;
+    }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .edit_failed{
     margin-bottom: 1rem;
     padding: 5px 10px;
@@ -841,30 +1003,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
     border-radius: 4px;
     box-shadow: 0 0 4px $c_warning_glow;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .post-hollow-btn{
     width: 100%;
@@ -963,23 +1101,23 @@ textarea, input[type=text], input[type=password], input[type=email]{
     background-image: url(thumb_rounded_full.svg);
 }
 
-#pagination-nav{
+#OLD_pagination-nav{
     margin: 2rem 0 2rem;
 }
 
-.page-item.disabled .page-link {
+.OLD_page-item.disabled .OLD_page-link {
     color: $c_border_primary;
     background: $c_bg_main;
     border-color: $c_border_secondary;
 }
 
-.page-item.active .page-link {
+.OLD_page-item.active .OLD_page-link {
     color: $c_txt_main;
     border-color: $c_border_secondary;
     background: $c_bg_main;
 }
 
-a.page-link {
+a.OLD_page-link {
     font-weight: bold;
 
     color: $c_txt_main;
@@ -996,11 +1134,7 @@ a.page-link {
 
 
 
-/* Add post only */
-#add-post{
-    padding: 0 2rem;
-    margin-bottom: 2rem;
-}
+
 
 
 
