@@ -26,7 +26,7 @@ class WebpageTests(LiveServerTestCase):
         self.driver.get('%s%s' % (self.server, '/login'))
         self.driver.find_element_by_name("username").send_keys("Alex")
         self.driver.find_element_by_name("password").send_keys("a")
-        self.driver.find_element_by_class_name("btn-primary").submit()
+        self.driver.find_element_by_id("login-btn").submit()
 
     @classmethod
     def tearDownClass(self):
@@ -37,15 +37,11 @@ class WebpageTests(LiveServerTestCase):
         """Check the title is ok on the homepage"""
         driver = self.driver
         driver.get('%s%s' % (self.server, ""))
-        self.assertEqual(driver.title, "Blather")
+        self.assertEqual(driver.title, "Starfleet Secure Comms")
 
     def test_index_like_counter(self):
         """Check the like counter works on the homepage"""
         self.like_counter("")
-
-    def test_index_like_btn_bg(self):
-        """Check the like button's image is toggling on the homepage"""
-        self.like_button_background("")
 
     def test_index_like_btn_class(self):
         """Check the like button's CSS class is toggling on the homepage"""
@@ -61,15 +57,11 @@ class WebpageTests(LiveServerTestCase):
         """Check the following page has the correct title"""
         driver = self.driver
         driver.get('%s%s' % (self.server, "/following"))
-        self.assertEqual(driver.title, "Blather - Following")
+        self.assertEqual(driver.title, "Starfleet Secure Comms - Following")
 
     def test_following_like_counter(self):
         """Check the like counter works on the following page"""
         self.like_counter("/following")
-
-    def test_following_like_btn_bg(self):
-        """Check the like button's image is toggling on the following page"""
-        self.like_button_background("/following")
 
     def test_following_like_btn_class(self):
         """Check the like button's CSS class is toggling on the following page"""
@@ -80,15 +72,11 @@ class WebpageTests(LiveServerTestCase):
         """Check a profile page has the correct title """
         driver = self.driver
         driver.get('%s%s' % (self.server, "/user/1"))
-        self.assertEqual(driver.title, "Blather - Profile for Alex")
+        self.assertEqual(driver.title, "Starfleet Secure Comms - Profile for Alex")
 
     def test_profile_like_counter(self):
         """Check the like counter works on profile pages (must not be logged-in user) """
         self.like_counter("/user/2")
-
-    def test_profile_like_btn_bg(self):
-        """Check the like button's image is toggling on profile pages (must not be logged-in user)"""
-        self.like_button_background("/user/2")
 
     def test_profile_like_btn_class(self):
         """Check the like button's CSS class is toggling on profile pages (must not be logged-in user)"""
@@ -112,12 +100,13 @@ class WebpageTests(LiveServerTestCase):
 
         count_at_start = int(count_ele.text)
         btn_at_start = btn_ele.text
-        if btn_at_start == 'following':
+
+        if btn_at_start == 'following'.upper():
             count_post_click = count_at_start - 1
-            btn_post_click = 'not following'
+            btn_post_click = 'not following'.upper()
         else:
             count_post_click = count_at_start + 1
-            btn_post_click = 'following'
+            btn_post_click = 'following'.upper()
 
         btn_ele.click()
         time.sleep(1)
@@ -135,7 +124,7 @@ class WebpageTests(LiveServerTestCase):
         # Find a like button
         driver = self.driver
         driver.get('%s%s' % (self.server, url))
-        like_btn = driver.find_element_by_class_name("like_btn")
+        like_btn = driver.find_element_by_class_name("like-btn")
 
         # Grab its status and the post ID. Use the post_id to grab the corresponding counter and save the init value
         status_before = like_btn.get_attribute("data-status")
@@ -151,7 +140,9 @@ class WebpageTests(LiveServerTestCase):
             toggled_count = init_count + 1
 
         else:
-            toggled_count = -1
+            # It should be true or false, so if it somehow isn't check the type then run an assert that'll tell me what it /is/.
+            self.assertTrue(type(status_before), type("str"))
+            self.assertTrue(status_before in ["true", "false"])
 
         # Click the button and give the page a moment to actually make the changes
         like_btn.click()
@@ -169,30 +160,6 @@ class WebpageTests(LiveServerTestCase):
         like_counter = driver.find_element_by_id(f"num_likes_{post_id}")
         self.assertEqual(int(like_counter.text), init_count)        
 
-    def like_button_background(self, url):
-        """Check the CSS is changing the background on toggle"""
-        driver = self.driver
-        driver.get('%s%s' % (self.server, url))
-
-        # Find a like button. Like buttons should have "class='like_btn liked'" or "class='like_btn unliked'"
-        like_btn = driver.find_element_by_class_name("like_btn")
-        bg_before = like_btn.value_of_css_property("background-image")
-        
-        # Click the button and give it a moment to Do The Thing
-        like_btn.click()
-        time.sleep(1)
-
-        # Grab post-toggled elements
-        bg_after = like_btn.value_of_css_property("background-image")
-        self.assertFalse(bg_before == bg_after)
-
-        # Put it back
-        like_btn.click()
-        time.sleep(1)
-
-        # Check that worked ok
-        bg_end = like_btn.value_of_css_property("background-image")
-        self.assertEqual(bg_before, bg_end)
 
     def like_button_class(self, url):
         """Check the like toggle is setting CSS class correctly"""
@@ -201,43 +168,51 @@ class WebpageTests(LiveServerTestCase):
         driver = self.driver
         driver.get('%s%s' % (self.server, url))
 
-        # Find a like button. Like buttons should have "class='like_btn liked'" or "class='like_btn unliked'"
-        like_btn = driver.find_element_by_class_name("like_btn")
+        # Find a like button. Like buttons should have "class='like-btn lcars-btn liked'" or "class='like-btn lcars-btn unliked'"
+        like_btn = driver.find_element_by_class_name("like-btn")
         status_before = like_btn.get_attribute("data-status")
-        class_before = like_btn.get_attribute("class").split(" ")[1]
+        classes_before = like_btn.get_attribute("class").split(" ")
 
-        # Define expectations
+        # Define toggle status at the start
         if status_before == 'true':
             start_id = 0
+            toggle_id = 1
 
         elif status_before == 'false':
             start_id = 1
+            toggle_id = 0
+        
+        else:
+            # It should be true or false, so if it somehow isn't check the type then run an assert that's sort of a print statement.
+            self.assertTrue(type(status_before) == str)
+            self.assertEqual("should be true or false", status_before)
 
-        # Check the expectations are correctly set
-        self.assertEqual(class_before, CLASS_NAMES[start_id])
+        # Check the start class is correct
+        self.assertTrue(CLASS_NAMES[start_id] in classes_before)
         
         # Click the button and give it a moment to Do The Thing
         like_btn.click()
         time.sleep(1)
 
         # Check it's toggled
-        class_after = like_btn.get_attribute("class").split(" ")[1]
-        self.assertFalse(class_after == class_before)
+        classes_after = like_btn.get_attribute("class").split(" ")
+        self.assertTrue(CLASS_NAMES[toggle_id] in classes_after)
 
         # Put it back
         like_btn.click()
         time.sleep(1)
 
         # Check that worked ok
-        class_end = like_btn.get_attribute("class").split(" ")[1]
-        self.assertEqual(class_end, class_before)
+        classes_end = like_btn.get_attribute("class").split(" ")
+        self.assertTrue(CLASS_NAMES[start_id] in classes_end)
+
 
     def edit_button(self, url):
         driver = self.driver
         driver.get('%s%s' % (self.server, url))
 
         # Find an edit button, its associated content div and the original message and size.
-        edit_btn = driver.find_element_by_class_name("edit_btn")
+        edit_btn = driver.find_element_by_class_name("edit-btn")
         post_id = edit_btn.get_attribute("data-id")
         cont_div = driver.find_element_by_id(f"post_content_{post_id}")
         text_start = cont_div.text

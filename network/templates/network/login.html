@@ -1,27 +1,49 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2>Login</h2>
+    <div class="conference-container">
+        <div class="conference-v-panels">
+            <div class="pv-login-0 lcars-top-left"></div>
+            <div class="pv-login-1 vt-panel"></div>
+            <div class="pv-login-2 vt-panel"></div>
+            <div class="pv-login-3 vt-panel"></div>
+        </div>
+
+        <div class="conference-content">
+            <div class="hz-panel-container">
+                <div class="ph-login-0 hz-panel hz-p0"></div>
+                <div class="ph-login-1 hz-panel hz-p1"></div>
+                <div class="ph-login-2 hz-panel hz-p2"></div>
+                <div class="ph-login-3 hz-panel hz-p3"></div>
+                <div class="ph-login-4 hz-panel hz-p4"></div>
+                <div class="ph-login-5 hz-panel hz-p5"></div>
+            </div>
+            <div class="login-corner-box">
+                <div class="corner top-left-corner">
+                </div>
+            </div>
+
+            <div class="main-container">
+                <h2>LOGIN</h2>
 
                 {% if message %}
-                    <div>{{ message }}</div>
+                    <div class="edit-failed">{{ message|safe }}</div>
                 {% endif %}
 
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+                        <input autofocus class="form-control" type="text" name="username" placeholder="USERNAME">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password" placeholder="Password">
+                        <input class="form-control" type="password" name="password" placeholder="PASSWORD / COMMAND CODES">
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Login">
+                    <input id="login-btn" class="lcars-btn post-btn" type="submit" value="LOGIN">
                 </form>
 
-                Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+                <div class="helpful-suggestion">
+                    DON'T HAVE AN ACCOUNT? <a href="{% url 'register' %}">REGISTER HERE.</a>
+                </div>
             </div>
         </div>
     </div>

@@ -39,7 +39,7 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "network/login.html", {
-                "message": "Invalid username and/or password."
+                "message": "<span>ACCESS DENIED</span><br>Invalid username and/or password.".upper()
             })
     else:
         return render(request, "network/login.html")
@@ -60,7 +60,7 @@ def register(request):
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(request, "network/register.html", {
-                "message": "Passwords must match."
+                "message": "<span>ERROR</span><br>Passwords must match.".upper()
             })
 
         # Attempt to create new user
@@ -69,7 +69,7 @@ def register(request):
             user.save()
         except IntegrityError:
             return render(request, "network/register.html", {
-                "message": "Username already taken."
+                "message": "<span>ERROR</span><br>Username already taken.".upper()
             })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
@@ -81,7 +81,7 @@ def profile(request, user_id):
 
     if not User.objects.filter(id=user_id).exists():
         return render(request, "network/error.html", {
-            "message": "The requested user was not found."
+            "message": "<span>ACCESS DENIED</span><br>The requested user was not found.".upper()
         }, status=404)
 
     # Get user object for profile owner
@@ -116,14 +116,15 @@ def following(request):
     user = User.objects.get(username=request.user)
 
     if request.user.is_authenticated:
-        fposts = Post.objects.filter(poster__in=user.following.all())
+        fposts = Post.objects.filter(poster__in=user.following.all()).order_by("-created_on")
 
         p = Paginator(fposts, MAX_POSTS_PER_PAGE)
         page_num = request.GET.get("page")
         req_page = p.get_page(page_num)
 
         return render(request, "network/following.html", {
-            "page": req_page
+            "page": req_page,
+            "isFollowing": user.following.all().count() > 0
         })
     else:
         return render(request, "network/error.html", {

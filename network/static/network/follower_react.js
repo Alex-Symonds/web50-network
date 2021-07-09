@@ -18,9 +18,9 @@ function Followers(){
     // Select the display string to appear inside the button
     function get_display_str(isf){
         if (isf){
-            return DISPLAY_TRUE;
+            return DISPLAY_TRUE.toUpperCase();
         } else {
-            return DISPLAY_FALSE;
+            return DISPLAY_FALSE.toUpperCase();
         }
     }
 
@@ -62,7 +62,7 @@ function Followers(){
     if('True' === user_isauth && (username != profile)){
         return [
                 <FollowerCounter count={followers.num_followers} />,
-                <button id="follower_toggle_react" class={followers.class_list} data-id={user_id} data-status={followers.following} data-viewname="follow" onClick={(e) => {toggleFollowers(e)}}>{followers.display_str}</button>
+                <button id="follower_toggle_react" class={followers.class_list} data-id={user_id} data-status={followers.following} data-viewname="follow" onClick={(e) => {toggleFollowers(e)}}><span>{followers.display_str}</span></button>
         ];
     }
     // Otherwise, just display the counter
@@ -72,9 +72,12 @@ function Followers(){
 function FollowerCounter(props){
     // Displays the number of current followers in a span
     return (
-        <span class="follow-count-num" id="num-followers">
-            {props.count}
-        </span>
+        //<span class="follow-count-num" id="num-followers">
+        <div class="stats-result">
+            <span id="num-followers">
+                {props.count}
+            </span>
+        </div>
     );   
 }
 

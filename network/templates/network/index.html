@@ -81,90 +81,90 @@
             </div>
 
             <div class="all-posts">
-                    <h2>CONFERENCE</h2>
+                <h2>CONFERENCE</h2>
             
 {% for post in page %}
-                    <div class="post-container">
-                        <div class="post-section-date-edit">
-                            {{  post.created_on|date:"Ymd.Hms" }} <small>({{  post.created_on|date:"d M Y, H:m:s" }})</small><br>
+                <div class="post-container">
+                    <div class="post-section-date-edit">
+                        {{  post.created_on|date:"Ymd.Hms" }} <small>({{  post.created_on|date:"d M Y, H:m:s" }})</small><br>
                             
     {% if user.is_authenticated and user.username == post.poster.username %}
-                            <button class="edit-btn lcars-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}"><span>EDIT</span></button>
+                        <button class="edit-btn lcars-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}"><span>EDIT</span></button>
     {% endif %}
-                        </div>
+                    </div>
 
-                        <div class="post-section-content">    
-                            <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username|upper }}</a>
-                            <div class="pcont-content" id="post_content_{{ post.id }}">
-                                {{ post.content|upper }}
-                            </div>
-                        </div>
-
-                        <div class="post-section-likes"> 
-                            <p><span id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> LIKES</p>
-
-    {% if user.is_authenticated and user.username != post.poster.username %}
-                            <button class="like-btn lcars-btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
-    {% endif %} 
+                    <div class="post-section-content">    
+                        <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username|upper }}</a>
+                        <div class="pcont-content" id="post_content_{{ post.id }}">
+                            {{ post.content|upper }}
                         </div>
                     </div>
+
+                    <div class="post-section-likes"> 
+                        <p><span id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> LIKES</p>
+
+    {% if user.is_authenticated and user.username != post.poster.username %}
+                        <button class="like-btn lcars-btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
+    {% endif %} 
+                    </div>
+                </div>
                     
 {% empty %}
-                    <p> No posts. Yours can be the first! {% if not user.is_authenticated %} <a href="{% url 'register' %}">Register here</a> {% endif %} :)</p>
+                <p> No posts. Yours can be the first! {% if not user.is_authenticated %} <a href="{% url 'register' %}">Register here</a> {% endif %} :)</p>
 {% endfor %}
-            </div> <!-- all posts-->
+        </div>
 
 {% if page.has_other_pages %}
-                <nav aria-label="See more posts" id="pagination-nav">
-                    <ul class="pagination justify-content-center">
+            <nav aria-label="See more posts" id="pagination-nav">
+                <ul class="pagination justify-content-center">
 
     {% if page.paginator.num_pages > 2 %}
         {% if page.number > 1 %}
-                        <li class="page-item"><a class="page-link page-newest" href="?page=1">NEW</a></li>
+                    <li class="page-item"><a class="page-link page-newest" href="?page=1">NEW</a></li>
         {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">NEW</span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">NEW</span>
+                    </li>
         {% endif %}
     {% endif %}
 
     {% if page.has_previous %}
-                        <li class="page-item"><a class="page-link page-previous" href="?page={{ page.previous_page_number }}">PREV.</a></li>
+                    <li class="page-item"><a class="page-link page-previous" href="?page={{ page.previous_page_number }}">PREV.</a></li>
     {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">PREV.</span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">PREV.</span>
+                    </li>
     {% endif %}
 
-                        <li class="page-item active" aria-current="page">
-                            <span class="page-link">
-                            {{ page.number }}&nbsp;OF&nbsp;{{ page.paginator.num_pages }}
-                            <span class="sr-only">(current)</span>
-                            </span>
-                        </li>
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">
+                        {{ page.number }}&nbsp;OF&nbsp;{{ page.paginator.num_pages }}
+                        <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
 
     {% if page.has_next %}
-                        <li class="page-item"><a class="page-link page-next" href="?page={{ page.next_page_number }}">NEXT</a></li>
+                    <li class="page-item"><a class="page-link page-next" href="?page={{ page.next_page_number }}">NEXT</a></li>
     {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">NEXT</span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">NEXT</span>
+                    </li>
     {% endif %}
 
     {% if page.paginator.num_pages > 2 %}
         {% if page.number < page.paginator.num_pages %}
-                        <li class="page-item"><a class="page-link page-oldest" href="?page={{ page.paginator.num_pages }}">OLD</a></li>
+                    <li class="page-item"><a class="page-link page-oldest" href="?page={{ page.paginator.num_pages }}">OLD</a></li>
         {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">OLD</span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">OLD</span>
+                    </li>
         {% endif %}
     {% endif %}
-                    </ul>
-                </nav>
+                </ul>
+            </nav>
 {% endif %}
-        </div><!-- conference content -->
-    </div><!-- conference container -->
+        </div>
+    </div>
 {% if form and user.is_authenticated %}
 </div>
 {% endif %}
