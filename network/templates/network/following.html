@@ -6,29 +6,29 @@
 
 {% block body %}
     <div class="conference-container">
-        <div class="conference-v-panels">
-            <div class="side-0 lcars-top-left"></div>
-            <div class="side-1 vt-panel"></div>
-            <div class="side-2 vt-panel"></div>
-            <div class="side-3 vt-panel"></div>
-            <div class="side-4 vt-panel"></div>
-            <div class="side-5 vt-panel"></div>
-            <div class="side-6 vt-panel"></div>
-            <div class="side-7 vt-panel"></div>
-            <div class="side-8 vt-panel"></div>
-            <div class="side-9 vt-panel"></div>
+        <div class="conference-v-panels panels-following">
+            <div class="vt-p0 lcars-top-left"></div>
+            <div class="vt-p1 vt-panel"></div>
+            <div class="vt-p2 vt-panel"></div>
+            <div class="vt-p3 vt-panel"></div>
+            <div class="vt-p4 vt-panel"></div>
+            <div class="vt-p5 vt-panel"></div>
+            <div class="vt-p6 vt-panel"></div>
+            <div class="vt-p7 vt-panel"></div>
+            <div class="vt-p8 vt-panel"></div>
+            <div class="vt-p9 vt-panel"></div>
         </div>
 
         <div class="conference-content">
-            <div class="hz-panel-container">
-                <div class="p-conf-0 hz-panel hz-p0"></div>
-                <div class="p-conf-1 hz-panel hz-p1"></div>
-                <div class="p-conf-2 hz-panel hz-p2"></div>
-                <div class="p-conf-3 hz-panel hz-p3"></div>
-                <div class="p-conf-4 hz-panel hz-p4"></div>
-                <div class="p-conf-5 hz-panel hz-p5"></div>
+            <div class="hz-panel-container panels-following">
+                <div class="hz-panel hz-p0"></div>
+                <div class="hz-panel hz-p1"></div>
+                <div class="hz-panel hz-p2"></div>
+                <div class="hz-panel hz-p3"></div>
+                <div class="hz-panel hz-p4"></div>
+                <div class="hz-panel hz-p5"></div>
             </div>
-            <div class="body-left-corner-box">
+            <div class="corner-box panels-following">
                 <div class="corner top-left-corner">
                 </div>
             </div>
@@ -39,7 +39,7 @@
 {% for post in page %}
                     <div class="post-container">
                         <div class="post-section-date-edit">
-                            {{  post.created_on|date:"Ymd.Hms" }} <small>({{  post.created_on|date:"d M Y, H:m:s" }})</small><br>
+                            {{  post.created_on|date:"Ymd.His" }} <small>({{  post.created_on|date:"d M Y, H:i:s" }})</small><br>
                             
     {% if user.is_authenticated and user.username == post.poster.username %}
                             <button class="edit-btn lcars-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}"><span>EDIT</span></button>

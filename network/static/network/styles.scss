@@ -1,100 +1,66 @@
 // Fonts
-$f_branding: 'Antonio', 'Oswald', 'Arial Narrow', 'Avenir Next Condensed', sans-serif;
-$f_secondary: $f_branding;
+$f_lcarsy: 'Antonio', 'Oswald', 'Arial Narrow', 'Avenir Next Condensed', sans-serif;
 
-// ---------------------------------------
-$c_like: rgb(0, 216, 0);
-$c_links: rgb(255, 238, 0);
-$c_links_hv: rgb(255, 249, 167);
-
-$c_branding: rgb(93, 209, 255);
-
-$c_post: rgb(0, 149, 218); /*rgb(0, 174, 255);*/
-$c_post_dark: rgb(0, 66, 97);
-$c_post_glow: rgba(220, 244, 255, 0.623);
-$c_post_glow_border: rgba(220, 244, 255, 0.823);
-
-$c_follow: rgb(174, 0, 255);
-$c_follow_dark: rgb(88, 0, 129);
-$c_follow_glow: rgb(208, 108, 255);
-$c_follow_glow_border: rgb(228, 170, 255);
-
-$c_warning: rgb(182, 0, 0);
-$c_warning_glow: rgb(255, 207, 207);
-
+// Colours
 $c_bg_main:black;
+$c_hollow_hover: #282828;
+$c_input_txt: white;
+$c_input_bg: #222;
+$c_inactive_txt: #777;
+$c_inactive_border: #555;
 
-$c_txt_main: white;
-$c_text_subtle: #ddd;
+$c_edit: #cad1ff;
+$c_edit_hover: #e7eaff;
+$c_username: #aba3ff;
+$c_username_hover: #dedbff; 
 
-$c_bg_input: #222;
+$c_body_heading: #abcaff;
+$c_main_text: #72efff;
+$c_emphasis: #f8fbdb;
+$c_error: red;
 
-$c_bg_hollow: #282828;
-$c_bghv_hollow: #2d2d2d;
+$c_bg_A0: #ff9900;
+$c_bg_A0_hover: #ffd597;
+$c_bg_A1: #ff9966;
+$c_bg_A1_hover: #ffc3a4;
+$c_bg_A2: #ffcc99;
+$c_bg_A2_hover: #ffe4ca;
 
-$c_border_primary: #777;
-$c_border_secondary: #555;
+$c_bg_B0: #cc99cc;
+$c_bg_B0_hover: #e9cfe9;
+$c_bg_B1: #9999ff;
+$c_bg_B1_hover: #c5c5fc;
 
+$c_bg_C0: #cc6666;
 
+// Corner colour assignments
+$lcars_header_top_left: $c_bg_A0;
+$lcars_header_bottom_left: $c_bg_B1;
 
+$lcars_login_corner: $c_bg_A2;
+$lcars_register_corner: $c_bg_A0;
 
+$lcars_following_corner: $c_bg_B0;
+$lcars_profile_corner: $c_bg_A1;
+$lcars_conference_top_left: $c_bg_C0;
+$lcars_response_top_left: $c_bg_B1;
+$lcars_response_bottom_left: $c_bg_A2;
 
-
-// ----------------------------------------------------------------------------------------------------------------------- 
-// Variables for LCARS layout
-// -----------------------------------------------------------------------------------------------------------------------
-
-$lcars_0: #ff9900;
-$lcars_0_hover: #ffd597;
-
-$lcars_1: #ff9966;
-$lcars_1_hover: #ffc3a4;
-
-$lcars_2: #ffcc99;
-$lcars_2_hover: #ffe4ca;
-
-$lcars_3: #cc99cc;
-$lcars_3_hover: #e9cfe9;
-
-$lcars_4: #9999ff;
-$lcars_4_hover: #c5c5fc;
-
-$lcars_purple: $lcars_3;
-$lcars_blue: $lcars_4;
-
-$lcars_rust: #cc6666;
-$lcars_likes: #f8fbdb;
-
-$lcars_header_top_left: $lcars_0;
-$lcars_header_bottom_left: $lcars_blue;
-
-$lcars_conference_top_left: $lcars_rust;
-$lcars_response_top_left: $lcars_blue;
-$lcars_response_bottom_left: $lcars_2;
-$lcars_login_corner: $lcars_purple;
-$lcars_register_corner: $lcars_2;
-
-$lcars_body_h_top: #abcaff; // body headings
-$lcars_edit_date: #cad1ff; // edit button, date
-$lcars_edit_date_hover: #e7eaff; 
-$lcars_username: #aba3ff; // usernames
-$lcars_text: #72efff; // text
-$lcars_error_corner: red;
+$panel_border: 4px solid $c_bg_main;
 
 $page_width: 98%;
 $max_page: 85rem;
 $min_page: 20rem;
 
-$h_divider_margin: 10px;
-
-$main_title_height: 3.5rem;
 $side_panel_width: 15%;
 
 $breakpoint_lose_post_columns: 700px;
 $breakpoint_title_twolines: 484px;
 $breakpoint_corners_tighten: 385px;
 
-$panel_border: 4px solid black;
+$h_divider_margin: 10px;
+$main_title_height: 3.5rem;
+
 
 
 // ----------------------------------------------------------------------------------------------------------------------- 
@@ -103,12 +69,12 @@ $panel_border: 4px solid black;
 
 body{
     background: $c_bg_main;
-    color: $lcars_text;
-    font-family: $f_secondary; 
+    color: $c_main_text;
+    font-family: $f_lcarsy; 
     font-size: 1.25rem;
 }
 .body{
-    font-family: $f_secondary;
+    font-family: $f_lcarsy;
 
     width: 100%;
     max-width: $max_page;
@@ -120,7 +86,7 @@ body{
 }
 
 h2, h3{
-    color: $lcars_body_h_top;
+    color: $c_body_heading;
 }
 
 textarea, input[type=text], input[type=password], input[type=email]{
@@ -128,437 +94,18 @@ textarea, input[type=text], input[type=password], input[type=email]{
     padding: 0.5rem;
     margin-bottom: 1rem;
 
-    color: $c_txt_main;
-    background: $c_bg_input;
+    color: $c_input_txt;
+    background: $c_input_bg;
 
-    border: 1px solid $lcars_edit_date;
+    border: 1px solid $c_edit;
     border-radius: 4px;
 
     &:focus, &:active{
-        color: $c_txt_main;
-        background: $c_bg_input;  
-        box-shadow: 0 0 4px $lcars_2;      
+        color: $c_input_txt;
+        background: $c_input_bg;  
+        box-shadow: 0 0 4px $c_bg_A2;      
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ----------------------------------------------------------------------------------------------------------------------- 
-// LCARS panels
-// -----------------------------------------------------------------------------------------------------------------------
-
-// Corner boxes
-.corner{
-    // Shared class: all the corners need this on the internal div
-    background: black;
-    width: 100%;
-    height: 100%;    
-}
-
-.header-top-corner-box{
-    width: 1rem;
-    height: 1rem;
-}
-
-.error-corner-box,
-.register-corner-box,
-.login-corner-box,
-.header-bottom-corner-box,
-.respond-bottom-corner-box,
-.body-left-corner-box,
-.respond-left-corner-box{
-    width: 2rem;
-    height: 2rem;
-}
-
-.header-top-corner{
-    border-top-left-radius: 1rem;
-}
-.header-bottom-corner{
-    border-bottom-left-radius: 2rem;
-}
-.top-left-corner{
-    border-top-left-radius: 2rem;
-}
-
-.header-top-corner-box{
-    // Note: Corners use three separate divs. Assign a variable to store the colour for each corner so it can be reused.
-    background: $lcars_header_top_left;
-}
-.header-bottom-corner-box{
-    background: $lcars_header_bottom_left;
-}
-.body-left-corner-box{ 
-    background: $lcars_conference_top_left;
-}
-.respond-left-corner-box{ 
-    background: $lcars_response_top_left;
-}
-.respond-bottom-corner-box{
-    background: $lcars_response_bottom_left;
-}
-.login-corner-box{
-    background: $lcars_login_corner;
-}
-.register-corner-box{
-    background: $lcars_register_corner;
-}
-.error-corner-box{
-    background: $lcars_error_corner;
-}
-
-@media (max-width: $breakpoint_corners_tighten){
-    .error-corner-box,
-    .register-corner-box,
-    .login-corner-box,
-    .header-bottom-corner-box,
-    .respond-bottom-corner-box,
-    .body-left-corner-box,
-    .respond-left-corner-box{
-        width: 1rem;
-        height: 1rem;
-    }
-    .header-bottom-corner{
-        border-bottom-left-radius: 1rem;
-    }
-    .top-left-corner{
-        border-top-left-radius: 1rem;
-    }
-}
-
-// ---- General containers and sizings -----------------------------------------------------------------------------------------------------------------------
-// --- vertical panels
-.lcars-top-left{
-    border-top-left-radius: 5.5rem;
-    flex-grow: 3;
-}
-.vt-panel{
-    width: 100%;
-    border-top: $panel_border;
-}
-
-// -- horizontal panels
-.hz-panel-container{
-    height: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: left;
-    text-align: right; 
-}
-
-.hz-panel{
-    height: 1rem;
-    min-width: 1rem;
-    border-right: $panel_border;    
-}
-.hz-p0{
-    flex-grow: 2.8;    
-}
-.hz-p1{
-    width: 2rem;    
-}
-.hz-p2{
-    width: 10rem;
-}
-.hz-p3{
-    width: 2rem;
-}
-.hz-p4{
-    flex-grow: 2; 
-}
-.hz-p5{
-    width: 2rem;
-}
-
-// Panels: colours and (sometimes) sizes for specific panels -----------------------------------------------------------------------------------------------------
-// Header, vertical strip down the side
-.header-0{
-    width: 100%;
-    background: $lcars_header_top_left;
-    border-top-left-radius: 5.5rem;
-    flex-grow: 2;
-}
-.header-1{
-    height: 1rem;
-    background: $lcars_3;
-}
-.header-2{
-    background: $lcars_header_bottom_left;
-    border-bottom-left-radius: 3rem;
-    flex-grow: 1;
-}
-
-// "End header" horizontal strip: widths should match "top body"
-.eh-panel{
-    height: 1rem;
-    min-width: 1rem;
-    border-right: $panel_border;
-}
-.eh-panel-0{
-    background: $lcars_4; 
-}
-.eh-panel-1{
-    background: $lcars_0;
-}
-.eh-panel-2{
-    background: $lcars_3;
-}
-.eh-panel-3{
-    background: $lcars_2;
-}
-.eh-panel-4{
-    background: $lcars_3; 
-}
-.eh-panel-5{
-    background: $lcars_2;
-}
-
-// "Top body" horizontal strip: widths should match "end header"
-.p-conf-0{
-    background: $lcars_conference_top_left;
-}
-
-.p-conf-1, .p-conf-2{
-    background: $lcars_2;
-}
-.p-conf-3{
-    background: $lcars_1;
-}
-.p-conf-4{
-    background: $lcars_blue;
-}
-.p-conf-5{
-    background: $lcars_purple;
-}
-
-.p-resp-th-0 {
-    // @ Half page, this is hidden
-    background: $lcars_response_top_left;
-}
-.p-resp-th-1{
-    background: $lcars_rust;
-}
-.p-resp-th-2{
-    background: $lcars_0;
-}
-.p-resp-th-3{
-    background: $lcars_3;
-}
-.p-resp-th-4{
-    // @ Half page, this is the "linker". Change the colour at full page
-    background: $lcars_response_top_left;
-}
-.p-resp-th-5{
-    background: $lcars_2;
-}
-
-.p-resp-bh-0 {
-    // @ Half page, this is hidden
-    background: $lcars_response_bottom_left;
-}
-.p-resp-bh-1{
-    background: $lcars_0;
-}
-.p-resp-bh-2{
-    background: $lcars_rust;
-}
-.p-resp-bh-3{
-    background: $lcars_2;
-}
-.p-resp-bh-4{
-    // @ Half page, this is the "linker". Change the colour at full page
-    background: $lcars_response_bottom_left;
-}
-.p-resp-bh-5{
-    background: $lcars_purple;
-}
-
-
-
-// Side of "conference" panels
-.side-0{
-    background: $lcars_conference_top_left;
-}
-.side-1{
-    background: $lcars_conference_top_left;
-    flex-grow: 2;
-}
-.side-2{
-    background: $lcars_1;
-    flex-grow: 3;
-}
-.side-3{
-    background: $lcars_4;
-    height: 1rem;
-}
-.side-4{
-    background: $lcars_0;
-    flex-grow: 2;
-}
-.side-5{
-    background: $lcars_rust;
-    height: 1rem;
-}
-.side-6{
-    background: $lcars_4;
-    flex-grow: 3;
-}
-.side-7{
-    background: $lcars_3;
-    flex-grow: 2;
-}
-.side-8{
-    background: $lcars_3;
-    height: 1rem;
-}
-.side-9{
-    background: $lcars_1;
-    flex-grow: 3;
-}
-
-// Side of "respond" panels
-.p-resp-lv-0{
-    background: $lcars_response_top_left;
-}
-.p-resp-lv-1{
-    background: $lcars_1;
-    flex-grow: 2;
-}
-.p-resp-lv-2{
-    background: $lcars_response_bottom_left;
-    flex-grow: 3;
-    border-bottom-left-radius: 3rem;
-}
-
-// login panels
-.pv-login-0{
-    background: $lcars_login_corner;
-    flex-grow: 2;
-}
-.ph-login-0{
-    background: $lcars_login_corner;
-}
-
-.pv-login-1{
-    background: $lcars_0;
-    height: 1rem;
-}
-.pv-login-2{
-    background: $lcars_2;
-    flex-grow: 1;
-}
-.pv-login-3{
-    background: $lcars_blue;
-    flex-grow: 3;
-}
-
-.ph-login-1{
-    background: $lcars_blue;
-}
-.ph-login-2{
-    background: $lcars_1;
-}
-.ph-login-3{
-    background: $lcars_4;
-}
-.ph-login-4{
-    background: $lcars_0;
-}
-.ph-login-5{
-    background: $lcars_0;
-}
-
-// register panels
-.pv-register-0{
-    background: $lcars_register_corner;
-    flex-grow: 2;
-}
-.ph-register-0{
-    background: $lcars_register_corner;
-}
-
-.pv-register-1{
-    background: $lcars_4;
-    height: 1rem;
-}
-.pv-register-2{
-    background: $lcars_2;
-    flex-grow: 1;
-}
-.pv-register-3{
-    background: $lcars_0;
-    flex-grow: 3;
-}
-
-.ph-register-1{
-    background: $lcars_0;
-}
-.ph-register-2{
-    background: $lcars_3;
-}
-.ph-register-3{
-    background: $lcars_4;
-}
-.ph-register-4{
-    background: $lcars_2;
-}
-.ph-register-5{
-    background: $lcars_1;
-}
-
-// error panels
-.pv-error-0{
-    background: $lcars_error_corner;
-    flex-grow: 2;
-}
-.ph-error-0{
-    background: $lcars_error_corner;
-}
-
-.pv-error-1{
-    background: white;
-    height: 1rem;
-}
-.pv-error-2{
-    background: white;
-    flex-grow: 1;
-}
-.pv-error-3{
-    background: $lcars_error_corner;
-    flex-grow: 3;
-}
-
-.ph-error-1, .ph-error-3, .ph-error-4{
-    background: $lcars_error_corner;
-}
-.ph-error-2, .ph-error-5{
-    background: white;
-}
-
-hr{
-    margin: 2rem 0 3rem;
-    border-color: $lcars_0;
-}
-
-
 
 
 
@@ -574,9 +121,11 @@ hr{
 .lcars-btn{
     position: relative;
     height: 3rem;
-    border-radius: 1.5rem;
+
     margin: 5px;
     padding: 0;
+
+    border-radius: 1.5rem;
 
     a, span{
         position: absolute;
@@ -584,15 +133,20 @@ hr{
         right: 1.25rem;
         color: black;
     }
+    &:focus, &:active{
+        outline: thin dotted $c_emphasis;
+    }
 }
 
 .edit-btn{
-    background: $lcars_edit_date;
-    color: black;
     height: 2rem;
     width: 100%;
     max-width: 7rem;
+
     margin: 0.5rem 0.1rem;
+
+    background: $c_edit;
+    color: black;
     border: none;
 
     span{
@@ -601,14 +155,14 @@ hr{
     }
 
     &:hover{
-        background: $lcars_edit_date_hover;
+        background: $c_edit_hover;
     }
 }
 
 .post-btn{
     float: right;
-    max-width: 10rem;
     width: 100%;
+    max-width: 10rem;
     padding: 0.5rem 1.5rem 0;
 
     font-size: 1.2rem;
@@ -618,20 +172,20 @@ hr{
     vertical-align: bottom;
 
     color: black;
-
-    background: $lcars_edit_date;
-    border: 1px solid $lcars_edit_date;
+    background: $c_edit;
+    border: 1px solid $c_edit;
 
     &:hover{
-        background: $lcars_edit_date_hover;
+        background: $c_edit_hover;
     }
 }
 
 .like-btn{
-    max-width: 7rem;
-    width: 100%;
-    margin-top: 0.3rem;
     height: 2.5rem;
+    width: 100%;
+    max-width: 7rem;
+
+    margin-top: 0.3rem;
 
     span{
         position: absolute;
@@ -639,28 +193,25 @@ hr{
         right: 0.9rem;
         pointer-events: none;
     }
-
-    &:active, &:focus{
-        outline: thin dotted;
-    }
 }
 .unliked{
-    border: 2px solid $lcars_0;
-    color: $lcars_0;
-    background: black;
+    color: $c_bg_A0;
+    background: $c_bg_main;
+    border: 2px solid $c_bg_A0;
     span{
-        color: $lcars_0;
+        color: $c_bg_A0;
     }
     &:hover{
-        background: $c_bg_hollow;
+        background: $c_hollow_hover;
     }
 }
 .liked{
-    border: 1px solid $lcars_0;
-    color: black;
-    background: $lcars_0;
+    color: $c_bg_main;
+    background: $c_bg_A0;
+    border: 2px solid $c_bg_A0;
     &:hover{
-        background: $lcars_0_hover;
+        background: $c_bg_A0_hover;
+        border: 2px solid $c_bg_A0_hover;
     }
 }
 
@@ -672,10 +223,11 @@ hr{
 // Heading and navigation
 // --------------------------------------------------------------------------------------------------------------------------------------------------------
 .heading-panel{
-    width: 100%;
-    height: 3.5rem;
     position: relative;
-    background: $lcars_0;
+    height: 3.5rem;
+    width: 100%;
+
+    background: $c_bg_A0;
     border-top-right-radius: 1.75rem;
     border-bottom-right-radius: 1.75rem; 
 }
@@ -685,18 +237,20 @@ hr{
     width: 100%;
 }
 .main-title-before{
-    background: $lcars_0;
-    min-height:$main_title_height;
     flex-grow: 2;
+    min-height:$main_title_height;
+    background: $c_bg_A0;
 }
 .main-title{
     padding: 0rem 1rem 0.4rem;
     margin: 0;
-    line-height: 100%;
-    background: black;
+    
     font-size: $main_title_height;
-    font-family: $f_branding;
-    color: $lcars_0; 
+    font-family: $f_lcarsy;
+    line-height: 100%;
+
+    color: $c_bg_A0;
+    background: $c_bg_main;
 }
 @media (max-width: $breakpoint_title_twolines){
     .main-title{
@@ -706,22 +260,23 @@ hr{
 .main-title-after{
     width: 3rem;
     margin-right: 5px;
-    background: $lcars_0;
+    background: $c_bg_A0;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
 }
 
 .lcars-nav-container{
-    width: 100%;
     display: flex;
+    width: 100%;
+
     justify-content: flex-end;
     align-items: center;
 
     ul{
-        width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
+        width: 100%;
         margin: 0;
     }
 
@@ -736,11 +291,11 @@ hr{
     height: 3rem;
     width: 10rem;
 
-    border-radius: 1.5rem;
     margin: 5px;
     padding: 0;
 
     color: black;
+    border-radius: 1.5rem;
 
     span {
         position: absolute;
@@ -751,34 +306,36 @@ hr{
     &:hover{
         color: black;
     }
-}
-.nav-user, .nav-following, .nav-register{
-    background: $lcars_4;
-    &:hover{
-        background: $lcars_4_hover;
+    &:active, &:focus{
+        outline: thin dotted $c_emphasis;
     }
 }
-.nav-allposts{
-    background: $lcars_0; 
+
+.nav-user, .nav-following, .nav-register{
+    background: $c_bg_B1;
     &:hover{
-        background: $lcars_0_hover;
+        background: $c_bg_B1_hover;
+    }
+
+}
+.nav-allposts{
+    background: $c_bg_A0; 
+    &:hover{
+        background: $c_bg_A0_hover;
     } 
 }
 .nav-logout{
-    background: $lcars_1;  
+    background: $c_bg_A1;  
     &:hover{
-        background: $lcars_1_hover;
+        background: $c_bg_A1_hover;
     }
 }
 .nav-login{
-    background: $lcars_1;  
+    background: $c_bg_A2;  
     &:hover{
-        background: $lcars_1_hover;
+        background: $c_bg_A2_hover;
     }
 }
-
-
-
 
 
 
@@ -792,14 +349,14 @@ hr{
 // -----------------------------------------------------------------------------------------------------------------------
 
 .header-container{
-    width: 100%;
-    max-width: $max_page;
-    margin: 1.5rem auto 0;
-
     display: flex;
     justify-content: flex-end;
     align-items: right;
     text-align: right; 
+
+    width: 100%;
+    max-width: $max_page;
+    margin: 1.5rem auto 0;
 }
 .header-content{
     width: 85%;
@@ -822,13 +379,19 @@ hr{
 .two-column-body{
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+
+    .post-section-content{
+        max-width: 27rem;
+    }
 
     .conference-v-panels{
         width: 21.5%;
     }
-    .p-conf-4, .p-conf-5{
-        display: none;
+
+    .panels-conference{
+        .hz-p4, .hz-p5{
+            display: none;
+        }
     }
 }
 
@@ -845,27 +408,28 @@ hr{
 
 .conference-container{
     order: 1;
-
-    margin-top: $h_divider_margin;
-
     display:flex;
     flex-grow: 2;
+    margin-top: $h_divider_margin;
 }
 .conference-content{  
     flex-grow: 2;
+    max-width: 85%;
 }
 
 .respond-container{
     order: 2;
+    display: flex;
     width: 30%;
-    align-self: flex-start; 
+    min-width: 30%;
 
     margin-top: $h_divider_margin;
-
-    display: flex;
+    
+    align-self: flex-start;
 }
 .respond-content{
     flex-grow:2;
+    max-width: 85%;
 }
 
 #add-post{
@@ -879,10 +443,17 @@ hr{
 }
 
 
-
-.p-resp-th-0, .p-resp-th-1, .p-resp-th-2, .p-resp-th-3,
-.p-resp-bh-0, .p-resp-bh-1, .p-resp-bh-2, .p-resp-bh-3{
-    display: none;
+.panels-respond{
+    &.hz-top{
+        .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+            display: none;
+        }
+    }
+    &.hz-btm{
+        .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+            display: none;
+        }
+    }
 }
 @media (max-width: $max_page){
     .conference-container{
@@ -898,8 +469,16 @@ hr{
     }
 
     .two-column-body{
-        .p-conf-4, .p-conf-5{
-            display: inline;
+        flex-wrap: wrap;
+
+        .panels-conference{
+            .hz-p4, .hz-p5{
+                display: inline;
+            }
+        }
+
+        .post-section-content{
+            max-width: 100%;
         }
     }
 
@@ -907,15 +486,23 @@ hr{
         width: $side_panel_width;
     }
 
-    .p-resp-th-0, .p-resp-th-1, .p-resp-th-2, .p-resp-th-3,
-    .p-resp-bh-0, .p-resp-bh-1, .p-resp-bh-2, .p-resp-bh-3{
-        display: inline;
-    }
-    .p-resp-th-4{
-        background: $lcars_rust;
-    }
-    .p-resp-bh-4{
-        background: $lcars_1;
+    .panels-respond{
+        &.hz-top{
+            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                display: inline;
+            }
+            .hz-p4{
+                background: $c_bg_C0;
+            }
+        }
+        &.hz-btm{
+            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                display: inline;
+            }
+            .hz-p4{
+                background: $c_bg_A1;
+            }
+        }
     }
 }
 
@@ -930,7 +517,7 @@ hr{
     width: 8rem;
     font-size: 1.1rem;
     padding-top: 0.6rem;
-    color: $lcars_edit_date;
+    color: $c_edit;
 
     small{
         white-space: nowrap;
@@ -943,16 +530,20 @@ hr{
     a{
         font-size: 1.7rem;
         font-weight: bold;
-        color: $lcars_username;
+        color: $c_username;
     
         &:hover{
-            color:white;
+            color: $c_username_hover;
+            text-decoration: none;
+        }
+        &:active, &:focus{
+            outline: thin dotted;
         }
     }
 }
 .post-section-likes{
     min-width: 7.5rem;
-    color: $lcars_likes;
+    color: $c_emphasis;
     text-align: right;
 }
 
@@ -1014,10 +605,15 @@ hr{
 .page-item{
     width: 18%;
     max-width: 8rem;
+
+    &:focus, &:active{
+        outline: thin dotted;
+        box-shadow: none;
+    }
 }
 
 .page-item.active .page-link {
-    color: $lcars_blue;
+    color: $c_bg_B1;
     background: $c_bg_main;
     border: none;
     text-align: center;
@@ -1026,9 +622,9 @@ hr{
     z-index: -2;
 }
 .page-item.disabled .page-link {
-    color: $c_border_primary;
+    color: $c_inactive_txt;
     background: $c_bg_main;
-    border: 1px solid $c_border_secondary;
+    border: 1px solid $c_inactive_border;
 
     text-align: right;
     padding: 0.9rem 0.7rem 0 0.1rem;
@@ -1044,34 +640,38 @@ a.page-link {
     &:hover{
         color: black;
     }
+    &:focus, &:active{
+        outline: thin dotted $c_emphasis;
+        box-shadow: none;
+    }
 }
 
 a.page-next{
-    background: $lcars_2;
+    background: $c_bg_A2;
     &:hover{
-        background: $lcars_2_hover;   
+        background: $c_bg_A2_hover;   
     }
 }
 a.page-oldest{
     border-left: $panel_border;
-    background: $lcars_0;
+    background: $c_bg_A0;
     &:hover{
         border-left: $panel_border;
-        background: $lcars_0_hover;   
+        background: $c_bg_A0_hover;   
     }
 }
 a.page-previous{
-    background: $lcars_3;
+    background: $c_bg_B0;
     &:hover{
-        background: $lcars_3_hover;   
+        background: $c_bg_B0_hover;   
     }
 }
 a.page-newest{
     border-right: $panel_border;
-    background: $lcars_4;
+    background: $c_bg_B1;
     &:hover{
         border-right: $panel_border;
-        background: $lcars_4_hover;   
+        background: $c_bg_B1_hover;   
     }
 }
 
@@ -1189,61 +789,539 @@ a.page-newest{
             bottom: 0.1rem;
             right: 1.5rem;
         }
+
+        &:active, &:focus{
+            outline: thin dotted $c_emphasis;
+        }
     }
 
     // set colours
     .user-follows .stats-label{
-        background: $lcars_0;
+        background: $c_bg_A0;
     }
     .user-follows span{
-        color: $lcars_0;
+        color: $c_bg_A0;
     }
     .user-follows .stats-block{
-        background: black;
+        background: $c_bg_main;
     }
 
     .following-user .stats-label{
-        background: $lcars_blue;
+        background: $c_bg_B1;
     }
     .following-user span{
-        color: $lcars_blue;
+        color: $c_bg_B1;
     }
     .following-user .stats-block{
-        background: $lcars_edit_date;
+        background: $c_edit;
     }
 
     .following{
-        background: $lcars_edit_date;
+        background: $c_edit;
         border: none;
         span{
             color: black;
         }
 
         &:hover{
-            background: $lcars_edit_date_hover;
-        }
-
-        &:active, &:focus{
-            outline: thin dotted;
+            background: $c_edit_hover;
         }
     }
     .notfollowing{
-        background: black;
+        background: $c_bg_main;
         
-        border: 1px solid $lcars_edit_date;
+        border: 1px solid $c_edit;
 
         span{
-            color: $lcars_edit_date;
+            color: $c_edit;
         }
 
 
         &:hover{
-            background: $c_bg_hollow;
-        }
-
-        &:active, &:focus{
-            outline: thin dotted;
+            background: $c_hollow_hover;
         }
     }
 
  }
+
+
+
+
+
+
+
+
+
+
+
+
+ // ----------------------------------------------------------------------------------------------------------------------- 
+// LCARS panels
+// -----------------------------------------------------------------------------------------------------------------------
+
+// Corner boxes
+.corner{
+    background: $c_bg_main;
+    width: 100%;
+    height: 100%;    
+}
+
+.corner-box{
+    width: 2rem;
+    height: 2rem;
+}
+
+.top-left-corner{
+    border-top-left-radius: 2rem;
+}
+.bottom-left-corner{
+    border-bottom-left-radius: 2rem;
+}
+
+
+@media (max-width: $breakpoint_corners_tighten){
+    .corner-box{
+        width: 1rem;
+        height: 1rem;
+    }
+    .top-left-corner{
+        border-top-left-radius: 1rem;
+    }
+    .bottom-left-corner{
+        border-bottom-left-radius: 1rem;
+    }
+}
+
+// ---- General containers and sizings -----------------------------------------------------------------------------------------------------------------------
+// --- vertical panels
+.lcars-top-left{
+    border-top-left-radius: 5.5rem;
+    flex-grow: 3;
+}
+.vt-panel{
+    width: 100%;
+    border-top: $panel_border;
+}
+
+// -- horizontal panels
+.hz-panel-container{
+    height: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
+    text-align: right; 
+}
+
+.hz-panel{
+    height: 1rem;
+    min-width: 1rem;
+    border-right: $panel_border;    
+}
+.hz-p0{
+    flex-grow: 2.8;    
+}
+.hz-p1{
+    width: 2rem;    
+}
+.hz-p2{
+    width: 10rem;
+}
+.hz-p3{
+    width: 2rem;
+}
+.hz-p4{
+    flex-grow: 2; 
+}
+.hz-p5{
+    width: 2rem;
+}
+
+// Panels: colours and (sometimes) sizes for specific panels -----------------------------------------------------------------------------------------------------
+.panels-header{
+    .top-left-corner{
+        border-top-left-radius: 1rem;
+    }
+    &.corner-box.hz-top{
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &.corner-box.hz-top, .vt-p0{
+        background: $lcars_header_top_left;
+    }
+
+    .vt-p2, .hz-p0, &.corner-box{
+        background: $lcars_header_bottom_left;
+    }
+
+    .vt-p0{
+        width: 100%;
+        border-top-left-radius: 5.5rem;
+        flex-grow: 2;
+    }
+    .vt-p1{
+        height: 1rem;
+        background: $c_bg_B0;
+    }
+    .vt-p2{
+        border-bottom-left-radius: 3rem;
+        flex-grow: 1;
+    }
+
+    .hz-p1{
+        background: $c_bg_A0;
+    }
+    .hz-p2{
+        background: $c_bg_B0;
+    }
+    .hz-p3{
+        background: $c_bg_A2;
+    }
+    .hz-p4{
+        background: $c_bg_B0; 
+    }
+    .hz-p5{
+        background: $c_bg_A2;
+    }
+}
+
+
+.panels-conference{
+    .vt-p0, .hz-p0, &.corner-box{
+        background: $lcars_conference_top_left;
+    }
+
+    .hz-p1, .hz-p2{
+        background: $c_bg_A2;
+    }
+    .hz-p3{
+        background: $c_bg_A1;
+    }
+    .hz-p4{
+        background: $c_bg_B1;
+    }
+    .hz-p5{
+        background: $c_bg_B0;
+    }
+
+    .vt-p1{
+        background: $lcars_conference_top_left;
+        flex-grow: 2;
+    }
+    .vt-p2{
+        background: $c_bg_A1;
+        flex-grow: 3;
+    }
+    .vt-p3{
+        background: $c_bg_B1;
+        height: 1rem;
+    }
+    .vt-p4{
+        background: $c_bg_A0;
+        flex-grow: 2;
+    }
+    .vt-p5{
+        background: $c_bg_C0;
+        height: 1rem;
+    }
+    .vt-p6{
+        background: $c_bg_B1;
+        flex-grow: 3;
+    }
+    .vt-p7{
+        background: $c_bg_B0;
+        flex-grow: 2;
+    }
+    .vt-p8{
+        background: $c_bg_B0;
+        height: 1rem;
+    }
+    .vt-p9{
+        background: $c_bg_A1;
+        flex-grow: 3;
+    }
+
+}
+
+.panels-respond{
+    .vt-p0{
+        background: $lcars_response_top_left;
+    }
+    .vt-p1{
+        background: $c_bg_A1;
+        flex-grow: 2;
+    }
+    .vt-p2{
+        background: $lcars_response_bottom_left;
+        flex-grow: 3;
+        border-bottom-left-radius: 3rem;
+    }
+
+
+    &.hz-top{
+        .hz-p0, .hz-p4, &.corner-box {
+            // @ Half page, p4 is the "linker". This will be changed by a media query @ full page
+            background: $lcars_response_top_left;
+        }
+        .hz-p1{
+            background: $c_bg_C0;
+        }
+        .hz-p2{
+            background: $c_bg_A0;
+        }
+        .hz-p3{
+            background: $c_bg_B0;
+        }
+        .hz-p5{
+            background: $c_bg_A2;
+        }
+    }
+    
+    &.hz-btm{
+        .hz-p0, .hz-p4, &.corner-box {
+            // @ Half page, p4 is the "linker". This will be changed by a media query @ full page
+            background: $lcars_response_bottom_left;
+        }
+        .hz-p1{
+            background: $c_bg_A0;
+        }
+        .hz-p2{
+            background: $c_bg_C0;
+        }
+        .hz-p3{
+            background: $c_bg_A2;
+        }
+        .hz-p5{
+            background: $c_bg_B0;
+        }
+    }
+}
+
+.panels-profile{
+    .vt-p0, .hz-p0, &.corner-box{
+        background: $lcars_profile_corner;
+    }
+
+    .hz-p1{
+        background: $c_bg_A2;
+    }
+    .hz-p2{
+        background: $c_bg_A0;
+    }
+    .hz-p3{
+        background: $c_bg_A1;
+    }
+    .hz-p4{
+        background: $c_bg_C0;
+    }
+    .hz-p5{
+        background: $c_bg_B0;
+    }
+
+    .vt-p1{
+        background: $c_bg_A0;
+        flex-grow: 2;
+    }
+    .vt-p2{
+        background: $c_bg_B1;
+        flex-grow: 3;
+    }
+    .vt-p3{
+        background: $c_bg_B1;
+        height: 1rem;
+    }
+    .vt-p4{
+        background: $c_bg_B0;
+        flex-grow: 2;
+    }
+    .vt-p5{
+        background: $c_bg_C0;
+        height: 1rem;
+    }
+    .vt-p6{
+        background: $c_bg_B1;
+        flex-grow: 3;
+    }
+    .vt-p7{
+        background: $c_bg_B0;
+        flex-grow: 2;
+    }
+    .vt-p8{
+        background: $c_bg_B0;
+        height: 1rem;
+    }
+    .vt-p9{
+        background: $c_bg_A1;
+        flex-grow: 3;
+    }
+}
+
+.panels-following{
+    .vt-p0, .hz-p0, &.corner-box{
+        background: $lcars_following_corner;
+    }
+
+    .hz-p1{
+        background: $c_bg_A0;
+    }
+    .hz-p2{
+        background: $c_bg_A2;
+    }
+    .hz-p3{
+        background: $c_bg_C0;
+    }
+    .hz-p4{
+        background: $c_bg_A1;
+    }
+    .hz-p5{
+        background: $c_bg_B1;
+    }
+
+    .vt-p1{
+        background: $c_bg_A2;
+        flex-grow: 2;
+    }
+    .vt-p2{
+        background: $c_bg_A1;
+        flex-grow: 3;
+    }
+    .vt-p3{
+        background: $c_bg_B1;
+        height: 1rem;
+    }
+    .vt-p4{
+        background: $c_bg_A0;
+        flex-grow: 2;
+    }
+    .vt-p5{
+        background: $c_bg_C0;
+        height: 1rem;
+    }
+    .vt-p6{
+        background: $c_bg_B1;
+        flex-grow: 3;
+    }
+    .vt-p7{
+        background: $c_bg_B0;
+        flex-grow: 2;
+    }
+    .vt-p8{
+        background: $c_bg_B0;
+        height: 1rem;
+    }
+    .vt-p9{
+        background: $c_bg_A1;
+        flex-grow: 3;
+    }
+}
+
+.panels-login{
+    .vt-p0, .hz-p0, &.corner-box{
+        background: $lcars_login_corner;
+    }
+    .vt-p0{
+        flex-grow: 2;
+    }
+
+    .vt-p1{
+        background: $c_bg_A0;
+        height: 1rem;
+    }
+    .vt-p2{
+        background: $c_bg_A2;
+        flex-grow: 1;
+    }
+    .vt-p3{
+        background: $c_bg_B1;
+        flex-grow: 3;
+    }
+    
+    .hz-p1{
+        background: $c_bg_B1;
+    }
+    .hz-p2{
+        background: $c_bg_A1;
+    }
+    .hz-p3{
+        background: $c_bg_B1;
+    }
+    .hz-p4{
+        background: $c_bg_A0;
+    }
+    .hz-p5{
+        background: $c_bg_A0;
+    }
+}
+
+.panels-register{
+    .vt-p0, .hz-p0, &.corner-box{
+        background: $lcars_register_corner;
+    }
+    .vt-p0{
+        flex-grow: 2;
+    }
+
+    .vt-p1{
+        background: $c_bg_B1;
+        height: 1rem;
+    }
+    .vt-p2{
+        background: $c_bg_A2;
+        flex-grow: 1;
+    }
+    .vt-p3{
+        background: $c_bg_A0;
+        flex-grow: 3;
+    }
+    
+    .hz-p1{
+        background: $c_bg_A0;
+    }
+    .hz-p2{
+        background: $c_bg_B0;
+    }
+    .hz-p3{
+        background: $c_bg_B1;
+    }
+    .hz-p4{
+        background: $c_bg_A2;
+    }
+    .hz-p5{
+        background: $c_bg_A1;
+    }
+}
+
+.panels-error{
+    .vt-p0, .hz-p0, &.corner-box{
+        background: $c_error;
+    }
+    .vt-p0{
+        flex-grow: 2;
+    }
+
+    .vt-p1{
+        background: white;
+        height: 1rem;
+    }
+    .vt-p2{
+        background: white;
+        flex-grow: 1;
+    }
+    .vt-p3{
+        background: $c_error;
+        flex-grow: 3;
+    }
+    
+    .hz-p1, .hz-p3, .hz-p4{
+        background: $c_error;
+    }
+    .hz-p2, .hz-p5{
+        background: white;
+    }
+    
+    hr{
+        margin: 2rem 0 3rem;
+        border-color: $c_bg_A0;
+    }
+}
