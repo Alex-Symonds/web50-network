@@ -54,7 +54,7 @@ $min_page: 20rem;
 
 $side_panel_width: 15%;
 
-$breakpoint_lose_post_columns: 700px;
+$breakpoint_post_columns_unsustainable: 700px;
 $breakpoint_title_twolines: 484px;
 $breakpoint_corners_tighten: 385px;
 
@@ -348,6 +348,22 @@ textarea, input[type=text], input[type=password], input[type=email]{
 // Page layout
 // -----------------------------------------------------------------------------------------------------------------------
 
+.vt-panel-container{
+    width: $side_panel_width;
+    display: flex;
+    flex-direction: column; 
+}
+
+.hz-panel-container{
+    height: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
+    text-align: right; 
+}
+
+
 .header-container{
     display: flex;
     justify-content: flex-end;
@@ -362,39 +378,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
     width: 85%;
 }
 
-.header-v-panels, .conference-v-panels{
-    width: $side_panel_width;
-    display: flex;
-    flex-direction: column; 
-}
-.conference-v-panels{
-    min-height: 50rem;
-}
-.respond-v-panels{
-    width: 10%;
-    display: flex;
-    flex-direction: column; 
-}
-
-.two-column-body{
-    width: 100%;
-    display: flex;
-
-    .post-section-content{
-        max-width: 27rem;
-    }
-
-    .conference-v-panels{
-        width: 21.5%;
-    }
-
-    .panels-conference{
-        .hz-p4, .hz-p5{
-            display: none;
-        }
-    }
-}
-
 .main-container{
     // Simple one for login and register
     width: 50%;
@@ -405,12 +388,15 @@ textarea, input[type=text], input[type=password], input[type=email]{
     clear: both;
 }
 
-
 .conference-container{
     order: 1;
     display:flex;
     flex-grow: 2;
     margin-top: $h_divider_margin;
+
+    .vt-panel-container{
+        min-height: 50rem;    
+    }
 }
 .conference-content{  
     flex-grow: 2;
@@ -424,83 +410,101 @@ textarea, input[type=text], input[type=password], input[type=email]{
     min-width: 30%;
 
     margin-top: $h_divider_margin;
-    
+
     align-self: flex-start;
+
+    .vt-panel-container{
+        width: 10%;
+    }
 }
-.respond-content{
-    flex-grow:2;
-    max-width: 85%;
+.respond-content{  
+    flex-grow: 2;
+    max-width: 95%;
 }
 
-#add-post{
-    padding: 0 2rem;
+.two-column-body{
     display: flex;
-    flex-wrap: wrap;
+    width: 100%;
 
-    form{
-        width: 100%;
+    .post-section-content{
+        max-width: 27rem;
+    }
+
+    .conference-container .vt-panel-container{
+        width: 21.5%;
+    }
+
+    // Ensure there's only one row of horizontal panels
+    .panels-respond{
+        &.hz-top{
+            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                display: none;
+            }
+        }
+        &.hz-btm{
+            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                display: none;
+            }
+        }
+    }
+
+    .panels-conference{
+        .hz-p4, .hz-p5{
+            display: none;
+        }
     }
 }
 
 
-.panels-respond{
-    &.hz-top{
-        .hz-p0, .hz-p1, .hz-p2, .hz-p3{
-            display: none;
-        }
-    }
-    &.hz-btm{
-        .hz-p0, .hz-p1, .hz-p2, .hz-p3{
-            display: none;
-        }
-    }
-}
 @media (max-width: $max_page){
-    .conference-container{
-        width: 100%;
-        order: 2;
-    }
     .respond-container{
-        width: 100%;
         order: 1;
+        width: 100%;
         textarea{
             height: 7rem;
         }
+    }
+    .conference-container{
+        order: 2;
+        width: 100%;
+    }
+    .respond-content{
+        max-width: 85%;
     }
 
     .two-column-body{
         flex-wrap: wrap;
 
-        .panels-conference{
-            .hz-p4, .hz-p5{
-                display: inline;
-            }
-        }
-
         .post-section-content{
             max-width: 100%;
         }
-    }
 
-    .two-column-body .conference-v-panels, .respond-v-panels{
-        width: $side_panel_width;
-    }
+        .conference-container .vt-panel-container,
+        .respond-container .vt-panel-container{
+            width: $side_panel_width;
+        }
 
-    .panels-respond{
-        &.hz-top{
-            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
-                display: inline;
+        .panels-respond{
+            &.hz-top{
+                .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                    display: inline;
+                }
+                .hz-p4{
+                    background: $c_bg_C0;
+                }
             }
-            .hz-p4{
-                background: $c_bg_C0;
+            &.hz-btm{
+                .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                    display: inline;
+                }
+                .hz-p4{
+                    background: $c_bg_A1;
+                }
             }
         }
-        &.hz-btm{
-            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+        .panels-conference{
+            .hz-p4, .hz-p5{
                 display: inline;
-            }
-            .hz-p4{
-                background: $c_bg_A1;
             }
         }
     }
@@ -515,11 +519,12 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 .post-section-date-edit{
     width: 8rem;
-    font-size: 1.1rem;
     padding-top: 0.6rem;
+    font-size: 1.1rem;
     color: $c_edit;
 
     small{
+        // Prevents unwanted line breaks between the month and year, or the day and month
         white-space: nowrap;
     }
 }
@@ -548,22 +553,22 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 
 
-
 .profile-posts{
     margin-top: 4rem;
 }
+
 .all-posts{
     padding: 0 2rem;
 }
+
 .edit-failed{
     width: 18rem;
     margin: 0 auto 1rem;
     padding: 5px 10px 10px;
 
+    font-size: 1.4rem;
     font-weight: bold;
     text-align: center;
-
-    font-size: 1.4rem;
 
     color: red;
     background: none;
@@ -576,8 +581,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 
 .error-message{
-    font-weight: bold;
     font-size: 1.4rem;
+    font-weight: bold;
     color: white;
 
     h2{
@@ -592,6 +597,16 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
+#add-post{
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 0 2rem;
+
+    form{
+        width: 100%;
+    }
+}
 
 
 
@@ -613,29 +628,33 @@ textarea, input[type=text], input[type=password], input[type=email]{
 }
 
 .page-item.active .page-link {
+    z-index: -2;
+    padding: 0;
+    line-height: 2rem;
+
+    text-align: center;
+
     color: $c_bg_B1;
     background: $c_bg_main;
     border: none;
-    text-align: center;
-    padding: 0;
-    line-height: 2rem;
-    z-index: -2;
 }
 .page-item.disabled .page-link {
+    padding: 0.9rem 0.7rem 0 0.1rem;
+
+    text-align: right;
+
     color: $c_inactive_txt;
     background: $c_bg_main;
     border: 1px solid $c_inactive_border;
-
-    text-align: right;
-    padding: 0.9rem 0.7rem 0 0.1rem;
 }
 
 a.page-link {
+    padding: 0.9rem 0.7rem 0 0.1rem;
+    text-align: right;
+
     font-weight: bold;
     color: black;  
     border: none;
-    text-align: right;
-    padding: 0.9rem 0.7rem 0 0.1rem;
     
     &:hover{
         color: black;
@@ -680,14 +699,13 @@ a.page-newest{
     border-bottom-left-radius: 2rem;
 }
 .page-item:last-child .page-link {
+    // Padding is there to compensate for the clash between the right text-alignment and border radii
+    padding-right: 1rem;
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    padding-right: 1rem;
 }
 
-
-
-@media (max-width: $breakpoint_lose_post_columns){
+@media (max-width: $breakpoint_post_columns_unsustainable){
     .all-posts{
         padding: 0 1rem;
     }
@@ -722,27 +740,28 @@ a.page-newest{
     margin-top: 2rem;
 
     .user-follows, .following-user{
-        height: 3rem;
         display: flex;
+        height: 3rem;
         margin-top: 0.5rem;
     }
 
     .stats-label{
-        display: inline-block;
-        width: 12rem;
-        height: 100%;
-        color: black;
-        text-align: right;
-        font-size: 1.5rem;
-        margin: 0;
-        padding: 0;
         display: flex;
         justify-content: flex-end;
+
+        width: 12rem;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+
+        font-size: 1.5rem;
+        color: black;
+        text-align: right;
     }
     label{
+        align-self: flex-end;
         padding: 0 0.2rem 0 0;
         margin: 0;
-        align-self: flex-end;
     }
 
     .stats-block{
@@ -753,23 +772,21 @@ a.page-newest{
     }
 
     .stats-result-btn{
-        width: 30rem;
         display: flex;
+        width: 30rem;
     }
 
     .stats-result{
-        display: inline-block;
-        width: 6rem;
-        height: 100%;
-
-        margin-top: 0.1rem;
-        font-size: 3.3rem;
-        line-height: 3.8rem;
-
-        padding-right: 1rem;
-
         display: flex;
         justify-content: flex-end;
+        height: 100%;
+        width: 6rem;
+
+        margin-top: 0.1rem;
+        padding-right: 1rem;
+
+        font-size: 3.3rem;
+        line-height: 3.8rem;
     }
     span{
         align-self: flex-end;
@@ -778,8 +795,8 @@ a.page-newest{
 
     .follow-btn{
         position: relative;
-        width: 10rem;
         height: 100%;
+        width: 10rem;
 
         border-top-right-radius: 1.5rem;
         border-bottom-right-radius: 1.5rem;
@@ -829,13 +846,11 @@ a.page-newest{
     }
     .notfollowing{
         background: $c_bg_main;
-        
         border: 1px solid $c_edit;
 
         span{
             color: $c_edit;
         }
-
 
         &:hover{
             background: $c_hollow_hover;
@@ -894,30 +909,52 @@ a.page-newest{
 
 // ---- General containers and sizings -----------------------------------------------------------------------------------------------------------------------
 // --- vertical panels
+.panel-num{
+    position: absolute;
+    bottom:0;
+    right: 0.2rem;
+    color: black;
+}
+.panels-respond{
+    .extra-digits{
+        display: none;
+    }
+    .vt-p2 .panel-num{
+        top: 0;
+    }
+}
+
+@media(max-width: $max_page){
+    .panels-respond .extra-digits{
+        display: inline;
+    }
+}
+
+@media(max-width: 500px){
+    .extra-digits, .panels-respond .extra-digits{
+        display: none;
+    }
+}
+
+
+
 .lcars-top-left{
     border-top-left-radius: 5.5rem;
     flex-grow: 3;
+    position: relative;
 }
+
 .vt-panel{
     width: 100%;
     border-top: $panel_border;
+    position: relative;
 }
-
-// -- horizontal panels
-.hz-panel-container{
-    height: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: left;
-    text-align: right; 
-}
-
 .hz-panel{
     height: 1rem;
     min-width: 1rem;
     border-right: $panel_border;    
 }
+
 .hz-p0{
     flex-grow: 2.8;    
 }
@@ -1009,6 +1046,8 @@ a.page-newest{
         background: $lcars_conference_top_left;
         flex-grow: 2;
     }
+
+
     .vt-p2{
         background: $c_bg_A1;
         flex-grow: 3;
@@ -1271,7 +1310,7 @@ a.page-newest{
         flex-grow: 1;
     }
     .vt-p3{
-        background: $c_bg_A0;
+        background: $c_bg_B0;
         flex-grow: 3;
     }
     

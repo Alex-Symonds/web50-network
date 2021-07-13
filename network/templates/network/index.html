@@ -4,10 +4,10 @@
 {% if form and user.is_authenticated %}
 <div class="two-column-body">
     <div class="respond-container">
-        <div class="respond-v-panels panels-respond">
-            <div class="vt-p0 lcars-top-left"></div>
-            <div class="vt-p1 vt-panel"></div>
-            <div class="vt-p2 vt-panel"></div>
+        <div class="vt-panel-container panels-respond">
+            <div class="vt-p0 lcars-top-left"><div class="panel-num">11<span class="extra-digits">-879.3</span></div></div>
+            <div class="vt-p1 vt-panel"><div class="panel-num">84<span class="extra-digits">-7653</span></div></div>
+            <div class="vt-p2 vt-panel"><div class="panel-num">42<span class="extra-digits">-2000</span></div></div>
         </div>
 
         <div class="respond-content">
@@ -53,17 +53,17 @@
 {% endif %}
 
     <div class="conference-container">
-        <div class="conference-v-panels panels-conference">
-            <div class="vt-p0 lcars-top-left"></div>
-            <div class="vt-p1 vt-panel"></div>
-            <div class="vt-p2 vt-panel"></div>
+        <div class="vt-panel-container panels-conference">
+            <div class="vt-p0 lcars-top-left"><div class="panel-num">84<span class="extra-digits">-430.9</span></div></div>
+            <div class="vt-p1 vt-panel"><div class="panel-num">93<span class="extra-digits">-4374</span></div></div>
+            <div class="vt-p2 vt-panel"><div class="panel-num">66<span class="extra-digits">-777</span></div></div>
             <div class="vt-p3 vt-panel"></div>
-            <div class="vt-p4 vt-panel"></div>
+            <div class="vt-p4 vt-panel"><div class="panel-num">42<span class="extra-digits">-1634</span></div></div>
             <div class="vt-p5 vt-panel"></div>
-            <div class="vt-p6 vt-panel"></div>
-            <div class="vt-p7 vt-panel"></div>
+            <div class="vt-p6 vt-panel"><div class="panel-num">76<span class="extra-digits">-8147</span></div></div>
+            <div class="vt-p7 vt-panel"><div class="panel-num">17<span class="extra-digits">-6228</span></div></div>
             <div class="vt-p8 vt-panel"></div>
-            <div class="vt-p9 vt-panel"></div>
+            <div class="vt-p9 vt-panel"><div class="panel-num">90<span class="extra-digits">-0117</span></div></div>
         </div>
 
         <div class="conference-content">
@@ -86,7 +86,7 @@
 {% for post in page %}
                 <div class="post-container">
                     <div class="post-section-date-edit">
-                        {{  post.created_on|date:"Ymd.His" }} <small>({{  post.created_on|date:"d M Y, H:i:s" }})</small><br>
+                        {{  post.created_on|date:"Ymd.His" }} <small>({{  post.created_on|date:"d M Y, H:i:s"|upper }})</small><br>
                             
     {% if user.is_authenticated and user.username == post.poster.username %}
                         <button class="edit-btn lcars-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}"><span>EDIT</span></button>

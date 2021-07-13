@@ -23,17 +23,17 @@
 
 {% block body %}
     <div class="conference-container">
-        <div class="conference-v-panels panels-profile">
-            <div class="vt-p0 lcars-top-left"></div>
-            <div class="vt-p1 vt-panel"></div>
-            <div class="vt-p2 vt-panel"></div>
+        <div class="vt-panel-container panels-profile">
+            <div class="vt-p0 lcars-top-left"><div class="panel-num">41<span class="extra-digits">-843.2</span></div></div>
+            <div class="vt-p1 vt-panel"><div class="panel-num">62<span class="extra-digits">-7434</span></div></div>
+            <div class="vt-p2 vt-panel"><div class="panel-num">49<span class="extra-digits">-8975</span></div></div>
             <div class="vt-p3 vt-panel"></div>
-            <div class="vt-p4 vt-panel"></div>
+            <div class="vt-p4 vt-panel"><div class="panel-num">55<span class="extra-digits">-8901</span></div></div>
             <div class="vt-p5 vt-panel"></div>
-            <div class="vt-p6 vt-panel"></div>
-            <div class="vt-p7 vt-panel"></div>
+            <div class="vt-p6 vt-panel"><div class="panel-num">31<span class="extra-digits">-2384</span></div></div>
+            <div class="vt-p7 vt-panel"><div class="panel-num">86<span class="extra-digits">-7864</span></div></div>
             <div class="vt-p8 vt-panel"></div>
-            <div class="vt-p9 vt-panel"></div>
+            <div class="vt-p9 vt-panel"><div class="panel-num">00<span class="extra-digits">-6391</span></div></div>
         </div>
 
         <div class="conference-content">
@@ -72,7 +72,7 @@
 {% for post in page %}
                 <div class="post-container">
                     <div class="post-section-date-edit">
-                        {{  post.created_on|date:"Ymd.His" }} <small>({{  post.created_on|date:"d M Y, H:i:s" }})</small><br>
+                        {{  post.created_on|date:"Ymd.His" }} <small>({{  post.created_on|date:"d M Y, H:i:s"|upper }})</small><br>
                             
     {% if user.is_authenticated and user.username == post.poster.username %}
                         <button class="edit-btn lcars-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}"><span>EDIT</span></button>

@@ -9,6 +9,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
+USER_LOGIN_NAME = "PICARD"
+USER_LOGIN_PW = "p"
+USER_LOGIN_PROFILE = "/user/5"
+USER_OTHER_PROFILE = "/user/6"
 
 class WebpageTests(LiveServerTestCase):  
     @classmethod
@@ -24,8 +28,8 @@ class WebpageTests(LiveServerTestCase):
 
         # Log in
         self.driver.get('%s%s' % (self.server, '/login'))
-        self.driver.find_element_by_name("username").send_keys("Alex")
-        self.driver.find_element_by_name("password").send_keys("a")
+        self.driver.find_element_by_name("username").send_keys(USER_LOGIN_NAME)
+        self.driver.find_element_by_name("password").send_keys(USER_LOGIN_PW)
         self.driver.find_element_by_id("login-btn").submit()
 
     @classmethod
@@ -71,20 +75,20 @@ class WebpageTests(LiveServerTestCase):
     def test_profile_title(self):
         """Check a profile page has the correct title """
         driver = self.driver
-        driver.get('%s%s' % (self.server, "/user/1"))
-        self.assertEqual(driver.title, "Starfleet Secure Comms - Profile for Alex")
+        driver.get('%s%s' % (self.server, USER_LOGIN_PROFILE))
+        self.assertEqual(driver.title, "Starfleet Secure Comms - Profile for " + USER_LOGIN_NAME)
 
     def test_profile_like_counter(self):
         """Check the like counter works on profile pages (must not be logged-in user) """
-        self.like_counter("/user/2")
+        self.like_counter(USER_OTHER_PROFILE)
 
     def test_profile_like_btn_class(self):
         """Check the like button's CSS class is toggling on profile pages (must not be logged-in user)"""
-        self.like_button_class("/user/2")
+        self.like_button_class(USER_OTHER_PROFILE)
 
     def test_profile_edit(self):
         """Check the edit button works on a profile (must be the logged-in user)"""
-        self.edit_button("/user/1")
+        self.edit_button(USER_LOGIN_PROFILE)
 
     def test_profile_follow_toggle(self):
         """
@@ -92,9 +96,10 @@ class WebpageTests(LiveServerTestCase):
         (must not be logged-in user)
         """
         driver = self.driver
-        driver.get('%s%s' % (self.server, '/user/2'))
+        driver.get('%s%s' % (self.server, USER_OTHER_PROFILE))
+        time.sleep(1)
 
-        # Find the element with the 
+        # Find the element
         count_ele = driver.find_element_by_id("num-followers")
         btn_ele = driver.find_element_by_id("follower_toggle_react")
 
@@ -124,6 +129,7 @@ class WebpageTests(LiveServerTestCase):
         # Find a like button
         driver = self.driver
         driver.get('%s%s' % (self.server, url))
+        time.sleep(1)
         like_btn = driver.find_element_by_class_name("like-btn")
 
         # Grab its status and the post ID. Use the post_id to grab the corresponding counter and save the init value
@@ -167,6 +173,7 @@ class WebpageTests(LiveServerTestCase):
 
         driver = self.driver
         driver.get('%s%s' % (self.server, url))
+        time.sleep(1)
 
         # Find a like button. Like buttons should have "class='like-btn lcars-btn liked'" or "class='like-btn lcars-btn unliked'"
         like_btn = driver.find_element_by_class_name("like-btn")
@@ -174,11 +181,11 @@ class WebpageTests(LiveServerTestCase):
         classes_before = like_btn.get_attribute("class").split(" ")
 
         # Define toggle status at the start
-        if status_before == 'true':
+        if status_before == "true":
             start_id = 0
             toggle_id = 1
 
-        elif status_before == 'false':
+        elif status_before == "false":
             start_id = 1
             toggle_id = 0
         
@@ -251,18 +258,6 @@ class WebpageTests(LiveServerTestCase):
 
         # Check the message is back
         self.assertEqual(cont_div.text, text_start)
-
-
-
-
-
-
-
-
-
-        # get text inside the div
-        # check length matches
-
 
 
 if __name__ == "__main__":
