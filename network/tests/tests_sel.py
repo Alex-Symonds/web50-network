@@ -1,103 +1,128 @@
-from django.test import Client, TestCase, LiveServerTestCase
-import os
-import pathlib
 import unittest
-
 from network.models import Post, User
-
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver.common.keys import Keys
 import time
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
-USER_LOGIN_NAME = "PICARD"
-USER_LOGIN_PW = "p"
-USER_LOGIN_PROFILE = "/user/5"
-USER_OTHER_PROFILE = "/user/6"
 
-class WebpageTests(LiveServerTestCase):  
+driver = webdriver.Chrome()
+
+class WebpageTests(StaticLiveServerTestCase):
+    # Define some constants
+    NUM_TEST_POSTS = 21
+    USERNAMES = ["Alice", "Bob"]
+    URL_FOLLOW = "/following"
+    URL_HOME = ""
+    URL_LOGIN = "/login"
+
     @classmethod
-    def setUpClass(self):
-        # Setup the class and the Chrome web driver
-        super().setUpClass()
-        self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(10)
+    def setUp(self):
+        self.server = self.live_server_url
 
-        # Set a string for the server
-        #self.server = self.live_server_url
-        self.server = 'http://localhost:8000'
+        # Create users
+        for u in self.USERNAMES:
+            user = User.objects.create_user(username=u, email=f"{u}@example.com", password=u[0].lower())
+            user.save()
 
-        # Log in
-        self.driver.get('%s%s' % (self.server, '/login'))
-        self.driver.find_element_by_name("username").send_keys(USER_LOGIN_NAME)
-        self.driver.find_element_by_name("password").send_keys(USER_LOGIN_PW)
-        self.driver.find_element_by_id("login-btn").submit()
+        # Save the first two users as reusable objects and setup a following relationship between them
+        self.UserA = User.objects.get(username=self.USERNAMES[0])
+        self.UserB = User.objects.get(username=self.USERNAMES[1])
+        self.UserA.following.add(self.UserB)
 
+        # Save the user profile url for each
+        self.profile_userA = f"/user/{self.UserA.id}"
+        self.profile_userB = f"/user/{self.UserB.id}"
+
+        # Create posts
+        for i in range(self.NUM_TEST_POSTS):
+            # Alternate between the users: will need a "my post" to check edit and "someone else's post" to check like
+            # Note: user IDs are incrementing between tests, for some reason, so you can't rely on it always being IDs 1, 2, 3, etc.
+            if i == 0:
+                poster = self.UserA
+            elif poster == self.UserA:
+                poster = self.UserB
+            else:
+                poster = self.UserA
+
+            post = Post(poster=poster, content=f"Blah blah rofflecakes #{i}")
+            post.save()
+        
     @classmethod
     def tearDownClass(self):
-        self.driver.quit()
+        driver.quit()
         super().tearDownClass()
+  
 
     def test_index_title(self):
         """Check the title is ok on the homepage"""
-        driver = self.driver
+        self.login(self.UserA)
         driver.get('%s%s' % (self.server, ""))
         self.assertEqual(driver.title, "Starfleet Secure Comms")
 
     def test_index_like_counter(self):
         """Check the like counter works on the homepage"""
+        self.login(self.UserA)
         self.like_counter("")
 
     def test_index_like_btn_class(self):
         """Check the like button's CSS class is toggling on the homepage"""
+        self.login(self.UserA)
         self.like_button_class("")
 
     def test_index_edit(self):
         """Check the edit button works on the homepage"""
+        self.login(self.UserA)
         self.edit_button("")
 
 
 
     def test_following_title(self):
         """Check the following page has the correct title"""
-        driver = self.driver
-        driver.get('%s%s' % (self.server, "/following"))
+        self.login(self.UserA)
+        driver.get('%s%s' % (self.server, self.URL_FOLLOW))
         self.assertEqual(driver.title, "Starfleet Secure Comms - Following")
 
     def test_following_like_counter(self):
         """Check the like counter works on the following page"""
-        self.like_counter("/following")
+        self.login(self.UserA)
+        self.like_counter(self.URL_FOLLOW)
 
     def test_following_like_btn_class(self):
         """Check the like button's CSS class is toggling on the following page"""
-        self.like_button_class("/following")
+        self.login(self.UserA)
+        self.like_button_class(self.URL_FOLLOW)
 
 
     def test_profile_title(self):
         """Check a profile page has the correct title """
-        driver = self.driver
-        driver.get('%s%s' % (self.server, USER_LOGIN_PROFILE))
-        self.assertEqual(driver.title, "Starfleet Secure Comms - Profile for " + USER_LOGIN_NAME)
+        self.login(self.UserA)
+        driver.get('%s%s' % (self.server, self.profile_userA))
+        self.assertEqual(driver.title, f"Starfleet Secure Comms - Profile for {self.UserA.username}")
 
     def test_profile_like_counter(self):
         """Check the like counter works on profile pages (must not be logged-in user) """
-        self.like_counter(USER_OTHER_PROFILE)
+        self.login(self.UserA)
+        self.like_counter(self.profile_userB)
 
     def test_profile_like_btn_class(self):
         """Check the like button's CSS class is toggling on profile pages (must not be logged-in user)"""
-        self.like_button_class(USER_OTHER_PROFILE)
+        self.login(self.UserA)
+        self.like_button_class(self.profile_userB)
 
     def test_profile_edit(self):
         """Check the edit button works on a profile (must be the logged-in user)"""
-        self.edit_button(USER_LOGIN_PROFILE)
+        self.login(self.UserA)
+        self.edit_button(self.profile_userA)
 
     def test_profile_follow_toggle(self):
         """
         Check the follower toggle is incrementing/decrementing successfully
         (must not be logged-in user)
         """
-        driver = self.driver
-        driver.get('%s%s' % (self.server, USER_OTHER_PROFILE))
-        time.sleep(1)
+        self.login(self.UserA)
+        driver.get('%s%s' % (self.server, self.profile_userB))
+        time.sleep(2)
 
         # Find the element
         count_ele = driver.find_element_by_id("num-followers")
@@ -124,12 +149,18 @@ class WebpageTests(LiveServerTestCase):
         self.assertEqual(btn_ele.text, btn_at_start)
 
 
+
+    def login(self, logger):
+        driver.get('%s%s' % (self.server, self.URL_LOGIN))
+        driver.find_element_by_name("username").send_keys(logger.username)
+        driver.find_element_by_name("password").send_keys(logger.username[0].lower())
+        driver.find_element_by_id("login-btn").submit()
+
     def like_counter(self, url):
         """ Test that the like counter increments and decrements correctly"""
         # Find a like button
-        driver = self.driver
         driver.get('%s%s' % (self.server, url))
-        time.sleep(1)
+        time.sleep(2)
         like_btn = driver.find_element_by_class_name("like-btn")
 
         # Grab its status and the post ID. Use the post_id to grab the corresponding counter and save the init value
@@ -170,10 +201,8 @@ class WebpageTests(LiveServerTestCase):
     def like_button_class(self, url):
         """Check the like toggle is setting CSS class correctly"""
         CLASS_NAMES = ["liked", "unliked"]
-
-        driver = self.driver
         driver.get('%s%s' % (self.server, url))
-        time.sleep(1)
+        time.sleep(2)
 
         # Find a like button. Like buttons should have "class='like-btn lcars-btn liked'" or "class='like-btn lcars-btn unliked'"
         like_btn = driver.find_element_by_class_name("like-btn")
@@ -215,8 +244,8 @@ class WebpageTests(LiveServerTestCase):
 
 
     def edit_button(self, url):
-        driver = self.driver
         driver.get('%s%s' % (self.server, url))
+        time.sleep(2)
 
         # Find an edit button, its associated content div and the original message and size.
         edit_btn = driver.find_element_by_class_name("edit-btn")

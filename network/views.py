@@ -113,9 +113,9 @@ def profile(request, user_id):
 
 
 def following(request):
-    user = User.objects.get(username=request.user)
 
     if request.user.is_authenticated:
+        user = User.objects.get(username=request.user)
         fposts = Post.objects.filter(poster__in=user.following.all()).order_by("-created_on")
 
         p = Paginator(fposts, MAX_POSTS_PER_PAGE)

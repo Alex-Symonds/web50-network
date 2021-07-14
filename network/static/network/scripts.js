@@ -249,7 +249,7 @@ function post_read_mode(post_id, editted_content, http_code){
 
     // Otherwise, show the editted post
     } else {
-        cont_div.innerHTML = editted_content;
+        cont_div.innerHTML = editted_content.toUpperCase();
         // Unhide the edit button
         btn = document.querySelector(get_edit_btn_id(post_id));
         btn.style.display = 'inline';

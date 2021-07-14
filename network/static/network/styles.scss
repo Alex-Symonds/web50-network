@@ -251,6 +251,11 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
     color: $c_bg_A0;
     background: $c_bg_main;
+
+    &:hover{
+        text-decoration: none;
+        color: $c_bg_A0;
+    }
 }
 @media (max-width: $breakpoint_title_twolines){
     .main-title{
