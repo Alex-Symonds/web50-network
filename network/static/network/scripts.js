@@ -53,6 +53,8 @@ function toggle(e){
     })
     .then(response => response.json())
     .then(data => {
+        // If the user is not logged in, redirect them to the error page bearing a suitable message.
+        // (The server will use the GET parameters to select the correct message.)
         if ('redirect' in data){
             window.location.href = data['redirect'] + '&type=' + view_name;
         }
@@ -158,9 +160,8 @@ function access_denied_className(){
     return 'edit-failed';
 }
 
+// Replace the post text with a textarea and a save button.
 function post_edit_mode(post_id){
-    // Replace the post text with a textarea and a save button.
-
     // Grab the div for the contents
     cont_div = document.querySelector(get_edit_div_id(post_id));
 
@@ -205,8 +206,9 @@ function post_edit_mode(post_id){
     btn.style.display = 'none';
 }
 
+// Update the content of a post, both on the page and in the database.
 function update_post(e, post_id){
-    // Update the content of a post, both on the page and in the database.
+    
     // Stop the page from reloading after this
     e.preventDefault();
 
@@ -245,15 +247,15 @@ function post_read_mode(post_id, editted_content, http_code){
     cont_div = document.querySelector(get_edit_div_id(post_id));
     cont_div.innerHTML = '';
 
-    // If User A somehow tried to edit User B's post, show an error and the uneditted post
-    if (http_code === 403){
+    // If something went wrong, show an error and return to the uneditted post
+    if (http_code != 200){
         let errmsg = document.createElement('div');
         errmsg.innerHTML = access_denied_innerHTML();
         errmsg.className = access_denied_className();
         cont_div.append(errmsg);
         cont_div.append(post_original);
 
-    // Otherwise, show the editted post
+    // Otherwise, update the page to show the editted post
     } else {
         cont_div.innerHTML = editted_content.toUpperCase();
         // Unhide the edit button
@@ -270,7 +272,6 @@ function post_read_mode(post_id, editted_content, http_code){
 
 // GENERAL USE ----------------------------------------------------------------
 function getCookie(name) {
-    // Gets a cookie.
     // Taken from Django documentation for CSRF handling
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
