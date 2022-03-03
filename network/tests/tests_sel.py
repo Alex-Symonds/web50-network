@@ -1,7 +1,6 @@
 import unittest
 from network.models import Post, User
 from selenium import webdriver
-#from selenium.webdriver.common.keys import Keys
 import time
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 

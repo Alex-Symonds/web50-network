@@ -44,15 +44,21 @@ function toggle(e){
     // Send to server
     const view_name = e.target.dataset.viewname;
     fetch(`/${view_name}/${e.target.dataset.id}`, {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({
             'toggled_status': toggled_status
         }),
         headers: headers,
         credentials: 'include'
     })
-    .then(() => {
-        update_toggled_page(view_name, toggled_status, e);
+    .then(response => response.json())
+    .then(data => {
+        if ('redirect' in data){
+            window.location.href = data['redirect'] + '&type=' + view_name;
+        }
+        else{
+            update_toggled_page(view_name, toggled_status, e);
+        }
     })
     .catch(error =>{
         console.log('Error: ', error);
@@ -214,9 +220,9 @@ function update_post(e, post_id){
     var headers = new Headers();
     headers.append('X-CSRFToken', csrftoken);
 
-    // PUT it into the database and call function to handle the page
+    // Put it into the database and call function to handle the page
     fetch('/posts', {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({
             "id": post_id,
             "editted_content": editted_content
@@ -224,7 +230,7 @@ function update_post(e, post_id){
         headers: headers,
         credentials: 'include'
     })
-    .then(response => {
+    .then(response => {        
         post_read_mode(post_id, editted_content, response.status);
     })
     .catch(error =>{
