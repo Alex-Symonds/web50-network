@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners to any/all edit buttons
-    document.querySelectorAll('.edit_btn').forEach(btn => {
+    document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             post_edit_mode(this.dataset.id);
         });
     });
 
     // Add event listeners to any/all like buttons
-    document.querySelectorAll('.like_btn').forEach(btn => {
+    document.querySelectorAll('.like-btn').forEach(btn => {
         load_like_button(btn);
     })
 })
@@ -44,15 +44,21 @@ function toggle(e){
     // Send to server
     const view_name = e.target.dataset.viewname;
     fetch(`/${view_name}/${e.target.dataset.id}`, {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({
             'toggled_status': toggled_status
         }),
         headers: headers,
         credentials: 'include'
     })
-    .then(() => {
-        update_toggled_page(view_name, toggled_status, e);
+    .then(response => response.json())
+    .then(data => {
+        if ('redirect' in data){
+            window.location.href = data['redirect'] + '&type=' + view_name;
+        }
+        else{
+            update_toggled_page(view_name, toggled_status, e);
+        }
     })
     .catch(error =>{
         console.log('Error: ', error);
@@ -115,9 +121,11 @@ function update_like_button(btn, is_liked){
     if (is_liked){
         btn.classList.remove('unliked');
         btn.classList.add('liked');
+        btn.innerHTML = '<span>LIKED</span>';
     } else {
         btn.classList.remove('liked');
-        btn.classList.add('unliked');       
+        btn.classList.add('unliked'); 
+        btn.innerHTML = '<span>LIKE</span>';      
     }  
     btn.blur();
 }
@@ -142,6 +150,14 @@ function get_edit_btn_id(post_id){
 // Store the original text. Used to restore the post if the edit fails.
 var post_original;
 
+function access_denied_innerHTML(){
+    return '<span>ACCESS DENIED</span><br>YOU DO NOT OWN THIS POST.';
+}
+
+function access_denied_className(){
+    return 'edit-failed';
+}
+
 function post_edit_mode(post_id){
     // Replace the post text with a textarea and a save button.
 
@@ -153,7 +169,16 @@ function post_edit_mode(post_id){
 
     // Make a textarea element and add it to the form
     txta = document.createElement('textarea');
-    txta.innerHTML = cont_div.innerHTML.trim();
+    //txta.innerHTML = cont_div.innerHTML.trim();
+    str_split = cont_div.innerHTML.split("</div>");
+
+    if (str_split.length == 2){
+        contents_str = str_split[1];
+    } else {
+        contents_str = str_split[0];
+    }
+
+    txta.innerHTML = contents_str.trim();
     edit_form.append(txta);
 
     // Save the text in the global variable
@@ -162,8 +187,9 @@ function post_edit_mode(post_id){
     // Make a save button element with an event handler and add it to the form
     save_btn = document.createElement('input');
     save_btn.type = 'submit';
-    save_btn.value = 'save';
-    save_btn.className = 'post-solid-btn';
+    save_btn.value = 'SAVE';
+    save_btn.classList.add('post-btn');
+    save_btn.classList.add('lcars-btn');
     save_btn.id = 'save-post-btn';
     save_btn.addEventListener('click', function(e){
         update_post(e, post_id);
@@ -194,9 +220,9 @@ function update_post(e, post_id){
     var headers = new Headers();
     headers.append('X-CSRFToken', csrftoken);
 
-    // PUT it into the database and call function to handle the page
+    // Put it into the database and call function to handle the page
     fetch('/posts', {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({
             "id": post_id,
             "editted_content": editted_content
@@ -204,7 +230,7 @@ function update_post(e, post_id){
         headers: headers,
         credentials: 'include'
     })
-    .then(response => {
+    .then(response => {        
         post_read_mode(post_id, editted_content, response.status);
     })
     .catch(error =>{
@@ -222,19 +248,18 @@ function post_read_mode(post_id, editted_content, http_code){
     // If User A somehow tried to edit User B's post, show an error and the uneditted post
     if (http_code === 403){
         let errmsg = document.createElement('div');
-        errmsg.innerHTML = 'Access denied. You do not own this post.';
-        errmsg.className = 'edit_failed';
+        errmsg.innerHTML = access_denied_innerHTML();
+        errmsg.className = access_denied_className();
         cont_div.append(errmsg);
         cont_div.append(post_original);
 
     // Otherwise, show the editted post
     } else {
-        cont_div.innerHTML = editted_content;
+        cont_div.innerHTML = editted_content.toUpperCase();
+        // Unhide the edit button
+        btn = document.querySelector(get_edit_btn_id(post_id));
+        btn.style.display = 'inline';
     }
-
-    // Unhide the edit button
-    btn = document.querySelector(get_edit_btn_id(post_id));
-    btn.style.display = 'inline';
 }
 
 

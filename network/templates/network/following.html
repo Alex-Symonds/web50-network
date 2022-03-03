@@ -5,106 +5,121 @@
 {% endblock %}
 
 {% block body %}
-
-{# Posts list #}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2>Following</h2>
-            </div>
+    <div class="conference-container">
+        <div class="vt-panel-container panels-following">
+            <div class="vt-p0 lcars-top-left"><div class="panel-num">17<span class="extra-digits">-184.3</span></div></div>
+            <div class="vt-p1 vt-panel"><div class="panel-num">38<span class="extra-digits">-7183</span></div></div>
+            <div class="vt-p2 vt-panel"><div class="panel-num">83<span class="extra-digits">-9932</span></div></div>
+            <div class="vt-p3 vt-panel"></div>
+            <div class="vt-p4 vt-panel"><div class="panel-num">25<span class="extra-digits">-1764</span></div></div>
+            <div class="vt-p5 vt-panel"></div>
+            <div class="vt-p6 vt-panel"><div class="panel-num">79<span class="extra-digits">-7372</span></div></div>
+            <div class="vt-p7 vt-panel"><div class="panel-num">35<span class="extra-digits">-1263</span></div></div>
+            <div class="vt-p8 vt-panel"></div>
+            <div class="vt-p9 vt-panel"><div class="panel-num">56<span class="extra-digits">-3842</span></div></div>
         </div>
 
-        <div id="all-posts">
-{% for post in page %}
-            <div class="post">
-                <div class="row pheader">
-                    <div class="col-12 pcont-user">
-                        By <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username }}</a> on {{  post.created_on }}
-                    </div>
+        <div class="conference-content">
+            <div class="hz-panel-container panels-following">
+                <div class="hz-panel hz-p0"></div>
+                <div class="hz-panel hz-p1"></div>
+                <div class="hz-panel hz-p2"></div>
+                <div class="hz-panel hz-p3"></div>
+                <div class="hz-panel hz-p4"></div>
+                <div class="hz-panel hz-p5"></div>
+            </div>
+            <div class="corner-box panels-following">
+                <div class="corner top-left-corner">
                 </div>
-                <div class="row pbody">    
-                    <div class="col">
-                        <div class="pcont-content" id="post_content_{{ post.id }}">
-                            {{ post.content }}
+            </div>
+
+            <div class="all-posts">
+                    <h2>CHANNEL: FOLLOWING</h2>
+            
+{% for post in page %}
+                    <div class="post-container">
+                        <div class="post-section-date-edit">
+                            {{  post.created_on|date:"Ymd.His" }} <small>({{  post.created_on|date:"d M Y, H:i:s"|upper }})</small><br>
+                            
+    {% if user.is_authenticated and user.username == post.poster.username %}
+                            <button class="edit-btn lcars-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}"><span>EDIT</span></button>
+    {% endif %}
                         </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="pcont-likes">
-    {% if user.is_authenticated and user.username != post.poster.username %}
-                            <p class="pcont-likecount">
-                                <span class="likes_count" id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> likes
-                            </p>
-                            <button class="like_btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
-    {% else %}
-                            <div class="like_pane_replacement">
-                                <p class="pcont-likecount">likes</p>
-                                <p class="num-inc-likes">{{ post.count_likes }}</p>
+
+                        <div class="post-section-content">    
+                            <a href="{% url 'profile' post.poster.id %}">{{  post.poster.username|upper }}</a>
+                            <div class="pcont-content" id="post_content_{{ post.id }}">
+                                {{ post.content|upper }}
                             </div>
+                        </div>
+
+                        <div class="post-section-likes"> 
+                            <p><span id="num_likes_{{ post.id }}">{{ post.count_likes }}</span> LIKES</p>
+
+    {% if user.is_authenticated and user.username != post.poster.username %}
+                            <button class="like-btn lcars-btn unliked" data-id="{{ post.id }}" data-status="?" data-viewname="likes"></button>
     {% endif %} 
                         </div>
-    {% if user.is_authenticated and user.username == post.poster.username %}
-                        <button class="edit_btn post-hollow-btn" data-id="{{ post.id }}" id="edit_btn_{{ post.id }}">edit</button>
-    {% endif %}
                     </div>
-                </div>
-            </div>
+                    
 {% empty %}
-            <div class="row">
-                <div class="col-12">
-                    <p> Follow other users to view their posts here.</p>
-                </div>
-            </div>
-{% endfor %}
-        </div>
-
-    {% if page.has_other_pages %}
-        <nav aria-label="See more posts">
-            <ul class="pagination justify-content-center" id="pagination-nav">
-
-        {% if page.paginator.num_pages > 2 %}
-            {% if page.number > 1 %}
-                <li class="page-item"><a class="page-link" href="?page=1">Newest</a></li>
-            {% else %}
-                <li class="page-item disabled">
-                    <span class="page-link">Newest</span>
-                </li>
-            {% endif %}
-        {% endif %}
-
-        {% if page.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a></li>
-        {% else %}
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-        {% endif %}
-
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">
-                    {{ page.number }} of {{ page.paginator.num_pages }}
-                    <span class="sr-only">(current)</span>
-                    </span>
-                </li>
-
-        {% if page.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Next</a></li>
-        {% else %}
-                <li class="page-item disabled">
-                    <span class="page-link">Next</span>
-                </li>
-        {% endif %}
-
-        {% if page.paginator.num_pages > 2 %}
-            {% if page.number < page.paginator.num_pages %}
-                <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Oldest</a></li>
-            {% else %}
-                <li class="page-item disabled">
-                    <span class="page-link">Oldest</span>
-                </li>
-            {% endif %}
-        {% endif %}
-            </ul>
-        </nav>
+    {% if isFollowing %}
+                    <p>NONE OF THE USERS YOU ARE FOLLOWING HAVE POSTED ANYTHING YET.</p>
+    {% else %}
+                    <p>YOU ARE NOT FOLLOWING ANYONE. GO TO A USER'S PROFILE AND CLICK THE BUTTON TO FOLLOW THEM.</p>
     {% endif %}
+{% endfor %}
+            </div>
+
+{% if page.has_other_pages %}
+            <nav aria-label="See more posts" id="pagination-nav">
+                <ul class="pagination justify-content-center">
+
+    {% if page.paginator.num_pages > 2 %}
+        {% if page.number > 1 %}
+                    <li class="page-item"><a class="page-link page-newest" href="?page=1">NEW</a></li>
+        {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">NEW</span>
+                    </li>
+        {% endif %}
+    {% endif %}
+
+    {% if page.has_previous %}
+                    <li class="page-item"><a class="page-link page-previous" href="?page={{ page.previous_page_number }}">PREV.</a></li>
+    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">PREV.</span>
+                    </li>
+    {% endif %}
+
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">
+                        {{ page.number }}&nbsp;OF&nbsp;{{ page.paginator.num_pages }}
+                        <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+
+    {% if page.has_next %}
+                    <li class="page-item"><a class="page-link page-next" href="?page={{ page.next_page_number }}">NEXT</a></li>
+    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">NEXT</span>
+                    </li>
+    {% endif %}
+
+    {% if page.paginator.num_pages > 2 %}
+        {% if page.number < page.paginator.num_pages %}
+                    <li class="page-item"><a class="page-link page-oldest" href="?page={{ page.paginator.num_pages }}">OLD</a></li>
+        {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">OLD</span>
+                    </li>
+        {% endif %}
+    {% endif %}
+                </ul>
+            </nav>
+{% endif %}
+        </div>
     </div>
 {% endblock %}

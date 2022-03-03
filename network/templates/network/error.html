@@ -1,11 +1,32 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2>Error</h2>
-                <p>{{ message }}</p>
+    <div class="conference-container">
+        <div class="vt-panel-container panels-error">
+            <div class="vt-p0 lcars-top-left"><div class="panel-num">99<span class="extra-digits">-000.0</span></div></div>
+            <div class="vt-p1 vt-panel"></div>
+            <div class="vt-p2 vt-panel"><div class="panel-num">15<span class="extra-digits">-7386</span></div></div>
+            <div class="vt-p3 vt-panel"><div class="panel-num">32<span class="extra-digits">-4371</span></div></div>
+        </div>
+
+        <div class="conference-content">
+            <div class="hz-panel-container panels-error">
+                <div class="hz-panel hz-p0"></div>
+                <div class="hz-panel hz-p1"></div>
+                <div class="hz-panel hz-p2"></div>
+                <div class="hz-panel hz-p3"></div>
+                <div class="hz-panel hz-p4"></div>
+                <div class="hz-panel hz-p5"></div>
+            </div>
+            <div class="corner-box panels-error">
+                <div class="corner top-left-corner">
+                </div>
+            </div>
+
+            <div class="main-container error-message">
+                    <h2>CANNOT COMPLY</h2>
+                    <p>{{ message|safe }}</p>
+                </div>
             </div>
         </div>
     </div>
