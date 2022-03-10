@@ -181,7 +181,7 @@ def follow_toggle(request, user_id):
     target_user = User.objects.get(id=user_id)
     current_user = request.user
 
-    if request.method == "POST":
+    if request.method == "PUT":
         data = json.loads(request.body)
         want_follow = data.get("toggled_status")
 
@@ -214,65 +214,66 @@ def posts(request):
         Create or update posts, return JSON confirmation
     """
 
+    # New post. Page expects a HTTP Redirect of some description.
     if request.method == "POST":
 
-        # If this request came from the form: a) it's a new post and b) the browser is expecting a page redirect
+        if not request.user.is_authenticated:
+            return render(request, "network/error.html", {
+                "message": "You must be logged in to create a post."
+            }, status=401)
+
         posted_form = NewPostForm(request.POST)
         if posted_form.is_valid():
-
-            if not request.user.is_authenticated:
-                return render(request, "network/error.html", {
-                    "message": "You must be logged in to create a post."
-                }, status=401)
-
             u = request.user
             new_content = posted_form.cleaned_data["content"]
             npo = Post(poster=u, content=new_content)
             npo.save()
             return HttpResponseRedirect(reverse("index"))
       
-        # Otherwise: a) request is either an edit/update or invalid; b) browser is expecting some JSON
+
+    # Edit post. Page expects a JSON response.
+    elif request.method == "PUT":
+
+        if not request.user.is_authenticated:
+            return JsonResponse({
+                "redirect": reverse("errors")
+            }, status=401)
+
+        data = json.loads(request.body)
+        post_id = data.get("id")
+        if post_id == None:
+            return JsonResponse({
+                "message": "Error: invalid input."
+            }, status=400)                
+    
+        this_post = Post.objects.get(id=post_id)
+        if request.user == this_post.poster:
+
+            new_content = data.get("editted_content")
+            this_post.content = new_content
+
+            try:
+                this_post.save()
+            except:
+                return JsonResponse({
+                    "message": "Server problem: post was not saved."
+                }, status=500)
+    
+            return JsonResponse({
+                "message": "Post editted successfully."
+            }, status=200)
+
         else:
-            if not request.user.is_authenticated:
-                return JsonResponse({
-                    "redirect": reverse("errors")
-                }, status=401)
-
-            data = json.loads(request.body)
-            post_id = data.get("id")
-            if post_id == None:
-                return JsonResponse({
-                    "message": "Error: invalid input."
-                }, status=400)                
-        
-            this_post = Post.objects.get(id=post_id)
-            if request.user == this_post.poster:
-
-                new_content = data.get("editted_content")
-                this_post.content = new_content
-
-                try:
-                    this_post.save()
-                except:
-                    return JsonResponse({
-                        "message": "Server problem: post was not saved."
-                    }, status=500)
-        
-                return JsonResponse({
-                    "message": "Post editted successfully."
-                }, status=200)
-
-            else:
-                return JsonResponse({
-                    "message": "Users can only edit their own posts."
-                }, status=403)
+            return JsonResponse({
+                "message": "Users can only edit their own posts."
+            }, status=403)
                  
 
 def likes(request, post_id):
     """
         Toggle or read likes, return JSON confirmation
     """
-    if request.method == "POST":
+    if request.method == "PUT":
 
         # Check the user is logged in
         if not request.user.is_authenticated:

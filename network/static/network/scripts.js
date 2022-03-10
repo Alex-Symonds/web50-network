@@ -44,7 +44,7 @@ function toggle(e){
     // Send to server
     const view_name = e.target.dataset.viewname;
     fetch(`/${view_name}/${e.target.dataset.id}`, {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({
             'toggled_status': toggled_status
         }),
@@ -224,7 +224,7 @@ function update_post(e, post_id){
 
     // Put it into the database and call function to handle the page
     fetch('/posts', {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({
             "id": post_id,
             "editted_content": editted_content
