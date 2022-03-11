@@ -23,7 +23,7 @@
     <body>
         <div class="header-container">
             <div class="vt-panel-container panels-header">
-                <div class="vt-p0"></div>
+                <div class="vt-p0 lcars-top-left"></div>
                 <div class="vt-p1 vt-panel"></div>
                 <div class="vt-p2 vt-panel"></div>
             </div>
@@ -35,7 +35,7 @@
                         <div class="main-title-after"></div>
                     </div>
                     <div class="corner-box panels-header hz-top">
-                        <div class="top-left-corner corner">
+                        <div class="internal-top-left-corner corner">
                         </div>
                     </div>
 
@@ -43,25 +43,25 @@
                         <ul>  
                         {% if user.is_authenticated %}
                             <li>
-                                <a class="lcars-nav-btn nav-user" href="{% url 'profile' user.id %}"><span><strong>{{ user.username|upper }}</strong></span></a>
+                                <a class="lcars-btn nav-user" href="{% url 'profile' user.id %}"><span><strong>{{ user.username|upper }}</strong></span></a>
                             </li>
                         {% endif %}
                             <li>
-                                <a class="lcars-nav-btn nav-allposts" href="{% url 'index' %}"><span>ALL POSTS</span></a>
+                                <a class="lcars-btn nav-allposts" href="{% url 'index' %}"><span>ALL POSTS</span></a>
                             </li>
                         {% if user.is_authenticated %}
                             <li>
-                                <a class="lcars-nav-btn nav-following" href="{% url 'following' %}"><span>FOLLOWING</span></a>
+                                <a class="lcars-btn nav-following" href="{% url 'following' %}"><span>FOLLOWING</span></a>
                             </li>
                             <li>
-                                <a class="lcars-nav-btn nav-logout" href="{% url 'logout' %}"><span>LOG OUT</span></a>
+                                <a class="lcars-btn nav-logout" href="{% url 'logout' %}"><span>LOG OUT</span></a>
                             </li>
                         {% else %}
                             <li>
-                                <a class="lcars-nav-btn nav-login" href="{% url 'login' %}"><span>LOG IN</span></a>
+                                <a class="lcars-btn nav-login" href="{% url 'login' %}"><span>LOG IN</span></a>
                             </li>
                             <li>
-                                <a class="lcars-nav-btn nav-register" href="{% url 'register' %}"><span>REGISTER</span></a>
+                                <a class="lcars-btn nav-register" href="{% url 'register' %}"><span>REGISTER</span></a>
                             </li>
                         {% endif %}
                         </ul>
@@ -69,7 +69,7 @@
                 </nav>
 
                 <div class="corner-box panels-header hz-btm">
-                    <div class="corner bottom-left-corner">
+                    <div class="corner internal-bottom-left-corner">
                     </div>
                 </div>
                 <div class="hz-panel-container panels-header">

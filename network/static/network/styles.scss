@@ -109,6 +109,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
 // Buttons
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 .lcars-btn{
     position: relative;
     height: 3rem;
@@ -184,27 +185,30 @@ textarea, input[type=text], input[type=password], input[type=email]{
         right: 0.9rem;
         pointer-events: none;
     }
-}
-.unliked{
-    color: $c_bg_A0;
-    background: $c_bg_main;
-    border: 2px solid $c_bg_A0;
-    span{
+
+    &.unliked{
         color: $c_bg_A0;
+        background: $c_bg_main;
+        border: 2px solid $c_bg_A0;
+        span{
+            color: $c_bg_A0;
+        }
+        &:hover{
+            background: $c_hollow_hover;
+        }
     }
-    &:hover{
-        background: $c_hollow_hover;
+
+    &.liked{
+        color: $c_bg_main;
+        background: $c_bg_A0;
+        border: 2px solid $c_bg_A0;
+        &:hover{
+            background: $c_bg_A0_hover;
+            border: 2px solid $c_bg_A0_hover;
+        }
     }
 }
-.liked{
-    color: $c_bg_main;
-    background: $c_bg_A0;
-    border: 2px solid $c_bg_A0;
-    &:hover{
-        background: $c_bg_A0_hover;
-        border: 2px solid $c_bg_A0_hover;
-    }
-}
+
 
 
 
@@ -213,16 +217,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
 // --------------------------------------------------------------------------------------------------------------------------------------------------------
 // Heading and navigation
 // --------------------------------------------------------------------------------------------------------------------------------------------------------
-// .heading-panel{
-//     position: relative;
-//     height: 3.5rem;
-//     width: 100%;
 
-//     background: $c_bg_A0;
-//     border-top-right-radius: 1.75rem;
-//     border-bottom-right-radius: 1.75rem; 
-// }
-
+// "STARFLEET SECURE COMMS" and the bars left and right of it
 .main-title-container{
     display: flex;
     width: 100%;
@@ -248,13 +244,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
         color: $c_bg_A0;
     }
 }
-
-@media (max-width: $breakpoint_title_twolines){
-    .main-title{
-        width: 12rem;
-    } 
-}
-
 .main-title-after{
     width: 3rem;
     margin-right: 5px;
@@ -263,6 +252,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
     border-bottom-right-radius: 50%;
 }
 
+
+// The "main bit" with the nav buttons
 .lcars-nav-container{
     display: flex;
     width: 100%;
@@ -281,34 +272,23 @@ textarea, input[type=text], input[type=password], input[type=email]{
     li {
         list-style: none;
     }
-}
 
-.lcars-nav-btn{
-    position: relative;
-    display: inline-block;
-    height: 3rem;
-    width: 10rem;
-
-    margin: 5px;
-    padding: 0;
-
-    color: black;
-    border-radius: 1.5rem;
-
-    span{
-        position: absolute;
-        bottom: 0.25rem;
-        right: 1.25rem;
-    }
-
-    &:hover{
+    // Adjust lcars-btn a bit for use in the nav bar
+    .lcars-btn{
+        display: inline-block;
+        width: 10rem;
         color: black;
+
+        &:hover{
+            color: black;
+        }
     }
-    &:active, &:focus{
-        outline: thin dotted $c_emphasis;
-    }
+
 }
 
+
+
+// Colours (normal and hover) for nav buttons
 .nav-user, .nav-following, .nav-register{
     background: $c_bg_B1;
     &:hover{
@@ -346,12 +326,14 @@ textarea, input[type=text], input[type=password], input[type=email]{
 // Page layout
 // -----------------------------------------------------------------------------------------------------------------------
 
+// Vertical LCARS block container
 .vt-panel-container{
     width: $side_panel_width;
     display: flex;
     flex-direction: column; 
 }
 
+// Horizontal LCARS block container
 .hz-panel-container{
     height: 1rem;
     width: 100%;
@@ -361,7 +343,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     text-align: right; 
 }
 
-
+// Header (i.e. h1 and nav)
 .header-container{
     display: flex;
     justify-content: flex-end;
@@ -371,11 +353,13 @@ textarea, input[type=text], input[type=password], input[type=email]{
     width: 100%;
     max-width: $max_page;
     margin: 1.5rem auto 0;
-}
-.header-content{
-    width: 85%;
+
+    .header-content{
+        width: 85%;
+    }
 }
 
+// Main area of the page, wrapped around the "page-specific" stuff in layout.html
 .content{
     font-family: $f_lcarsy;
 
@@ -388,8 +372,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
     flex-wrap: wrap;
 }
 
-.main-container{
-    // Simple one for login and register
+// Simple container for login and register pages
+.main-container{ 
     width: 50%;
     min-width: 17rem;
     padding: 2rem;
@@ -398,6 +382,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     clear: both;
 }
 
+// Conference (index / all posts)
 .conference-container{
     order: 1;
     display:flex;
@@ -407,11 +392,13 @@ textarea, input[type=text], input[type=password], input[type=email]{
     .vt-panel-container{
         min-height: 50rem;    
     }
+
+    .conference-content{  
+        flex-grow: 2;
+        max-width: 85%;
+    }
 }
-.conference-content{  
-    flex-grow: 2;
-    max-width: 85%;
-}
+
 
 .respond-container{
     order: 2;
@@ -423,13 +410,25 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
     align-self: flex-start;
 
-    .vt-panel-container{
-        width: 10%;
-    }
+    // .vt-panel-container{
+    //     width: 10%;
+    // }
+
+    .respond-content{  
+        flex-grow: 2;
+        max-width: 95%;
+    }  
 }
-.respond-content{  
-    flex-grow: 2;
-    max-width: 95%;
+
+#add-post{
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 0 2rem;
+
+    form{
+        width: 100%;
+    }
 }
 
 .two-column-body{
@@ -444,7 +443,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
         width: 21.5%;
     }
 
-    // Ensure there's only one row of horizontal panels
+    // Ensure there's only one row of horizontal panels by hiding the start of
+    // Respond's two rows of hz panels and the end of Conference's.
     .panels-respond{
         &.hz-top{
             .hz-p0, .hz-p1, .hz-p2, .hz-p3{
@@ -457,7 +457,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
             }
         }
     }
-
     .panels-conference{
         .hz-p4, .hz-p5{
             display: none;
@@ -465,7 +464,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
-
+// Media query to switch between one column (portrait) and two column (landscape) modes
 @media (max-width: $max_page){
     .respond-container{
         order: 1;
@@ -489,10 +488,10 @@ textarea, input[type=text], input[type=password], input[type=email]{
             max-width: 100%;
         }
 
-        .conference-container .vt-panel-container,
-        .respond-container .vt-panel-container{
-            width: $side_panel_width;
-        }
+        // .conference-container .vt-panel-container,
+        // .respond-container .vt-panel-container{
+        //     width: $side_panel_width;
+        // }
 
         .panels-respond{
             &.hz-top{
@@ -522,53 +521,57 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 
 
-.post-container{
-    display: flex;
-    width: 100%;
-    margin-top: 2rem;
-}
-.post-section-date-edit{
-    width: 8rem;
-    padding-top: 0.6rem;
-    font-size: 1.1rem;
-    color: $c_edit;
-
-    small{
-        // Prevents unwanted line breaks between the month and year, or the day and month
-        white-space: nowrap;
-    }
-}
-
-.post-section-content{
-    flex-grow: 1;
-    padding: 0.5rem;
-    a{
-        font-size: 1.7rem;
-        font-weight: bold;
-        color: $c_username;
-    
-        &:hover{
-            color: $c_username_hover;
-            text-decoration: none;
-        }
-        &:active, &:focus{
-            outline: thin dotted;
-        }
-    }
-}
-.post-section-likes{
-    min-width: 7.5rem;
-    color: $c_emphasis;
-    text-align: right;
-}
-
-
+// -------------------------------------------------------------------------------------
+// Posts
+// -------------------------------------------------------------------------------------
 .profile-posts{
     margin-top: 4rem;
 }
 
 .all-posts{
     padding: 0 2rem;
+}
+
+.post-container{
+    display: flex;
+    width: 100%;
+    margin-top: 2rem;
+
+    .post-section-date-edit{
+        width: 8rem;
+        padding-top: 0.6rem;
+        font-size: 1.1rem;
+        color: $c_edit;
+    
+        small{
+            // Prevents unwanted line breaks between the month and year, or the day and month
+            white-space: nowrap;
+        }
+    }
+
+    .post-section-content{
+        flex-grow: 1;
+        padding: 0.5rem;
+        a{
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: $c_username;
+        
+            &:hover{
+                color: $c_username_hover;
+                text-decoration: none;
+            }
+            &:active, &:focus{
+                outline: thin dotted;
+            }
+        }
+    }
+
+    .post-section-likes{
+        min-width: 7.5rem;
+        color: $c_emphasis;
+        text-align: right;
+    }
 }
 
 .edit-failed{
@@ -606,18 +609,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
         color: red; 
     }
 }
-
-#add-post{
-    display: flex;
-    flex-wrap: wrap;
-
-    padding: 0 2rem;
-
-    form{
-        width: 100%;
-    }
-}
-
 
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -715,25 +706,97 @@ a.page-newest{
     border-bottom-right-radius: 2rem;
 }
 
+
+
+// Posts and pagination
+// When the screen is too narrow for the three column layout for posts/pagination, change it to this.
 @media (max-width: $breakpoint_post_columns_unsustainable){
     .all-posts{
         padding: 0 1rem;
     }
-    .post-container{
-        flex-wrap: wrap;
-    }
-    .post-section-date-edit,
-    .post-section-content,
-    .post-section-likes{
-        width: 100%;
-    }
+
     #pagination-nav{
         font-size: 1.1rem;
     }
     .post-btn{
         padding: 0.5rem 1rem 0;
     }
- }
+
+    .post, .post-container{
+        display: block;
+        position: relative;
+        width: 100%;
+        margin-top: 1rem;
+    
+        border-bottom: 1px solid $c_username;
+    
+        a.username {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+    
+            font-size: 1.4rem;
+        }
+        .date{
+            display: block;
+            position: absolute;
+            top: 1.9rem;
+            left: 0;
+            width: 100%;
+    
+            font-size: 0.9rem;
+            color: $c_edit;
+        }
+        .pcont-content{
+            display: block;
+            padding-top: 3.7rem;
+            padding-bottom: 0.6rem;
+            width: 100%;
+    
+            font-size: 1.1rem;
+        }
+        p.like-counter{
+            height: 2.8rem;
+            padding: 0.5rem 0;
+            display: block;
+            margin: 0;
+    
+            font-size: 1rem;
+        }
+        .like-btn, .edit-btn{
+            margin-bottom: 0px;
+            height: 2rem;
+            position: absolute;
+            bottom: 6px;
+            right: 0;
+    
+            width: 5.5rem;
+    
+            font-size: 0.9rem;
+        }
+    
+        // The post "sections" are there for a 3-column layout in wide-mode,
+        // so "turn off" bits of those now that 3 columns won't fit.
+        .post-section-date-edit,
+        .post-section-content,
+        .post-section-likes{
+            width: 100%;
+        }
+        .post-section-date-edit{
+            width: auto;
+            margin-top: 0;
+            padding: 0;
+        }
+        .post-section-content{
+            padding: 0;
+        }
+        .post-section-likes{
+            text-align: left;
+        }
+    }
+}
 
 
 
@@ -884,47 +947,47 @@ a.page-newest{
 // LCARS panels
 // -----------------------------------------------------------------------------------------------------------------------
 
-// Corner boxes
-.corner{
-    background: $c_bg_main;
-    width: 100%;
-    height: 100%;    
-}
-
+// Corner boxes: for the curved internal borders
 .corner-box{
     width: 2rem;
     height: 2rem;
-}
 
-.top-left-corner{
-    border-top-left-radius: 2rem;
-}
-.bottom-left-corner{
-    border-bottom-left-radius: 2rem;
-}
+    .corner{
+        background: $c_bg_main;
+        width: 100%;
+        height: 100%;    
+    }
 
+    .internal-top-left-corner{
+        border-top-left-radius: 2rem;
+    }
 
+    .internal-bottom-left-corner{
+        border-bottom-left-radius: 2rem;
+    }
+}
 @media (max-width: $breakpoint_corners_tighten){
     .corner-box{
         width: 1rem;
         height: 1rem;
-    }
-    .top-left-corner{
-        border-top-left-radius: 1rem;
-    }
-    .bottom-left-corner{
-        border-bottom-left-radius: 1rem;
+
+        .internal-top-left-corner{
+            border-top-left-radius: 1rem;
+        }
+        .internal-bottom-left-corner{
+            border-bottom-left-radius: 1rem;
+        }
     }
 }
 
-// ---- General containers and sizings -----------------------------------------------------------------------------------------------------------------------
-// --- vertical panels
+// --- Decorative numbers inside some vertical LCARS panels
 .panel-num{
     position: absolute;
     bottom:0;
     right: 0.2rem;
     color: black;
 }
+
 .panels-respond{
     .extra-digits{
         display: none;
@@ -940,20 +1003,22 @@ a.page-newest{
     }
 }
 
-@media(max-width: 500px){
+@media(max-width: 607px){
     .extra-digits, .panels-respond .extra-digits{
         display: none;
     }
 }
 
 
-
+// --- LCARS blocks
+// Top left spot: give it a rounded external corner (and some flex grow)
 .lcars-top-left{
     border-top-left-radius: 5.5rem;
     flex-grow: 3;
     position: relative;
 }
 
+// Standard v and h LCARS blocks. Adds black borders to make the "gaps"
 .vt-panel{
     width: 100%;
     border-top: $panel_border;
@@ -965,6 +1030,7 @@ a.page-newest{
     border-right: $panel_border;    
 }
 
+// Horiztonal LCARS blocks: set default sizes
 .hz-p0{
     flex-grow: 2.8;    
 }
@@ -985,8 +1051,11 @@ a.page-newest{
 }
 
 // Panels: colours and (sometimes) sizes for specific panels -----------------------------------------------------------------------------------------------------
+
+// Nav/h1 pane at the top
 .panels-header{
-    .top-left-corner{
+
+    .internal-top-left-corner{
         border-top-left-radius: 1rem;
     }
     &.corner-box.hz-top{
@@ -994,17 +1063,19 @@ a.page-newest{
         height: 1rem;
     }
 
+    // Set matching colours for "L-shaped blocks" at the corners
+    // (these are actually three blocks -- v, h and corner -- in a trenchcoat)
     &.corner-box.hz-top, .vt-p0{
         background: $lcars_header_top_left;
     }
-
     .vt-p2, .hz-p0, &.corner-box{
         background: $lcars_header_bottom_left;
     }
 
+    // Set colours and/or sizes for other blocks in the header
     .vt-p0{
+        // Note: corner block, colour already set
         width: 100%;
-        border-top-left-radius: 5.5rem;
         flex-grow: 2;
     }
     .vt-p1{
@@ -1012,10 +1083,12 @@ a.page-newest{
         background: $c_bg_B0;
     }
     .vt-p2{
+        // Note: corner block, colour already set
         border-bottom-left-radius: 3rem;
         flex-grow: 1;
     }
 
+    // Note: Nothing here for .hz-p0 because its colour is the corner colour and default sizes were ok.
     .hz-p1{
         background: $c_bg_A0;
     }
@@ -1033,8 +1106,9 @@ a.page-newest{
     }
 }
 
-
+// LCARS settings for the panels around the "conference"
 .panels-conference{
+    // Set matching colours for "L-shaped blocks" at the corner
     .vt-p0, .hz-p0, &.corner-box{
         background: $lcars_conference_top_left;
     }
@@ -1053,11 +1127,10 @@ a.page-newest{
     }
 
     .vt-p1{
+        // Note: this is /arbitrarily/ the same colour as the corner block
         background: $lcars_conference_top_left;
         flex-grow: 2;
     }
-
-
     .vt-p2{
         background: $c_bg_A1;
         flex-grow: 3;
@@ -1093,26 +1166,48 @@ a.page-newest{
 
 }
 
+// LCARS settings for the panels around the "respond" pane
 .panels-respond{
-    .vt-p0{
+
+    // Corner colours
+    /*  Note: On a landscape screen, Respond moves to the right column
+        with Conference on the left. hz-p0 to hz-p3 are hidden and hz-p4 
+        becomes a component of the "L-shaped corner".
+
+        On a portrait screen, Respond and Conference are stacked, so both
+        take up the full page width and all horizontal panes are visible.
+        hz-p0 is a corner component, as usual, and hz-p4 can do its own thing.
+
+        Plan: hz-p0 is set to the corner colour at all times, since it's hidden
+        when not in use. hz-p4 set to the corner colour here, then a media
+        query below changes it to a different colour in portrait mode.
+    */ 
+    .vt-p0,
+    &.hz-top .hz-p0,
+    &.hz-top .hz-p4,
+    &.hz-top.corner-box{
         background: $lcars_response_top_left;
+    }    
+
+    .vt-p2,
+    &.hz-btm .hz-p0,
+    &.hz-btm .hz-p4,
+    &.hz-btm.corner-box{
+        background: $lcars_response_bottom_left;
     }
+
+    // The rest
     .vt-p1{
         background: $c_bg_A1;
         flex-grow: 2;
     }
     .vt-p2{
-        background: $lcars_response_bottom_left;
         flex-grow: 3;
         border-bottom-left-radius: 3rem;
     }
 
 
     &.hz-top{
-        .hz-p0, .hz-p4, &.corner-box {
-            // @ Half page, p4 is the "linker". This will be changed by a media query @ full page
-            background: $lcars_response_top_left;
-        }
         .hz-p1{
             background: $c_bg_C0;
         }
@@ -1128,10 +1223,6 @@ a.page-newest{
     }
     
     &.hz-btm{
-        .hz-p0, .hz-p4, &.corner-box {
-            // @ Half page, p4 is the "linker". This will be changed by a media query @ full page
-            background: $lcars_response_bottom_left;
-        }
         .hz-p1{
             background: $c_bg_A0;
         }
@@ -1147,11 +1238,14 @@ a.page-newest{
     }
 }
 
+// LCARS settings for the panels around a profile
 .panels-profile{
+    // Corner colour
     .vt-p0, .hz-p0, &.corner-box{
         background: $lcars_profile_corner;
     }
 
+    // The rest
     .hz-p1{
         background: $c_bg_A2;
     }
@@ -1206,11 +1300,15 @@ a.page-newest{
     }
 }
 
+// LCARS settings for panels around the "following" page's contents
 .panels-following{
+
+    // Corner colour
     .vt-p0, .hz-p0, &.corner-box{
         background: $lcars_following_corner;
     }
 
+    // The rest
     .hz-p1{
         background: $c_bg_A0;
     }
@@ -1265,14 +1363,17 @@ a.page-newest{
     }
 }
 
+// LCARS settings for login page
 .panels-login{
+    // Corner colour
     .vt-p0, .hz-p0, &.corner-box{
         background: $lcars_login_corner;
     }
+
+    // The rest
     .vt-p0{
         flex-grow: 2;
     }
-
     .vt-p1{
         background: $c_bg_A0;
         height: 1rem;
@@ -1303,14 +1404,18 @@ a.page-newest{
     }
 }
 
+// LCARS settings for register page
 .panels-register{
+
+    // Corner colour
     .vt-p0, .hz-p0, &.corner-box{
         background: $lcars_register_corner;
     }
+
+    // The rest
     .vt-p0{
         flex-grow: 2;
     }
-
     .vt-p1{
         background: $c_bg_B1;
         height: 1rem;
@@ -1341,14 +1446,18 @@ a.page-newest{
     }
 }
 
+// LCARS settings for error page
 .panels-error{
+
+    // Corner colour
     .vt-p0, .hz-p0, &.corner-box{
         background: $c_error;
     }
+
+    // The rest
     .vt-p0{
         flex-grow: 2;
     }
-
     .vt-p1{
         background: white;
         height: 1rem;
@@ -1378,11 +1487,15 @@ a.page-newest{
 
 
 
+// Improved Mobile / portrait appearance
 @media (max-width: 865px){
-    .header-content{
+    .header-container .header-content,
+    .two-column-body .conference-container .conference-content{
+        max-width: 92%;
         width: 92%;
     }
-    .vt-panel-container{
+    .header-container .vt-panel-container,
+    .two-column-body .conference-container .vt-panel-container{
         width: 8%;
     }
     h1{
@@ -1421,7 +1534,7 @@ a.page-newest{
         ul{
             padding: 0;
         }
-        .lcars-nav-btn{
+        .lcars-btn{
             width: 3.7rem;
             height: 1.9rem;
             border-radius: 0.8rem;
