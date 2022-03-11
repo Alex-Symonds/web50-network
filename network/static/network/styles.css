@@ -764,6 +764,7 @@ a.page-newest:hover {
   }
 
   .conference-container .vt-panel-container,
+.respond-container .vt-panel-container,
 .vt-panel-container {
     width: 8%;
   }
