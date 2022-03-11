@@ -519,8 +519,15 @@ a.page-newest:hover {
     font-size: 1.1rem;
   }
 
+  textarea {
+    margin-bottom: 0.5rem;
+  }
+
   .post-btn {
-    padding: 0.5rem 1rem 0;
+    padding: 0.5rem 0.8rem 0;
+    width: 7rem;
+    font-size: 0.9rem;
+    height: 2.2rem;
   }
 
   .post, .post-container {
@@ -536,7 +543,7 @@ a.page-newest:hover {
     top: 0;
     left: 0;
     width: 100%;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   .post .date, .post-container .date {
     display: block;
@@ -1156,6 +1163,10 @@ a.page-newest:hover {
     font-size: 1em;
     margin: 0;
     font-weight: normal;
+  }
+
+  h2 {
+    font-size: 1.4rem;
   }
 
   .main-title {
