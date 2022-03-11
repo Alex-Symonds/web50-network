@@ -226,7 +226,7 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
   font-family: "Antonio", "Oswald", "Arial Narrow", "Avenir Next Condensed", sans-serif;
   width: 100%;
   max-width: 85rem;
-  min-width: 20rem;
+  min-width: 19rem;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -253,7 +253,7 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 }
 .conference-container .conference-content {
   flex-grow: 2;
-  max-width: 85%;
+  max-width: 92%;
 }
 
 .respond-container {
@@ -266,7 +266,7 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 }
 .respond-container .respond-content {
   flex-grow: 2;
-  max-width: 95%;
+  max-width: 85%;
 }
 
 #add-post {
@@ -312,12 +312,15 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
     width: 100%;
   }
 
-  .respond-content {
+  .conference-container .conference-content {
     max-width: 85%;
   }
 
   .two-column-body {
     flex-wrap: wrap;
+  }
+  .two-column-body .conference-container .vt-panel-container {
+    width: 15%;
   }
   .two-column-body .post-section-content {
     max-width: 100%;
@@ -503,6 +506,11 @@ a.page-newest:hover {
 }
 
 @media (max-width: 700px) {
+  .conference-container .conference-content {
+    width: 85%;
+    max-width: 85%;
+  }
+
   .all-posts {
     padding: 0 1rem;
   }
@@ -733,6 +741,18 @@ a.page-newest:hover {
 @media (max-width: 607px) {
   .extra-digits, .panels-respond .extra-digits {
     display: none;
+  }
+
+  .header-container .header-content,
+.respond-container .respond-content,
+.conference-container .conference-content {
+    width: 92%;
+    max-width: 92%;
+  }
+
+  .two-column-body .conference-container .vt-panel-container,
+.vt-panel-container {
+    width: 8%;
   }
 }
 .lcars-top-left {
@@ -1131,17 +1151,6 @@ a.page-newest:hover {
 }
 
 @media (max-width: 865px) {
-  .header-container .header-content,
-.two-column-body .conference-container .conference-content {
-    max-width: 92%;
-    width: 92%;
-  }
-
-  .header-container .vt-panel-container,
-.two-column-body .conference-container .vt-panel-container {
-    width: 8%;
-  }
-
   h1 {
     display: block;
     font-size: 1em;

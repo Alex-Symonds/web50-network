@@ -50,14 +50,15 @@ $panel_border: 4px solid $c_bg_main;
 
 $page_width: 98%;
 $max_page: 85rem;
-$min_page: 20rem;
+$min_page: 19rem;
 
 $side_panel_width: 15%;
 $side_panel_width_wide: 15%;
 $side_panel_width_tall: 5%;
 
+$breakpoint_large_nav_buttons: 865px;
 $breakpoint_post_columns_unsustainable: 700px;
-$breakpoint_title_twolines: 484px;
+$breakpoint_lcars_numbers: 607px;
 $breakpoint_corners_tighten: 385px;
 
 $h_divider_margin: 10px;
@@ -395,7 +396,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
     .conference-content{  
         flex-grow: 2;
-        max-width: 85%;
+        max-width: 92%;
     }
 }
 
@@ -410,13 +411,9 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
     align-self: flex-start;
 
-    // .vt-panel-container{
-    //     width: 10%;
-    // }
-
     .respond-content{  
         flex-grow: 2;
-        max-width: 95%;
+        max-width: 85%;
     }  
 }
 
@@ -477,21 +474,19 @@ textarea, input[type=text], input[type=password], input[type=email]{
         order: 2;
         width: 100%;
     }
-    .respond-content{
+    .conference-container .conference-content{
         max-width: 85%;
     }
 
     .two-column-body{
         flex-wrap: wrap;
 
+        .conference-container .vt-panel-container{
+            width: 15%;
+        }
         .post-section-content{
             max-width: 100%;
         }
-
-        // .conference-container .vt-panel-container,
-        // .respond-container .vt-panel-container{
-        //     width: $side_panel_width;
-        // }
 
         .panels-respond{
             &.hz-top{
@@ -711,6 +706,13 @@ a.page-newest{
 // Posts and pagination
 // When the screen is too narrow for the three column layout for posts/pagination, change it to this.
 @media (max-width: $breakpoint_post_columns_unsustainable){
+
+    .conference-container .conference-content
+    {
+        width: 85%;
+        max-width: 85%;
+    }
+
     .all-posts{
         padding: 0 1rem;
     }
@@ -997,15 +999,28 @@ a.page-newest{
     }
 }
 
+// Show the extra digits when the page is large enough
 @media(max-width: $max_page){
     .panels-respond .extra-digits{
         display: inline;
     }
 }
 
-@media(max-width: 607px){
+// When it isn't, hide the extra digits and shrink the sidebars
+@media(max-width: $breakpoint_lcars_numbers){
     .extra-digits, .panels-respond .extra-digits{
         display: none;
+    }
+
+    .header-container .header-content,
+    .respond-container .respond-content,
+    .conference-container .conference-content{
+        width: 92%;
+        max-width: 92%;
+    }
+    .two-column-body .conference-container .vt-panel-container,
+    .vt-panel-container{
+        width: 8%;
     }
 }
 
@@ -1487,17 +1502,8 @@ a.page-newest{
 
 
 
-// Improved Mobile / portrait appearance
-@media (max-width: 865px){
-    .header-container .header-content,
-    .two-column-body .conference-container .conference-content{
-        max-width: 92%;
-        width: 92%;
-    }
-    .header-container .vt-panel-container,
-    .two-column-body .conference-container .vt-panel-container{
-        width: 8%;
-    }
+// Shrink the header and nav buttons when they will no longer fit four in a row
+@media (max-width: $breakpoint_large_nav_buttons){
     h1{
         display: block;
         font-size: 1em;
