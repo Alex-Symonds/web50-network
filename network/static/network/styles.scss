@@ -391,9 +391,9 @@ textarea, input[type=text], input[type=password], input[type=email]{
     margin-top: $h_divider_margin;
 
     .vt-panel-container{
+        width: 21.5%;
         min-height: 50rem;    
     }
-
     .conference-content{  
         flex-grow: 2;
         max-width: 92%;
@@ -413,9 +413,14 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
     .respond-content{  
         flex-grow: 2;
-        max-width: 85%;
+        max-width: 92%;
     }  
+    .vt-panel-container{
+        width: 8%;
+    }
 }
+
+
 
 #add-post{
     display: flex;
@@ -434,10 +439,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
     .post-section-content{
         max-width: 27rem;
-    }
-
-    .conference-container .vt-panel-container{
-        width: 21.5%;
     }
 
     // Ensure there's only one row of horizontal panels by hiding the start of
@@ -461,29 +462,42 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
-// Media query to switch between one column (portrait) and two column (landscape) modes
+// Media query to switch from two columns (landscape) to one column (portrait)
 @media (max-width: $max_page){
+
     .respond-container{
         order: 1;
         width: 100%;
+
+        .respond-content{
+            max-width: 85%;
+        }
+
         textarea{
             height: 7rem;
         }
+
+        .vt-panel-container{
+            width: 15%;
+        }
     }
+    
     .conference-container{
         order: 2;
         width: 100%;
-    }
-    .conference-container .conference-content{
-        max-width: 85%;
+
+        .conference-content{
+            max-width: 85%;
+        }
+
+        .vt-panel-container{
+            width: 15%;
+        }
     }
 
     .two-column-body{
         flex-wrap: wrap;
 
-        .conference-container .vt-panel-container{
-            width: 15%;
-        }
         .post-section-content{
             max-width: 100%;
         }
@@ -506,6 +520,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
                 }
             }
         }
+
         .panels-conference{
             .hz-p4, .hz-p5{
                 display: inline;
@@ -1025,7 +1040,7 @@ a.page-newest{
         width: 92%;
         max-width: 92%;
     }
-    .two-column-body .conference-container .vt-panel-container,
+    .conference-container .vt-panel-container,
     .vt-panel-container{
         width: 8%;
     }

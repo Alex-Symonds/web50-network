@@ -249,6 +249,7 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
   margin-top: 10px;
 }
 .conference-container .vt-panel-container {
+  width: 21.5%;
   min-height: 50rem;
 }
 .conference-container .conference-content {
@@ -266,7 +267,10 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 }
 .respond-container .respond-content {
   flex-grow: 2;
-  max-width: 85%;
+  max-width: 92%;
+}
+.respond-container .vt-panel-container {
+  width: 8%;
 }
 
 #add-post {
@@ -285,9 +289,6 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 .two-column-body .post-section-content {
   max-width: 27rem;
 }
-.two-column-body .conference-container .vt-panel-container {
-  width: 21.5%;
-}
 .two-column-body .panels-respond.hz-top .hz-p0, .two-column-body .panels-respond.hz-top .hz-p1, .two-column-body .panels-respond.hz-top .hz-p2, .two-column-body .panels-respond.hz-top .hz-p3 {
   display: none;
 }
@@ -303,24 +304,29 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
     order: 1;
     width: 100%;
   }
+  .respond-container .respond-content {
+    max-width: 85%;
+  }
   .respond-container textarea {
     height: 7rem;
+  }
+  .respond-container .vt-panel-container {
+    width: 15%;
   }
 
   .conference-container {
     order: 2;
     width: 100%;
   }
-
   .conference-container .conference-content {
     max-width: 85%;
+  }
+  .conference-container .vt-panel-container {
+    width: 15%;
   }
 
   .two-column-body {
     flex-wrap: wrap;
-  }
-  .two-column-body .conference-container .vt-panel-container {
-    width: 15%;
   }
   .two-column-body .post-section-content {
     max-width: 100%;
@@ -757,7 +763,7 @@ a.page-newest:hover {
     max-width: 92%;
   }
 
-  .two-column-body .conference-container .vt-panel-container,
+  .conference-container .vt-panel-container,
 .vt-panel-container {
     width: 8%;
   }
