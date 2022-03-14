@@ -80,14 +80,13 @@
                 </div>
             </div>
 
-            <div class="all-posts">
+            <div class="posts-container">
                 <h2>CONFERENCE</h2>
             
 {% for post in page %}
-                {% include "network/components/post.html" with post=post %}
-                    
+                {% include "network/components/post.html" with post=post %}             
 {% empty %}
-                <p> No posts. Yours can be the first! {% if not user.is_authenticated %} <a href="{% url 'register' %}">Register here</a> {% endif %} :)</p>
+                <p> NO POSTS. YOURS CAN BE THE FIRST! {% if not user.is_authenticated %} <a href="{% url 'register' %}">REGISTER HERE</a> {% endif %} :)</p>
 {% endfor %}
         </div>
 

@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="all-posts">
+            <div class="posts-container">
                 <h2>PROFILE: {{ profile_user.username|upper }}</h2>
 
                 <div class="follow-stats-container">
@@ -72,7 +72,7 @@
 {% for post in page %}
                 {% include "network/components/post.html" with post=post %}        
 {% empty %}
-                <p>This user has not posted anything yet.</p>
+                <p>THIS USER HAS NOT POSTED ANYTHING YET.</p>
 {% endfor %}
         </div>
 

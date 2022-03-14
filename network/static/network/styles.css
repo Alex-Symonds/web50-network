@@ -5,11 +5,15 @@ body {
   font-size: 1.25rem;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: #abcaff;
 }
 
-textarea, input[type=text], input[type=password], input[type=email] {
+textarea,
+input[type=text],
+input[type=password],
+input[type=email] {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -18,7 +22,13 @@ textarea, input[type=text], input[type=password], input[type=email] {
   border: 1px solid #cad1ff;
   border-radius: 4px;
 }
-textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active, input[type=password]:focus, input[type=password]:active, input[type=email]:focus, input[type=email]:active {
+textarea:focus, textarea:active,
+input[type=text]:focus,
+input[type=text]:active,
+input[type=password]:focus,
+input[type=password]:active,
+input[type=email]:focus,
+input[type=email]:active {
   color: white;
   background: #222;
   box-shadow: 0 0 4px #ffcc99;
@@ -31,7 +41,8 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
   padding: 0;
   border-radius: 1.5rem;
 }
-.lcars-btn a, .lcars-btn span {
+.lcars-btn a,
+.lcars-btn span {
   position: absolute;
   bottom: 0.25rem;
   right: 1.25rem;
@@ -116,7 +127,6 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 .main-title-before {
   flex-grow: 2;
   min-height: 3.5rem;
-  background: #ff9900;
 }
 
 .main-title {
@@ -136,7 +146,6 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 .main-title-after {
   width: 3rem;
   margin-right: 5px;
-  background: #ff9900;
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
 }
@@ -195,18 +204,18 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 }
 
 .vt-panel-container {
-  width: 15%;
   display: flex;
   flex-direction: column;
+  width: 15%;
 }
 
 .hz-panel-container {
-  height: 1rem;
-  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: left;
   text-align: right;
+  height: 1rem;
+  width: 100%;
 }
 
 .header-container {
@@ -223,18 +232,18 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 }
 
 .content {
-  font-family: "Antonio", "Oswald", "Arial Narrow", "Avenir Next Condensed", sans-serif;
-  width: 100%;
-  max-width: 85rem;
-  min-width: 19rem;
-  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  min-width: 19rem;
+  max-width: 85rem;
+  margin: 0 auto;
+  font-family: "Antonio", "Oswald", "Arial Narrow", "Avenir Next Condensed", sans-serif;
 }
 
 .main-container {
   width: 50%;
-  min-width: 17rem;
+  min-width: 19.5rem;
   padding: 2rem;
 }
 
@@ -249,11 +258,11 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
   margin-top: 10px;
 }
 .conference-container .vt-panel-container {
-  width: 21.5%;
   min-height: 50rem;
 }
 .conference-container .conference-content {
   flex-grow: 2;
+  width: 85%;
   max-width: 92%;
 }
 
@@ -262,15 +271,15 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
   display: flex;
   width: 30%;
   min-width: 30%;
-  margin-top: 10px;
   align-self: flex-start;
+  margin-top: 10px;
+}
+.respond-container .vt-panel-container {
+  width: 8%;
 }
 .respond-container .respond-content {
   flex-grow: 2;
   max-width: 92%;
-}
-.respond-container .vt-panel-container {
-  width: 8%;
 }
 
 #add-post {
@@ -289,17 +298,32 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
 .two-column-body .post-section-content {
   max-width: 27rem;
 }
+.two-column-body .conference-container .vt-panel-container {
+  width: 23.5%;
+}
+.two-column-body .panels-conference .hz-p4, .two-column-body .panels-conference .hz-p5 {
+  display: none;
+}
 .two-column-body .panels-respond.hz-top .hz-p0, .two-column-body .panels-respond.hz-top .hz-p1, .two-column-body .panels-respond.hz-top .hz-p2, .two-column-body .panels-respond.hz-top .hz-p3 {
   display: none;
 }
 .two-column-body .panels-respond.hz-btm .hz-p0, .two-column-body .panels-respond.hz-btm .hz-p1, .two-column-body .panels-respond.hz-btm .hz-p2, .two-column-body .panels-respond.hz-btm .hz-p3 {
   display: none;
 }
-.two-column-body .panels-conference .hz-p4, .two-column-body .panels-conference .hz-p5 {
-  display: none;
-}
 
 @media (max-width: 85rem) {
+  .post-section-content {
+    max-width: 100%;
+  }
+
+  /* Note about specificity
+      .respond-container is only used on a two-column page, so
+      its settings were all applied as plain ".respond-container".
+
+      .conference-container is used for posts on single-column-only
+      pages as well, so the two-column CSS was all applied via 
+      ".two-column-body .conference-container".
+  */
   .respond-container {
     order: 1;
     width: 100%;
@@ -307,29 +331,28 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
   .respond-container .respond-content {
     max-width: 85%;
   }
-  .respond-container textarea {
-    height: 7rem;
-  }
   .respond-container .vt-panel-container {
     width: 15%;
   }
-
-  .conference-container {
-    order: 2;
-    width: 100%;
-  }
-  .conference-container .conference-content {
-    max-width: 85%;
-  }
-  .conference-container .vt-panel-container {
-    width: 15%;
+  .respond-container textarea {
+    height: 7rem;
   }
 
   .two-column-body {
     flex-wrap: wrap;
   }
-  .two-column-body .post-section-content {
-    max-width: 100%;
+  .two-column-body .conference-container {
+    order: 2;
+    width: 100%;
+  }
+  .two-column-body .conference-container .conference-content {
+    max-width: 92%;
+  }
+  .two-column-body .conference-container .vt-panel-container {
+    width: 15%;
+  }
+  .two-column-body .panels-conference .hz-p4, .two-column-body .panels-conference .hz-p5 {
+    display: inline;
   }
   .two-column-body .panels-respond.hz-top .hz-p0, .two-column-body .panels-respond.hz-top .hz-p1, .two-column-body .panels-respond.hz-top .hz-p2, .two-column-body .panels-respond.hz-top .hz-p3 {
     display: inline;
@@ -343,49 +366,42 @@ textarea:focus, textarea:active, input[type=text]:focus, input[type=text]:active
   .two-column-body .panels-respond.hz-btm .hz-p4 {
     background: #ff9966;
   }
-  .two-column-body .panels-conference .hz-p4, .two-column-body .panels-conference .hz-p5 {
-    display: inline;
-  }
 }
-.profile-posts {
-  margin-top: 4rem;
-}
-
-.all-posts {
+.posts-container {
   padding: 0 2rem;
 }
 
-.post-container {
+.one-post {
   display: flex;
   width: 100%;
   margin-top: 2rem;
 }
-.post-container .post-section-date-edit {
+.one-post .post-section-date-edit {
   width: 8rem;
   padding-top: 0.6rem;
   font-size: 1.1rem;
   color: #cad1ff;
 }
-.post-container .post-section-date-edit small {
+.one-post .post-section-date-edit small {
   white-space: nowrap;
 }
-.post-container .post-section-content {
+.one-post .post-section-content {
   flex-grow: 1;
   padding: 0.5rem;
 }
-.post-container .post-section-content a {
+.one-post .post-section-content a {
   font-size: 1.7rem;
   font-weight: bold;
   color: #aba3ff;
 }
-.post-container .post-section-content a:hover {
+.one-post .post-section-content a:hover {
   color: #dedbff;
   text-decoration: none;
 }
-.post-container .post-section-content a:active, .post-container .post-section-content a:focus {
+.one-post .post-section-content a:active, .one-post .post-section-content a:focus {
   outline: thin dotted;
 }
-.post-container .post-section-likes {
+.one-post .post-section-likes {
   min-width: 7.5rem;
   color: #f8fbdb;
   text-align: right;
@@ -514,7 +530,8 @@ a.page-newest:hover {
 .follow-stats-container {
   margin-top: 2rem;
 }
-.follow-stats-container .user-follows, .follow-stats-container .following-user {
+.follow-stats-container .user-follows,
+.follow-stats-container .following-user {
   display: flex;
   height: 3rem;
   margin-top: 0.5rem;
@@ -638,14 +655,16 @@ a.page-newest:hover {
     padding: 0 1rem;
   }
 
-  .post, .post-container {
+  .post,
+.post-container {
     display: block;
     position: relative;
     width: 100%;
     margin-top: 1rem;
     border-bottom: 1px solid #aba3ff;
   }
-  .post a.username, .post-container a.username {
+  .post a.username,
+.post-container a.username {
     display: block;
     position: absolute;
     top: 0;
@@ -653,7 +672,8 @@ a.page-newest:hover {
     width: 100%;
     font-size: 1.3rem;
   }
-  .post .date, .post-container .date {
+  .post .date,
+.post-container .date {
     display: block;
     position: absolute;
     top: 1.9rem;
@@ -662,21 +682,25 @@ a.page-newest:hover {
     font-size: 0.9rem;
     color: #cad1ff;
   }
-  .post .pcont-content, .post-container .pcont-content {
+  .post .pcont-content,
+.post-container .pcont-content {
     display: block;
     padding-top: 3.7rem;
     padding-bottom: 0.6rem;
     width: 100%;
     font-size: 1.1rem;
   }
-  .post p.like-counter, .post-container p.like-counter {
+  .post p.like-counter,
+.post-container p.like-counter {
     height: 2.8rem;
     padding: 0.5rem 0;
     display: block;
     margin: 0;
     font-size: 1rem;
   }
-  .post .like-btn, .post .edit-btn, .post-container .like-btn, .post-container .edit-btn {
+  .post .like-btn, .post .edit-btn,
+.post-container .like-btn,
+.post-container .edit-btn {
     margin-bottom: 0px;
     height: 2rem;
     position: absolute;
@@ -687,20 +711,24 @@ a.page-newest:hover {
   }
   .post .post-section-date-edit,
 .post .post-section-content,
-.post .post-section-likes, .post-container .post-section-date-edit,
+.post .post-section-likes,
+.post-container .post-section-date-edit,
 .post-container .post-section-content,
 .post-container .post-section-likes {
     width: 100%;
   }
-  .post .post-section-date-edit, .post-container .post-section-date-edit {
+  .post .post-section-date-edit,
+.post-container .post-section-date-edit {
     width: auto;
     margin-top: 0;
     padding: 0;
   }
-  .post .post-section-content, .post-container .post-section-content {
+  .post .post-section-content,
+.post-container .post-section-content {
     padding: 0;
   }
-  .post .post-section-likes, .post-container .post-section-likes {
+  .post .post-section-likes,
+.post-container .post-section-likes {
     text-align: left;
   }
 }
@@ -746,21 +774,14 @@ a.page-newest:hover {
   top: 0;
 }
 
-/*  The respond panel becomes a right column on wider screens. When it's a right column
-    its LCARS vertical narrows to the point it can't fit all the digits, so the extra 
-    digits default setting is "off".
-
-    This is where we turn them on for their Goldilocks zone (i.e. wide enough for the main
-    left LCARS vertical to be wide enough for numbers, but narrow enough to preclude the 
-    two-column layout).
-*/
 @media (max-width: 85rem) {
   .panels-respond .extra-digits {
     display: inline;
   }
 }
 @media (max-width: 607px) {
-  .extra-digits, .panels-respond .extra-digits {
+  .extra-digits,
+.panels-respond .extra-digits {
     display: none;
   }
 
@@ -771,7 +792,8 @@ a.page-newest:hover {
     max-width: 92%;
   }
 
-  .conference-container .vt-panel-container,
+  .two-column-body .conference-container .vt-panel-container,
+.conference-container .vt-panel-container,
 .respond-container .vt-panel-container,
 .vt-panel-container {
     width: 8%;
@@ -826,10 +848,13 @@ a.page-newest:hover {
   width: 1rem;
   height: 1rem;
 }
-.panels-header.corner-box.hz-top, .panels-header .vt-p0 {
+.panels-header .vt-p0,
+.panels-header .main-title-before,
+.panels-header .main-title-after, .panels-header.corner-box.hz-top {
   background: #ff9900;
 }
-.panels-header .vt-p2, .panels-header .hz-p0, .panels-header.corner-box {
+.panels-header .vt-p2,
+.panels-header .hz-p0, .panels-header.corner-box {
   background: #9999ff;
 }
 .panels-header .vt-p0 {
@@ -860,10 +885,12 @@ a.page-newest:hover {
   background: #ffcc99;
 }
 
-.panels-conference .vt-p0, .panels-conference .hz-p0, .panels-conference.corner-box {
+.panels-conference .vt-p0,
+.panels-conference .hz-p0, .panels-conference.corner-box {
   background: #cc6666;
 }
-.panels-conference .hz-p1, .panels-conference .hz-p2 {
+.panels-conference .hz-p1,
+.panels-conference .hz-p2 {
   background: #ffcc99;
 }
 .panels-conference .hz-p3 {
@@ -913,16 +940,16 @@ a.page-newest:hover {
 }
 
 .panels-respond {
-  /*  Note: On a landscape screen, Respond moves to the right column
+  /*  Note: On a wide screen, Respond moves to the right column
       with Conference on the left. hz-p0 to hz-p3 are hidden and hz-p4 
       becomes a component of the "L-shaped corner".
 
-      On a portrait screen, Respond and Conference are stacked, so both
+      On a narrow screen, Respond and Conference are stacked, so both
       take up the full page width and all horizontal panes are visible.
       hz-p0 is a corner component, as usual, and hz-p4 can do its own thing.
 
       Plan: hz-p0 is set to the corner colour at all times, since it's hidden
-      when not in use. hz-p4 set to the corner colour here, then a media
+      when not in use. hz-p4 is set to the corner colour here, then a media
       query below changes it to a different colour in portrait mode.
   */
 }
@@ -965,7 +992,8 @@ a.page-newest:hover {
   background: #cc99cc;
 }
 
-.panels-profile .vt-p0, .panels-profile .hz-p0, .panels-profile.corner-box {
+.panels-profile .vt-p0,
+.panels-profile .hz-p0, .panels-profile.corner-box {
   background: #ff9966;
 }
 .panels-profile .hz-p1 {
@@ -1020,7 +1048,8 @@ a.page-newest:hover {
   flex-grow: 3;
 }
 
-.panels-following .vt-p0, .panels-following .hz-p0, .panels-following.corner-box {
+.panels-following .vt-p0,
+.panels-following .hz-p0, .panels-following.corner-box {
   background: #cc99cc;
 }
 .panels-following .hz-p1 {
@@ -1075,7 +1104,8 @@ a.page-newest:hover {
   flex-grow: 3;
 }
 
-.panels-login .vt-p0, .panels-login .hz-p0, .panels-login.corner-box {
+.panels-login .vt-p0,
+.panels-login .hz-p0, .panels-login.corner-box {
   background: #ffcc99;
 }
 .panels-login .vt-p0 {
@@ -1109,7 +1139,8 @@ a.page-newest:hover {
   background: #ff9900;
 }
 
-.panels-register .vt-p0, .panels-register .hz-p0, .panels-register.corner-box {
+.panels-register .vt-p0,
+.panels-register .hz-p0, .panels-register.corner-box {
   background: #ff9900;
 }
 .panels-register .vt-p0 {
@@ -1143,7 +1174,8 @@ a.page-newest:hover {
   background: #ff9966;
 }
 
-.panels-error .vt-p0, .panels-error .hz-p0, .panels-error.corner-box {
+.panels-error .vt-p0,
+.panels-error .hz-p0, .panels-error.corner-box {
   background: red;
 }
 .panels-error .vt-p0 {
@@ -1222,11 +1254,13 @@ a.page-newest:hover {
     width: 1.5rem;
   }
 
-  .hz-panel, .hz-panel-container {
+  .hz-panel,
+.hz-panel-container {
     height: 0.7rem;
   }
 
-  .corner-box, .panels-header.corner-box.hz-top {
+  .corner-box,
+.panels-header.corner-box.hz-top {
     height: 0.7rem;
     width: 0.7rem;
   }
@@ -1235,7 +1269,8 @@ a.page-newest:hover {
     font-size: 1.4rem;
   }
 
-  .follow-stats-container .user-follows, .follow-stats-container .following-user {
+  .follow-stats-container .user-follows,
+.follow-stats-container .following-user {
     height: 2.2rem;
   }
   .follow-stats-container .stats-label {
@@ -1258,6 +1293,10 @@ a.page-newest:hover {
   }
   .follow-stats-container .stats-block {
     min-width: 10px;
+  }
+
+  .main-container {
+    width: 75%;
   }
 }
 

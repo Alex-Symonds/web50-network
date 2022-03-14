@@ -48,13 +48,13 @@ $lcars_response_bottom_left: $c_bg_A2;
 
 $panel_border: 4px solid $c_bg_main;
 
+// Standard widths and breakpoints
 $page_width: 98%;
 $max_page: 85rem;
 $min_page: 19rem;
 
-$side_panel_width: 15%;
 $side_panel_width_wide: 15%;
-$side_panel_width_tall: 5%;
+$side_panel_width_narrow: 8%;
 
 $breakpoint_large_nav_buttons: 865px;
 $breakpoint_post_columns_unsustainable: 700px;
@@ -67,7 +67,7 @@ $main_title_height: 3.5rem;
 
 
 // ----------------------------------------------------------------------------------------------------------------------- 
-// Tag-level stuff (and tag-ish)
+// Tag-level stuff
 // -----------------------------------------------------------------------------------------------------------------------
 
 body{
@@ -77,11 +77,15 @@ body{
     font-size: 1.25rem;
 }
 
-h2, h3{
+h2,
+h3{
     color: $c_body_heading;
 }
 
-textarea, input[type=text], input[type=password], input[type=email]{
+textarea,
+input[type=text],
+input[type=password],
+input[type=email]{
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
@@ -92,7 +96,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
     border: 1px solid $c_edit;
     border-radius: 4px;
 
-    &:focus, &:active{
+    &:focus,
+    &:active{
         color: $c_input_txt;
         background: $c_input_bg;  
         box-shadow: 0 0 4px $c_bg_A2;      
@@ -120,13 +125,15 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
     border-radius: 1.5rem;
 
-    a, span{
+    a,
+    span{
         position: absolute;
         bottom: 0.25rem;
         right: 1.25rem;
         color: black;
     }
-    &:focus, &:active{
+    &:focus,
+    &:active{
         outline: thin dotted $c_emphasis;
     }
 }
@@ -224,10 +231,11 @@ textarea, input[type=text], input[type=password], input[type=email]{
     display: flex;
     width: 100%;
 }
+
 .main-title-before{
     flex-grow: 2;
     min-height:$main_title_height;
-    background: $c_bg_A0;
+    // background colour set down in the LCARS colour setting section near the end.
 }
 .main-title{
     padding: 0rem 1rem 0.4rem;
@@ -248,13 +256,13 @@ textarea, input[type=text], input[type=password], input[type=email]{
 .main-title-after{
     width: 3rem;
     margin-right: 5px;
-    background: $c_bg_A0;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
+    // background colour set down in the LCARS colour setting section near the end.
 }
 
 
-// The "main bit" with the nav buttons
+// Navigation
 .lcars-nav-container{
     display: flex;
     width: 100%;
@@ -286,8 +294,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 
 }
-
-
 
 // Colours (normal and hover) for nav buttons
 .nav-user, .nav-following, .nav-register{
@@ -329,19 +335,21 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 // Vertical LCARS block container
 .vt-panel-container{
-    width: $side_panel_width;
     display: flex;
     flex-direction: column; 
+
+    width: $side_panel_width_wide;
 }
 
 // Horizontal LCARS block container
 .hz-panel-container{
-    height: 1rem;
-    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: left;
-    text-align: right; 
+    text-align: right;
+
+    height: 1rem;
+    width: 100%; 
 }
 
 // Header (i.e. h1 and nav)
@@ -362,66 +370,65 @@ textarea, input[type=text], input[type=password], input[type=email]{
 
 // Main area of the page, wrapped around the "page-specific" stuff in layout.html
 .content{
-    font-family: $f_lcarsy;
-
-    width: 100%;
-    max-width: $max_page;
-    min-width: $min_page;
-    margin: 0 auto;
-
     display: flex;
     flex-wrap: wrap;
+    
+    width: 100%;
+    min-width: $min_page;
+    max-width: $max_page;
+    margin: 0 auto;
+
+    font-family: $f_lcarsy;
 }
 
 // Simple container for login and register pages
 .main-container{ 
     width: 50%;
-    min-width: 17rem;
+    min-width: 19.5rem;
     padding: 2rem;
 }
 .helpful-suggestion{
     clear: both;
 }
 
-// Conference (index / all posts)
+// Container for "main body" stuff
 .conference-container{
     order: 1;
-    display:flex;
+    display: flex;
     flex-grow: 2;
     margin-top: $h_divider_margin;
 
     .vt-panel-container{
-        width: 21.5%;
         min-height: 50rem;    
     }
+
     .conference-content{  
         flex-grow: 2;
+        width: 85%;
         max-width: 92%;
     }
 }
 
-
+// Container for the add post form
 .respond-container{
     order: 2;
     display: flex;
     width: 30%;
     min-width: 30%;
-
+    align-self: flex-start;
     margin-top: $h_divider_margin;
 
-    align-self: flex-start;
+    .vt-panel-container{
+        width: $side_panel_width_narrow;
+    }
 
     .respond-content{  
         flex-grow: 2;
         max-width: 92%;
     }  
-    .vt-panel-container{
-        width: 8%;
-    }
 }
 
-
-
+// Form for adding a post
 #add-post{
     display: flex;
     flex-wrap: wrap;
@@ -433,6 +440,8 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
+// Container for the conference and respond containers, arranging them in two columns.
+// Note: a media query later kills the two columns on narrow screens.
 .two-column-body{
     display: flex;
     width: 100%;
@@ -441,8 +450,19 @@ textarea, input[type=text], input[type=password], input[type=email]{
         max-width: 27rem;
     }
 
-    // Ensure there's only one row of horizontal panels by hiding the start of
-    // Respond's two rows of hz panels and the end of Conference's.
+    // conference-container is not 100% width when in two-column mode,
+    // so adjust the vt-panel width to be relative to a thinner container
+    .conference-container .vt-panel-container{
+        width: 23.5%;  
+    }
+    
+    // Make the horizontal LCARS rows "fit" by turning off the end of left
+    // and the start of right.
+    .panels-conference{
+        .hz-p4, .hz-p5{
+            display: none;
+        }
+    }
     .panels-respond{
         &.hz-top{
             .hz-p0, .hz-p1, .hz-p2, .hz-p3{
@@ -455,16 +475,24 @@ textarea, input[type=text], input[type=password], input[type=email]{
             }
         }
     }
-    .panels-conference{
-        .hz-p4, .hz-p5{
-            display: none;
-        }
-    }
 }
 
-// Media query to switch from two columns (landscape) to one column (portrait)
+// Apply one column rules to screens below the width cutoff for two-column mode.
 @media (max-width: $max_page){
 
+    // Set post content to fill the screen
+    .post-section-content{
+        max-width: 100%;
+    }
+
+    /* Note about specificity
+        .respond-container is only used on a two-column page, so
+        its settings were all applied as plain ".respond-container".
+
+        .conference-container is used for posts on single-column-only
+        pages as well, so the two-column CSS was all applied via 
+        ".two-column-body .conference-container".
+    */
     .respond-container{
         order: 1;
         width: 100%;
@@ -472,36 +500,37 @@ textarea, input[type=text], input[type=password], input[type=email]{
         .respond-content{
             max-width: 85%;
         }
+        .vt-panel-container{
+            width: $side_panel_width_wide;
+        }
 
         textarea{
             height: 7rem;
         }
-
-        .vt-panel-container{
-            width: 15%;
-        }
     }
     
-    .conference-container{
-        order: 2;
-        width: 100%;
-
-        .conference-content{
-            max-width: 85%;
-        }
-
-        .vt-panel-container{
-            width: 15%;
-        }
-    }
-
     .two-column-body{
         flex-wrap: wrap;
 
-        .post-section-content{
-            max-width: 100%;
+        .conference-container{
+            order: 2;
+            width: 100%;
+    
+            .conference-content{
+                max-width: 92%;
+            }
+    
+            .vt-panel-container{
+                width: $side_panel_width_wide;
+            }
         }
 
+        // LCARS horizontal: revert to full horizontal bars
+        .panels-conference{
+            .hz-p4, .hz-p5{
+                display: inline;
+            }
+        }
         .panels-respond{
             &.hz-top{
                 .hz-p0, .hz-p1, .hz-p2, .hz-p3{
@@ -520,12 +549,6 @@ textarea, input[type=text], input[type=password], input[type=email]{
                 }
             }
         }
-
-        .panels-conference{
-            .hz-p4, .hz-p5{
-                display: inline;
-            }
-        }
     }
 }
 
@@ -534,15 +557,17 @@ textarea, input[type=text], input[type=password], input[type=email]{
 // -------------------------------------------------------------------------------------
 // Posts
 // -------------------------------------------------------------------------------------
-.profile-posts{
-    margin-top: 4rem;
-}
-
-.all-posts{
+// "Normal" container, used on index, following
+.posts-container{
     padding: 0 2rem;
 }
 
-.post-container{
+// Profile needs an extra margin to make space betwene it and the following/ed stats.
+// .profile-posts-container{
+//     margin-top: 4rem;
+// }
+
+.one-post{
     display: flex;
     width: 100%;
     margin-top: 2rem;
@@ -554,7 +579,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
         color: $c_edit;
     
         small{
-            // Prevents unwanted line breaks between the month and year, or the day and month
+            // Prevent unwanted line breaks between the month and year, or the day and month
             white-space: nowrap;
         }
     }
@@ -638,7 +663,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     }
 }
 
-.page-item.active .page-link {
+.page-item.active .page-link{
     z-index: -2;
     padding: 0;
     line-height: 2rem;
@@ -649,7 +674,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     background: $c_bg_main;
     border: none;
 }
-.page-item.disabled .page-link {
+.page-item.disabled .page-link{
     padding: 0.9rem 0.7rem 0 0.1rem;
 
     text-align: right;
@@ -659,7 +684,7 @@ textarea, input[type=text], input[type=password], input[type=email]{
     border: 1px solid $c_inactive_border;
 }
 
-a.page-link {
+a.page-link{
     padding: 0.9rem 0.7rem 0 0.1rem;
     text-align: right;
 
@@ -709,7 +734,7 @@ a.page-newest{
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
 }
-.page-item:last-child .page-link {
+.page-item:last-child .page-link{
     // Padding is there to compensate for the clash between the right text-alignment and border radii
     padding-right: 1rem;
     border-top-right-radius: 2rem;
@@ -724,7 +749,8 @@ a.page-newest{
  .follow-stats-container{
     margin-top: 2rem;
 
-    .user-follows, .following-user{
+    .user-follows,
+    .following-user{
         display: flex;
         height: 3rem;
         margin-top: 0.5rem;
@@ -846,7 +872,7 @@ a.page-newest{
 
 
 
- // Posts, pagination and follow stats
+// Posts, pagination and follow stats
 // When the screen is too narrow for the three column layout for posts/pagination, change it to this.
 @media (max-width: $breakpoint_post_columns_unsustainable){
 
@@ -878,7 +904,8 @@ a.page-newest{
         padding: 0 1rem;
     }
 
-    .post, .post-container{
+    .post,
+    .post-container{
         display: block;
         position: relative;
         width: 100%;
@@ -1002,38 +1029,38 @@ a.page-newest{
 // --- Arbitrary decorative numbers inside (some) vertical LCARS panels
 .panel-num{
     position: absolute;
-    bottom:0;
+    bottom: 0;
     right: 0.2rem;
     color: black;
 }
 
+
+// Special case LCARS numbers (respond panel)
 .panels-respond{
+    // Hide extra digits as a default (default for respond is two-column mode, in which the
+    // vt panels are too narrow to fit the full numbers).
     .extra-digits{
         display: none;
     }
+
+    // Respond's vt-p2 is acting as a bottom corner, so the decorative number ends up
+    // floating in the middle of the L-shape, which looks bad. Move it to the top instead.
     .vt-p2 .panel-num{
         top: 0;
     }
 }
-
-// LCARS numbers special case (respond panel)
-/*  The respond panel becomes a right column on wider screens. When it's a right column
-    its LCARS vertical narrows to the point it can't fit all the digits, so the extra 
-    digits default setting is "off".
-
-    This is where we turn them on for their Goldilocks zone (i.e. wide enough for the main
-    left LCARS vertical to be wide enough for numbers, but narrow enough to preclude the 
-    two-column layout).
-*/
 @media(max-width: $max_page){
+    // When one-column mode is triggered, the vt panels are wide enough for full numbers, so turn them back on.
     .panels-respond .extra-digits{
         display: inline;
     }
 }
 
-// LCARS numbers: on narrower screens, reduce width of left LCARS and abbreviate the arbitrary numbers
+
+// "Normal" LCARS numbers: when the vertical panels become too narrow to fit the "long" numbers, hide the "end bit".
 @media(max-width: $breakpoint_lcars_numbers){
-    .extra-digits, .panels-respond .extra-digits{
+    .extra-digits,
+    .panels-respond .extra-digits{
         display: none;
     }
 
@@ -1043,10 +1070,11 @@ a.page-newest{
         width: 92%;
         max-width: 92%;
     }
+    .two-column-body .conference-container .vt-panel-container,
     .conference-container .vt-panel-container,
     .respond-container .vt-panel-container,
     .vt-panel-container{
-        width: 8%;
+        width: $side_panel_width_narrow;
     }
 }
 
@@ -1073,7 +1101,7 @@ a.page-newest{
     border-right: $panel_border;    
 }
 
-// Horiztonal LCARS blocks: set default sizes
+// Horizontal LCARS blocks: set default sizes
 .hz-p0{
     flex-grow: 2.8;    
 }
@@ -1093,9 +1121,9 @@ a.page-newest{
     width: 2rem;
 }
 
-// Panels: colours and (sometimes) sizes for specific panels -----------------------------------------------------------------------------------------------------
+// Panels: colours and (for verticals) sizes for specific panels -----------------------------------------------------------------------------------------------------
 
-// Nav/h1 pane at the top
+// Nav/h1 panel at the top
 .panels-header{
 
     .internal-top-left-corner{
@@ -1107,11 +1135,16 @@ a.page-newest{
     }
 
     // Set matching colours for "L-shaped blocks" at the corners
-    // (these are actually three blocks -- v, h and corner -- in a trenchcoat)
-    &.corner-box.hz-top, .vt-p0{
+    // Note: L-shaped blocks are actually three blocks -- vt, hz and corner -- in a trenchcoat.
+    .vt-p0,
+    .main-title-before, // this acts as a hz block
+    .main-title-after,  // this also acts as a hz block. Extra block in this trenchcoat.
+    &.corner-box.hz-top{
         background: $lcars_header_top_left;
     }
-    .vt-p2, .hz-p0, &.corner-box{
+    .vt-p2,
+    .hz-p0,
+    &.corner-box{
         background: $lcars_header_bottom_left;
     }
 
@@ -1151,12 +1184,16 @@ a.page-newest{
 
 // LCARS settings for the panels around the "conference"
 .panels-conference{
+
     // Set matching colours for "L-shaped blocks" at the corner
-    .vt-p0, .hz-p0, &.corner-box{
+    .vt-p0,
+    .hz-p0,
+    &.corner-box{
         background: $lcars_conference_top_left;
     }
 
-    .hz-p1, .hz-p2{
+    .hz-p1,
+    .hz-p2{
         background: $c_bg_A2;
     }
     .hz-p3{
@@ -1211,18 +1248,17 @@ a.page-newest{
 
 // LCARS settings for the panels around the "respond" pane
 .panels-respond{
-
     // Corner colours
-    /*  Note: On a landscape screen, Respond moves to the right column
+    /*  Note: On a wide screen, Respond moves to the right column
         with Conference on the left. hz-p0 to hz-p3 are hidden and hz-p4 
         becomes a component of the "L-shaped corner".
 
-        On a portrait screen, Respond and Conference are stacked, so both
+        On a narrow screen, Respond and Conference are stacked, so both
         take up the full page width and all horizontal panes are visible.
         hz-p0 is a corner component, as usual, and hz-p4 can do its own thing.
 
         Plan: hz-p0 is set to the corner colour at all times, since it's hidden
-        when not in use. hz-p4 set to the corner colour here, then a media
+        when not in use. hz-p4 is set to the corner colour here, then a media
         query below changes it to a different colour in portrait mode.
     */ 
     .vt-p0,
@@ -1284,7 +1320,9 @@ a.page-newest{
 // LCARS settings for the panels around a profile
 .panels-profile{
     // Corner colour
-    .vt-p0, .hz-p0, &.corner-box{
+    .vt-p0,
+    .hz-p0,
+    &.corner-box{
         background: $lcars_profile_corner;
     }
 
@@ -1347,7 +1385,9 @@ a.page-newest{
 .panels-following{
 
     // Corner colour
-    .vt-p0, .hz-p0, &.corner-box{
+    .vt-p0,
+    .hz-p0,
+    &.corner-box{
         background: $lcars_following_corner;
     }
 
@@ -1409,7 +1449,9 @@ a.page-newest{
 // LCARS settings for login page
 .panels-login{
     // Corner colour
-    .vt-p0, .hz-p0, &.corner-box{
+    .vt-p0,
+    .hz-p0,
+    &.corner-box{
         background: $lcars_login_corner;
     }
 
@@ -1451,7 +1493,9 @@ a.page-newest{
 .panels-register{
 
     // Corner colour
-    .vt-p0, .hz-p0, &.corner-box{
+    .vt-p0,
+    .hz-p0,
+    &.corner-box{
         background: $lcars_register_corner;
     }
 
@@ -1493,7 +1537,9 @@ a.page-newest{
 .panels-error{
 
     // Corner colour
-    .vt-p0, .hz-p0, &.corner-box{
+    .vt-p0,
+    .hz-p0,
+    &.corner-box{
         background: $c_error;
     }
 
@@ -1582,10 +1628,12 @@ a.page-newest{
         height: 1.8rem;
         width: 1.5rem;
     }
-    .hz-panel, .hz-panel-container{
+    .hz-panel,
+    .hz-panel-container{
         height: 0.7rem;
     }
-    .corner-box, .panels-header.corner-box.hz-top{
+    .corner-box,
+    .panels-header.corner-box.hz-top{
         height: 0.7rem;
         width: 0.7rem;
     }
@@ -1595,9 +1643,10 @@ a.page-newest{
         font-size: 1.4rem;
     }
 
-    // Smaller follow stats, because smaller h2
+    // Smaller follow stats, because of smaller h2
     .follow-stats-container{
-        .user-follows, .following-user{
+        .user-follows,
+        .following-user{
             height: 2.2rem;
         }
         .stats-label{
@@ -1622,5 +1671,10 @@ a.page-newest{
         .stats-block{
             min-width: 10px;
         }
+    }
+
+    // This just looks nicer.
+    .main-container{
+        width: 75%;
     }
 }
