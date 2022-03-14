@@ -784,7 +784,6 @@ a.page-newest{
 
     .stats-result-btn{
         display: flex;
-        width: 30rem;
     }
 
     .stats-result{
@@ -900,12 +899,12 @@ a.page-newest{
     }
 
     // Posts
-    .all-posts{
+    .posts-container{
         padding: 0 1rem;
     }
 
-    .post,
-    .post-container{
+    //.post-container,
+    .one-post{
         display: block;
         position: relative;
         width: 100%;

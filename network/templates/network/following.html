@@ -20,18 +20,7 @@
         </div>
 
         <div class="conference-content">
-            <div class="hz-panel-container panels-following">
-                <div class="hz-panel hz-p0"></div>
-                <div class="hz-panel hz-p1"></div>
-                <div class="hz-panel hz-p2"></div>
-                <div class="hz-panel hz-p3"></div>
-                <div class="hz-panel hz-p4"></div>
-                <div class="hz-panel hz-p5"></div>
-            </div>
-            <div class="corner-box panels-following">
-                <div class="corner internal-top-left-corner">
-                </div>
-            </div>
+            {% include "network/components/lcars_hz_top.html" with hz_identifier_class="panels-following" %}
 
             <div class="posts-container">
                 <h2>CHANNEL: FOLLOWING</h2>

@@ -37,18 +37,7 @@
         </div>
 
         <div class="conference-content">
-            <div class="hz-panel-container panels-profile">
-                <div class="hz-panel hz-p0"></div>
-                <div class="hz-panel hz-p1"></div>
-                <div class="hz-panel hz-p2"></div>
-                <div class="hz-panel hz-p3"></div>
-                <div class="hz-panel hz-p4"></div>
-                <div class="hz-panel hz-p5"></div>
-            </div>
-            <div class="corner-box panels-profile">
-                <div class="corner internal-top-left-corner">
-                </div>
-            </div>
+            {% include "network/components/lcars_hz_top.html" with hz_identifier_class="panels-profile" %}
 
             <div class="posts-container">
                 <h2>PROFILE: {{ profile_user.username|upper }}</h2>

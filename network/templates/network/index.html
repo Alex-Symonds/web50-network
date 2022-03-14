@@ -12,19 +12,7 @@
 
         <div class="respond-content">
 
-            <div class="hz-panel-container panels-respond hz-top">
-                <div class="hz-panel hz-p0"></div>
-                <div class="hz-panel hz-p1"></div>
-                <div class="hz-panel hz-p2"></div>
-                <div class="hz-panel hz-p3"></div>
-                <div class="hz-panel hz-p4"></div>
-                <div class="hz-panel hz-p5"></div>
-            </div>
-
-            <div class="corner-box panels-respond hz-top">
-                <div class="corner internal-top-left-corner">
-                </div>
-            </div>
+            {% include "network/components/lcars_hz_top.html" with hz_identifier_class="panels-respond hz-top" %}
 
             <div id="add-post">
                 <h2>RESPOND</h2>
@@ -35,19 +23,8 @@
                 </form>
             </div>
 
-            <div class="corner-box panels-respond hz-btm">
-                <div class="corner internal-bottom-left-corner">
-                </div>
-            </div>
-            <div class="hz-panel-container panels-respond hz-btm">
-                <div class="hz-panel hz-p0"></div>
-                <div class="hz-panel hz-p1"></div>
-                <div class="hz-panel hz-p2"></div>
-                <div class="hz-panel hz-p3"></div>
-                <div class="hz-panel hz-p4"></div>
-                <div class="hz-panel hz-p5"></div>
-            </div>
-
+            {% include "network/components/lcars_hz_bottom.html" with hz_identifier_class="panels-respond hz-btm" %}
+            
         </div>
     </div>
 {% endif %}
@@ -67,18 +44,7 @@
         </div>
 
         <div class="conference-content">
-            <div class="hz-panel-container panels-conference">
-                <div class="hz-panel hz-p0"></div>
-                <div class="hz-panel hz-p1"></div>
-                <div class="hz-panel hz-p2"></div>
-                <div class="hz-panel hz-p3"></div>
-                <div class="hz-panel hz-p4"></div>
-                <div class="hz-panel hz-p5"></div>
-            </div>
-            <div class="corner-box panels-conference">
-                <div class="corner internal-top-left-corner">
-                </div>
-            </div>
+            {% include "network/components/lcars_hz_top.html" with hz_identifier_class="panels-conference" %}
 
             <div class="posts-container">
                 <h2>CONFERENCE</h2>

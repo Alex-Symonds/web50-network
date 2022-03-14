@@ -560,7 +560,6 @@ a.page-newest:hover {
 }
 .follow-stats-container .stats-result-btn {
   display: flex;
-  width: 30rem;
 }
 .follow-stats-container .stats-result {
   display: flex;
@@ -651,20 +650,18 @@ a.page-newest:hover {
     height: 2.2rem;
   }
 
-  .all-posts {
+  .posts-container {
     padding: 0 1rem;
   }
 
-  .post,
-.post-container {
+  .one-post {
     display: block;
     position: relative;
     width: 100%;
     margin-top: 1rem;
     border-bottom: 1px solid #aba3ff;
   }
-  .post a.username,
-.post-container a.username {
+  .one-post a.username {
     display: block;
     position: absolute;
     top: 0;
@@ -672,8 +669,7 @@ a.page-newest:hover {
     width: 100%;
     font-size: 1.3rem;
   }
-  .post .date,
-.post-container .date {
+  .one-post .date {
     display: block;
     position: absolute;
     top: 1.9rem;
@@ -682,25 +678,21 @@ a.page-newest:hover {
     font-size: 0.9rem;
     color: #cad1ff;
   }
-  .post .pcont-content,
-.post-container .pcont-content {
+  .one-post .pcont-content {
     display: block;
     padding-top: 3.7rem;
     padding-bottom: 0.6rem;
     width: 100%;
     font-size: 1.1rem;
   }
-  .post p.like-counter,
-.post-container p.like-counter {
+  .one-post p.like-counter {
     height: 2.8rem;
     padding: 0.5rem 0;
     display: block;
     margin: 0;
     font-size: 1rem;
   }
-  .post .like-btn, .post .edit-btn,
-.post-container .like-btn,
-.post-container .edit-btn {
+  .one-post .like-btn, .one-post .edit-btn {
     margin-bottom: 0px;
     height: 2rem;
     position: absolute;
@@ -709,26 +701,20 @@ a.page-newest:hover {
     width: 5.5rem;
     font-size: 0.9rem;
   }
-  .post .post-section-date-edit,
-.post .post-section-content,
-.post .post-section-likes,
-.post-container .post-section-date-edit,
-.post-container .post-section-content,
-.post-container .post-section-likes {
+  .one-post .post-section-date-edit,
+.one-post .post-section-content,
+.one-post .post-section-likes {
     width: 100%;
   }
-  .post .post-section-date-edit,
-.post-container .post-section-date-edit {
+  .one-post .post-section-date-edit {
     width: auto;
     margin-top: 0;
     padding: 0;
   }
-  .post .post-section-content,
-.post-container .post-section-content {
+  .one-post .post-section-content {
     padding: 0;
   }
-  .post .post-section-likes,
-.post-container .post-section-likes {
+  .one-post .post-section-likes {
     text-align: left;
   }
 }
