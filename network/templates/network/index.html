@@ -91,53 +91,7 @@
         </div>
 
 {% if page.has_other_pages %}
-            <nav aria-label="See more posts" id="pagination-nav">
-                <ul class="pagination justify-content-center">
-
-    {% if page.paginator.num_pages > 2 %}
-        {% if page.number > 1 %}
-                    <li class="page-item"><a class="page-link page-newest" href="?page=1">NEW</a></li>
-        {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link">NEW</span>
-                    </li>
-        {% endif %}
-    {% endif %}
-
-    {% if page.has_previous %}
-                    <li class="page-item"><a class="page-link page-previous" href="?page={{ page.previous_page_number }}">PREV.</a></li>
-    {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link">PREV.</span>
-                    </li>
-    {% endif %}
-
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link">
-                        {{ page.number }}&nbsp;OF&nbsp;{{ page.paginator.num_pages }}
-                        <span class="sr-only">(current)</span>
-                        </span>
-                    </li>
-
-    {% if page.has_next %}
-                    <li class="page-item"><a class="page-link page-next" href="?page={{ page.next_page_number }}">NEXT</a></li>
-    {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link">NEXT</span>
-                    </li>
-    {% endif %}
-
-    {% if page.paginator.num_pages > 2 %}
-        {% if page.number < page.paginator.num_pages %}
-                    <li class="page-item"><a class="page-link page-oldest" href="?page={{ page.paginator.num_pages }}">OLD</a></li>
-        {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link">OLD</span>
-                    </li>
-        {% endif %}
-    {% endif %}
-                </ul>
-            </nav>
+        {% include "network/components/pagination.html" with page=page %}
 {% endif %}
         </div>
     </div>
