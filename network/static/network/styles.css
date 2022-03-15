@@ -295,9 +295,6 @@ input[type=email]:active {
   display: flex;
   width: 100%;
 }
-.two-column-body .post-section-content {
-  max-width: 27rem;
-}
 .two-column-body .conference-container .vt-panel-container {
   width: 23.5%;
 }
@@ -319,10 +316,6 @@ input[type=email]:active {
 }
 
 @media (max-width: 85rem) {
-  .post-section-content {
-    max-width: 100%;
-  }
-
   /* Note about specificity
       .respond-container is only used on a two-column page, so
       its settings were all applied as plain ".respond-container".

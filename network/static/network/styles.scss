@@ -452,10 +452,6 @@ input[type=email]{
     display: flex;
     width: 100%;
 
-    .post-section-content{
-        max-width: 27rem;
-    }
-
     // conference-container is not 100% width when in two-column mode,
     // so adjust the vt-panel width to be relative to a thinner container
     .conference-container .vt-panel-container{
@@ -492,12 +488,6 @@ input[type=email]{
 
 // Apply one column rules to screens below the width cutoff for two-column mode.
 @media (max-width: $max_page){
-
-    // Set post content to fill the screen
-    .post-section-content{
-        max-width: 100%;
-    }
-
     /* Note about specificity
         .respond-container is only used on a two-column page, so
         its settings were all applied as plain ".respond-container".
