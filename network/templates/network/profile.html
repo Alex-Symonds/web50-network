@@ -24,16 +24,16 @@
 {% block body %}
     <div class="conference-container">
         <div class="vt-panel-container panels-profile">
-            <div class="vt-p0 lcars-top-left"><div class="panel-num">41<span class="extra-digits">-843.2</span></div></div>
-            <div class="vt-p1 vt-panel"><div class="panel-num">62<span class="extra-digits">-7434</span></div></div>
-            <div class="vt-p2 vt-panel"><div class="panel-num">49<span class="extra-digits">-8975</span></div></div>
-            <div class="vt-p3 vt-panel"></div>
-            <div class="vt-p4 vt-panel"><div class="panel-num">55<span class="extra-digits">-8901</span></div></div>
-            <div class="vt-p5 vt-panel"></div>
-            <div class="vt-p6 vt-panel"><div class="panel-num">31<span class="extra-digits">-2384</span></div></div>
-            <div class="vt-p7 vt-panel"><div class="panel-num">86<span class="extra-digits">-7864</span></div></div>
-            <div class="vt-p8 vt-panel"></div>
-            <div class="vt-p9 vt-panel"><div class="panel-num">00<span class="extra-digits">-6391</span></div></div>
+            {% include "network/components/lcars_vt_block.html" with pos="0" num="41" ext="843.2" %}
+            {% include "network/components/lcars_vt_block.html" with pos="1" num="62" ext="7434" %}
+            {% include "network/components/lcars_vt_block.html" with pos="2" num="49" ext="8975" %}
+            {% include "network/components/lcars_vt_block.html" with pos="3" %}
+            {% include "network/components/lcars_vt_block.html" with pos="4" num="55" ext="8901" %}
+            {% include "network/components/lcars_vt_block.html" with pos="5" %}
+            {% include "network/components/lcars_vt_block.html" with pos="6" num="31" ext="2384" %}
+            {% include "network/components/lcars_vt_block.html" with pos="7" num="86" ext="7864" %}
+            {% include "network/components/lcars_vt_block.html" with pos="8" %}
+            {% include "network/components/lcars_vt_block.html" with pos="9" num="00" ext="6391" %}
         </div>
 
         <div class="conference-content">

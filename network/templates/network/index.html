@@ -3,11 +3,13 @@
 {% block body %}
 {% if form and user.is_authenticated %}
 <div class="two-column-body">
+
     <div class="respond-container">
+
         <div class="vt-panel-container panels-respond">
-            <div class="vt-p0 lcars-top-left"><div class="panel-num">11<span class="extra-digits">-879.3</span></div></div>
-            <div class="vt-p1 vt-panel"><div class="panel-num">84<span class="extra-digits">-7653</span></div></div>
-            <div class="vt-p2 vt-panel"><div class="panel-num">42<span class="extra-digits">-2000</span></div></div>
+            {% include "network/components/lcars_vt_block.html" with pos="0" num="11" ext="879.3" %}
+            {% include "network/components/lcars_vt_block.html" with pos="1" num="84" ext="7653" %}
+            {% include "network/components/lcars_vt_block.html" with pos="2" num="42" ext="2000" %}
         </div>
 
         <div class="respond-content">
@@ -24,23 +26,23 @@
             </div>
 
             {% include "network/components/lcars_hz_bottom.html" with hz_identifier_class="panels-respond hz-btm" %}
-            
+
         </div>
     </div>
 {% endif %}
 
     <div class="conference-container">
         <div class="vt-panel-container panels-conference">
-            <div class="vt-p0 lcars-top-left"><div class="panel-num">84<span class="extra-digits">-430.9</span></div></div>
-            <div class="vt-p1 vt-panel"><div class="panel-num">93<span class="extra-digits">-4374</span></div></div>
-            <div class="vt-p2 vt-panel"><div class="panel-num">66<span class="extra-digits">-777</span></div></div>
-            <div class="vt-p3 vt-panel"></div>
-            <div class="vt-p4 vt-panel"><div class="panel-num">42<span class="extra-digits">-1634</span></div></div>
-            <div class="vt-p5 vt-panel"></div>
-            <div class="vt-p6 vt-panel"><div class="panel-num">76<span class="extra-digits">-8147</span></div></div>
-            <div class="vt-p7 vt-panel"><div class="panel-num">17<span class="extra-digits">-6228</span></div></div>
-            <div class="vt-p8 vt-panel"></div>
-            <div class="vt-p9 vt-panel"><div class="panel-num">90<span class="extra-digits">-0117</span></div></div>
+            {% include "network/components/lcars_vt_block.html" with pos="0" num="84" ext="430.9" %}
+            {% include "network/components/lcars_vt_block.html" with pos="1" num="93" ext="4374" %}
+            {% include "network/components/lcars_vt_block.html" with pos="2" num="66" ext="777" %}
+            {% include "network/components/lcars_vt_block.html" with pos="3" %}
+            {% include "network/components/lcars_vt_block.html" with pos="4" num="42" ext="1634" %}
+            {% include "network/components/lcars_vt_block.html" with pos="5" %}
+            {% include "network/components/lcars_vt_block.html" with pos="6" num="76" ext="8147" %}
+            {% include "network/components/lcars_vt_block.html" with pos="7" num="17" ext="6228" %}
+            {% include "network/components/lcars_vt_block.html" with pos="8" %}
+            {% include "network/components/lcars_vt_block.html" with pos="9" num="90" ext="0117" %}
         </div>
 
         <div class="conference-content">

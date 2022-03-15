@@ -3,10 +3,10 @@
 {% block body %}
     <div class="conference-container">
         <div class="vt-panel-container panels-error">
-            <div class="vt-p0 lcars-top-left"><div class="panel-num">99<span class="extra-digits">-000.0</span></div></div>
-            <div class="vt-p1 vt-panel"></div>
-            <div class="vt-p2 vt-panel"><div class="panel-num">15<span class="extra-digits">-7386</span></div></div>
-            <div class="vt-p3 vt-panel"><div class="panel-num">32<span class="extra-digits">-4371</span></div></div>
+            {% include "network/components/lcars_vt_block.html" with pos="0" num="99" ext="000.0" %}
+            {% include "network/components/lcars_vt_block.html" with pos="1" %}
+            {% include "network/components/lcars_vt_block.html" with pos="2" num="15" ext="7386" %}
+            {% include "network/components/lcars_vt_block.html" with pos="3" num="32" ext="4371" %}
         </div>
 
         <div class="conference-content">

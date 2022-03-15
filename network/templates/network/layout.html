@@ -23,9 +23,9 @@
     <body>
         <div class="header-container">
             <div class="vt-panel-container panels-header">
-                <div class="vt-p0 lcars-top-left"></div>
-                <div class="vt-p1 vt-panel"></div>
-                <div class="vt-p2 vt-panel"></div>
+                {% include "network/components/lcars_vt_block.html" with pos="0" %}
+                {% include "network/components/lcars_vt_block.html" with pos="1" %}
+                {% include "network/components/lcars_vt_block.html" with pos="2" %}
             </div>
             <div class="header-content">
                 <nav>
