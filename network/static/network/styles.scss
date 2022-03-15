@@ -17,7 +17,9 @@ $c_username_hover: #dedbff;
 $c_body_heading: #abcaff;
 $c_main_text: #72efff;
 $c_emphasis: #f8fbdb;
-$c_error: red;
+
+$c_error_primary: red;
+$c_error_secondary: white;
 
 $c_bg_A0: #ff9900;
 $c_bg_A0_hover: #ffd597;
@@ -33,7 +35,7 @@ $c_bg_B1_hover: #c5c5fc;
 
 $c_bg_C0: #cc6666;
 
-// Corner colour assignments
+// LCARS corner colour assignments and standard border
 $lcars_header_top_left: $c_bg_A0;
 $lcars_header_bottom_left: $c_bg_B1;
 
@@ -73,7 +75,7 @@ $main_title_height: 3.5rem;
 body{
     background: $c_bg_main;
     color: $c_main_text;
-    font-family: $f_lcarsy; 
+    font-family: $f_lcarsy;
     font-size: 1.25rem;
 }
 
@@ -150,8 +152,8 @@ input[type=email]{
     border: none;
 
     span{
-        bottom: 0.1rem;
         right: 1rem;
+        bottom: 0.1rem;
     }
 
     &:hover{
@@ -189,8 +191,8 @@ input[type=email]{
 
     span{
         position: absolute;
-        bottom: 0;
         right: 0.9rem;
+        bottom: 0;
         pointer-events: none;
     }
 
@@ -234,7 +236,7 @@ input[type=email]{
 
 .main-title-before{
     flex-grow: 2;
-    min-height:$main_title_height;
+    min-height: $main_title_height;
     // background colour set down in the LCARS colour setting section near the end.
 }
 .main-title{
@@ -242,7 +244,6 @@ input[type=email]{
     margin: 0;
     
     font-size: $main_title_height;
-    font-family: $f_lcarsy;
     line-height: 100%;
 
     color: $c_bg_A0;
@@ -265,10 +266,10 @@ input[type=email]{
 // Navigation
 .lcars-nav-container{
     display: flex;
-    width: 100%;
-
     justify-content: flex-end;
     align-items: center;
+
+    width: 100%;
 
     ul{
         display: flex;
@@ -278,7 +279,7 @@ input[type=email]{
         margin: 0;
     }
 
-    li {
+    li{
         list-style: none;
     }
 
@@ -296,7 +297,9 @@ input[type=email]{
 }
 
 // Colours (normal and hover) for nav buttons
-.nav-user, .nav-following, .nav-register{
+.nav-user,
+.nav-following,
+.nav-register{
     background: $c_bg_B1;
     &:hover{
         background: $c_bg_B1_hover;
@@ -345,23 +348,24 @@ input[type=email]{
 .hz-panel-container{
     display: flex;
     justify-content: flex-start;
-    align-items: left;
-    text-align: right;
 
     height: 1rem;
     width: 100%; 
+
+    text-align: right;
 }
 
 // Header (i.e. h1 and nav)
 .header-container{
     display: flex;
     justify-content: flex-end;
-    align-items: right;
-    text-align: right; 
 
     width: 100%;
     max-width: $max_page;
+
     margin: 1.5rem auto 0;
+    
+    text-align: right; 
 
     .header-content{
         width: 85%;
@@ -373,18 +377,17 @@ input[type=email]{
     display: flex;
     flex-wrap: wrap;
     
-    width: 100%;
     min-width: $min_page;
+    width: 100%;
     max-width: $max_page;
-    margin: 0 auto;
 
-    font-family: $f_lcarsy;
+    margin: 0 auto;
 }
 
 // Simple container for login and register pages
 .main-container{ 
-    width: 50%;
     min-width: 19.5rem;
+    width: 50%;
     padding: 2rem;
 }
 .helpful-suggestion{
@@ -396,6 +399,7 @@ input[type=email]{
     order: 1;
     display: flex;
     flex-grow: 2;
+
     margin-top: $h_divider_margin;
 
     .vt-panel-container{
@@ -413,9 +417,11 @@ input[type=email]{
 .respond-container{
     order: 2;
     display: flex;
-    width: 30%;
-    min-width: 30%;
     align-self: flex-start;
+
+    min-width: 30%;
+    width: 30%;
+
     margin-top: $h_divider_margin;
 
     .vt-panel-container{
@@ -459,18 +465,25 @@ input[type=email]{
     // Make the horizontal LCARS rows "fit" by turning off the end of left
     // and the start of right.
     .panels-conference{
-        .hz-p4, .hz-p5{
+        .hz-p4,
+        .hz-p5{
             display: none;
         }
     }
     .panels-respond{
         &.hz-top{
-            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+            .hz-p0,
+            .hz-p1,
+            .hz-p2,
+            .hz-p3{
                 display: none;
             }
         }
         &.hz-btm{
-            .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+            .hz-p0,
+            .hz-p1,
+            .hz-p2,
+            .hz-p3{
                 display: none;
             }
         }
@@ -527,13 +540,17 @@ input[type=email]{
 
         // LCARS horizontal: revert to full horizontal bars
         .panels-conference{
-            .hz-p4, .hz-p5{
+            .hz-p4,
+            .hz-p5{
                 display: inline;
             }
         }
         .panels-respond{
             &.hz-top{
-                .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                .hz-p0,
+                .hz-p1,
+                .hz-p2,
+                .hz-p3{
                     display: inline;
                 }
                 .hz-p4{
@@ -541,7 +558,10 @@ input[type=email]{
                 }
             }
             &.hz-btm{
-                .hz-p0, .hz-p1, .hz-p2, .hz-p3{
+                .hz-p0,
+                .hz-p1,
+                .hz-p2,
+                .hz-p3{
                     display: inline;
                 }
                 .hz-p4{
@@ -557,15 +577,9 @@ input[type=email]{
 // -------------------------------------------------------------------------------------
 // Posts
 // -------------------------------------------------------------------------------------
-// "Normal" container, used on index, following
 .posts-container{
     padding: 0 2rem;
 }
-
-// Profile needs an extra margin to make space betwene it and the following/ed stats.
-// .profile-posts-container{
-//     margin-top: 4rem;
-// }
 
 .one-post{
     display: flex;
@@ -575,9 +589,12 @@ input[type=email]{
     .post-section-date-edit{
         width: 8rem;
         padding-top: 0.6rem;
-        font-size: 1.1rem;
-        color: $c_edit;
-    
+
+        .date{
+            font-size: 1.1rem;
+            color: $c_edit;
+        }
+
         small{
             // Prevent unwanted line breaks between the month and year, or the day and month
             white-space: nowrap;
@@ -587,6 +604,7 @@ input[type=email]{
     .post-section-content{
         flex-grow: 1;
         padding: 0.5rem;
+
         a{
             font-size: 1.7rem;
             font-weight: bold;
@@ -604,13 +622,14 @@ input[type=email]{
 
     .post-section-likes{
         min-width: 7.5rem;
-        color: $c_emphasis;
         text-align: right;
+        color: $c_emphasis;
     }
 }
 
 .edit-failed{
     width: 18rem;
+
     margin: 0 auto 1rem;
     padding: 5px 10px 10px;
 
@@ -618,9 +637,9 @@ input[type=email]{
     font-weight: bold;
     text-align: center;
 
-    color: red;
+    color: $c_error_primary;
     background: none;
-    border: 1px solid red;
+    border: 1px solid $c_error_primary;
     border-radius: 4px;
 
     span{
@@ -631,17 +650,17 @@ input[type=email]{
 .error-message{
     font-size: 1.4rem;
     font-weight: bold;
-    color: white;
+    color: $c_error_secondary;
 
     h2{
         font-weight: bold;
         font-size: 3rem;
-        color: red;       
+        color: $c_error_primary;       
     }
 
     span{
         font-size: 2rem;
-        color: red; 
+        color: $c_error_primary; 
     }
 }
 
@@ -657,7 +676,8 @@ input[type=email]{
     width: 18%;
     max-width: 8rem;
 
-    &:focus, &:active{
+    &:focus,
+    &:active{
         outline: thin dotted;
         box-shadow: none;
     }
@@ -666,8 +686,8 @@ input[type=email]{
 .page-item.active .page-link{
     z-index: -2;
     padding: 0;
-    line-height: 2rem;
 
+    line-height: 2rem;
     text-align: center;
 
     color: $c_bg_B1;
@@ -686,9 +706,10 @@ input[type=email]{
 
 a.page-link{
     padding: 0.9rem 0.7rem 0 0.1rem;
-    text-align: right;
 
+    text-align: right;
     font-weight: bold;
+
     color: black;  
     border: none;
     
@@ -771,8 +792,8 @@ a.page-newest{
     }
     label{
         align-self: flex-end;
-        padding: 0 0.2rem 0 0;
         margin: 0;
+        padding: 0 0.2rem 0 0;
     }
 
     .stats-block{
@@ -866,7 +887,6 @@ a.page-newest{
             background: $c_hollow_hover;
         }
     }
-
  }
 
 
@@ -890,20 +910,12 @@ a.page-newest{
     textarea{
         margin-bottom: 0.5rem;
     }
-    .post-btn{
-        padding: 0.5rem 0.8rem 0;
-
-        width: 7rem;
-        font-size: 0.9rem;
-        height: 2.2rem;
-    }
 
     // Posts
     .posts-container{
         padding: 0 1rem;
     }
 
-    //.post-container,
     .one-post{
         display: block;
         position: relative;
@@ -929,33 +941,33 @@ a.page-newest{
             width: 100%;
     
             font-size: 0.9rem;
-            color: $c_edit;
         }
         .pcont-content{
             display: block;
+            width: 100%;
+
             padding-top: 3.7rem;
             padding-bottom: 0.6rem;
-            width: 100%;
-    
+
             font-size: 1.1rem;
         }
         p.like-counter{
-            height: 2.8rem;
-            padding: 0.5rem 0;
             display: block;
+            height: 2.8rem;
             margin: 0;
-    
+            padding: 0.5rem 0;
             font-size: 1rem;
         }
-        .like-btn, .edit-btn{
-            margin-bottom: 0px;
-            height: 2rem;
+        .like-btn,
+        .edit-btn{
             position: absolute;
             bottom: 6px;
             right: 0;
-    
+
+            height: 2rem;
             width: 5.5rem;
-    
+            margin-bottom: 0px;
+
             font-size: 0.9rem;
         }
     
@@ -994,13 +1006,14 @@ a.page-newest{
 
 // Corner boxes: for the curved internal borders
 .corner-box{
-    width: 2rem;
     height: 2rem;
+    width: 2rem;
+
 
     .corner{
         background: $c_bg_main;
+        height: 100%;   
         width: 100%;
-        height: 100%;    
     }
 
     .internal-top-left-corner{
@@ -1013,8 +1026,8 @@ a.page-newest{
 }
 @media (max-width: $breakpoint_corners_tighten){
     .corner-box{
-        width: 1rem;
         height: 1rem;
+        width: 1rem;
 
         .internal-top-left-corner{
             border-top-left-radius: 1rem;
@@ -1033,11 +1046,10 @@ a.page-newest{
     color: black;
 }
 
-
 // Special case LCARS numbers (respond panel)
 .panels-respond{
-    // Hide extra digits as a default (default for respond is two-column mode, in which the
-    // vt panels are too narrow to fit the full numbers).
+    // Hide extra digits as a default (respond panel's default CSS is for two-column
+    // layout, in which the vt panel is too narrow for extra-digits.
     .extra-digits{
         display: none;
     }
@@ -1056,7 +1068,8 @@ a.page-newest{
 }
 
 
-// "Normal" LCARS numbers: when the vertical panels become too narrow to fit the "long" numbers, hide the "end bit".
+// "Normal" LCARS numbers: when the vertical panels become too narrow to fit ~7 characters,
+// hide them inside the "extra-digits" span.
 @media(max-width: $breakpoint_lcars_numbers){
     .extra-digits,
     .panels-respond .extra-digits{
@@ -1082,17 +1095,17 @@ a.page-newest{
 
 // --- LCARS blocks
 // Top left spot: give it a rounded external corner (and some flex grow)
-.lcars-top-left{
-    border-top-left-radius: 5.5rem;
-    flex-grow: 3;
+.tl-panel{
     position: relative;
+    flex-grow: 3;
+    border-top-left-radius: 5.5rem;
 }
 
 // Standard v and h LCARS blocks. Adds black borders to make the "gaps"
 .vt-panel{
+    position: relative;
     width: 100%;
     border-top: $panel_border;
-    position: relative;
 }
 .hz-panel{
     height: 1rem;
@@ -1129,8 +1142,8 @@ a.page-newest{
         border-top-left-radius: 1rem;
     }
     &.corner-box.hz-top{
-        width: 1rem;
         height: 1rem;
+        width: 1rem;
     }
 
     // Set matching colours for "L-shaped blocks" at the corners
@@ -1150,8 +1163,9 @@ a.page-newest{
     // Set colours and/or sizes for other blocks in the header
     .vt-p0{
         // Note: corner block, colour already set
-        width: 100%;
         flex-grow: 2;
+        width: 100%;
+
     }
     .vt-p1{
         height: 1rem;
@@ -1159,8 +1173,8 @@ a.page-newest{
     }
     .vt-p2{
         // Note: corner block, colour already set
-        border-bottom-left-radius: 3rem;
         flex-grow: 1;
+        border-bottom-left-radius: 3rem;
     }
 
     // Note: Nothing here for .hz-p0 because its colour is the corner colour and default sizes were ok.
@@ -1206,43 +1220,42 @@ a.page-newest{
     }
 
     .vt-p1{
+        flex-grow: 2;
         // Note: this is /arbitrarily/ the same colour as the corner block
         background: $lcars_conference_top_left;
-        flex-grow: 2;
     }
     .vt-p2{
-        background: $c_bg_A1;
         flex-grow: 3;
+        background: $c_bg_A1;
     }
     .vt-p3{
-        background: $c_bg_B1;
         height: 1rem;
+        background: $c_bg_B1;
     }
     .vt-p4{
-        background: $c_bg_A0;
         flex-grow: 2;
+        background: $c_bg_A0;
     }
     .vt-p5{
-        background: $c_bg_C0;
         height: 1rem;
+        background: $c_bg_C0;
     }
     .vt-p6{
-        background: $c_bg_B1;
         flex-grow: 3;
+        background: $c_bg_B1;
     }
     .vt-p7{
-        background: $c_bg_B0;
         flex-grow: 2;
+        background: $c_bg_B0;
     }
     .vt-p8{
-        background: $c_bg_B0;
         height: 1rem;
+        background: $c_bg_B0;
     }
     .vt-p9{
-        background: $c_bg_A1;
         flex-grow: 3;
+        background: $c_bg_A1;
     }
-
 }
 
 // LCARS settings for the panels around the "respond" pane
@@ -1276,8 +1289,8 @@ a.page-newest{
 
     // The rest
     .vt-p1{
-        background: $c_bg_A1;
         flex-grow: 2;
+        background: $c_bg_A1;
     }
     .vt-p2{
         flex-grow: 3;
@@ -1343,40 +1356,40 @@ a.page-newest{
     }
 
     .vt-p1{
-        background: $c_bg_A0;
         flex-grow: 2;
+        background: $c_bg_A0;
     }
     .vt-p2{
-        background: $c_bg_B1;
         flex-grow: 3;
+        background: $c_bg_B1;
     }
     .vt-p3{
-        background: $c_bg_B1;
         height: 1rem;
+        background: $c_bg_B1;
     }
     .vt-p4{
-        background: $c_bg_B0;
         flex-grow: 2;
+        background: $c_bg_B0;
     }
     .vt-p5{
-        background: $c_bg_C0;
         height: 1rem;
+        background: $c_bg_C0;
     }
     .vt-p6{
-        background: $c_bg_B1;
         flex-grow: 3;
+        background: $c_bg_B1;
     }
     .vt-p7{
-        background: $c_bg_B0;
         flex-grow: 2;
+        background: $c_bg_B0;
     }
     .vt-p8{
-        background: $c_bg_B0;
         height: 1rem;
+        background: $c_bg_B0;
     }
     .vt-p9{
-        background: $c_bg_A1;
         flex-grow: 3;
+        background: $c_bg_A1;
     }
 }
 
@@ -1408,40 +1421,40 @@ a.page-newest{
     }
 
     .vt-p1{
-        background: $c_bg_A2;
         flex-grow: 2;
+        background: $c_bg_A2;
     }
     .vt-p2{
-        background: $c_bg_A1;
         flex-grow: 3;
+        background: $c_bg_A1;
     }
     .vt-p3{
-        background: $c_bg_B1;
         height: 1rem;
+        background: $c_bg_B1;
     }
     .vt-p4{
-        background: $c_bg_A0;
         flex-grow: 2;
+        background: $c_bg_A0;
     }
     .vt-p5{
-        background: $c_bg_C0;
         height: 1rem;
+        background: $c_bg_C0;
     }
     .vt-p6{
-        background: $c_bg_B1;
         flex-grow: 3;
+        background: $c_bg_B1;
     }
     .vt-p7{
-        background: $c_bg_B0;
         flex-grow: 2;
+        background: $c_bg_B0;
     }
     .vt-p8{
-        background: $c_bg_B0;
         height: 1rem;
+        background: $c_bg_B0;
     }
     .vt-p9{
-        background: $c_bg_A1;
         flex-grow: 3;
+        background: $c_bg_A1;
     }
 }
 
@@ -1459,16 +1472,16 @@ a.page-newest{
         flex-grow: 2;
     }
     .vt-p1{
-        background: $c_bg_A0;
         height: 1rem;
+        background: $c_bg_A0;
     }
     .vt-p2{
-        background: $c_bg_A2;
         flex-grow: 1;
+        background: $c_bg_A2;
     }
     .vt-p3{
-        background: $c_bg_B1;
         flex-grow: 3;
+        background: $c_bg_B1;
     }
     
     .hz-p1{
@@ -1503,16 +1516,16 @@ a.page-newest{
         flex-grow: 2;
     }
     .vt-p1{
-        background: $c_bg_B1;
         height: 1rem;
+        background: $c_bg_B1;
     }
     .vt-p2{
-        background: $c_bg_A2;
         flex-grow: 1;
+        background: $c_bg_A2;
     }
     .vt-p3{
-        background: $c_bg_B0;
         flex-grow: 3;
+        background: $c_bg_B0;
     }
     
     .hz-p1{
@@ -1539,7 +1552,7 @@ a.page-newest{
     .vt-p0,
     .hz-p0,
     &.corner-box{
-        background: $c_error;
+        background: $c_error_primary;
     }
 
     // The rest
@@ -1547,23 +1560,26 @@ a.page-newest{
         flex-grow: 2;
     }
     .vt-p1{
-        background: white;
         height: 1rem;
+        background: $c_error_secondary;
     }
     .vt-p2{
-        background: white;
         flex-grow: 1;
+        background: $c_error_secondary;
     }
     .vt-p3{
-        background: $c_error;
         flex-grow: 3;
+        background: $c_error_primary;
     }
     
-    .hz-p1, .hz-p3, .hz-p4{
-        background: $c_error;
+    .hz-p1,
+    .hz-p3,
+    .hz-p4{
+        background: $c_error_primary;
     }
-    .hz-p2, .hz-p5{
-        background: white;
+    .hz-p2,
+    .hz-p5{
+        background: $c_error_secondary;
     }
     
     hr{
@@ -1579,29 +1595,31 @@ a.page-newest{
 /* Dominoes:
     * Teeny little nav buttons and a huge h1 looks silly, so shrink the entire panel
     * h1 being smaller means h2s also need to be smaller
-    * h2 being smaller means the follows/ed stat boxes on profiles look HUGE
+    * h2 being smaller means:
+        ** the "transmit" button on the respond form looks too big
+        ** the follows/ed stat boxes on profiles look HUGE
 */
 @media (max-width: $breakpoint_large_nav_buttons){
 
     // Smaller nav buttons
     .lcars-nav-container{
-        padding-left: 0;
         margin-left: 0;
+        padding-left: 0;
 
         ul{
             padding: 0;
         }
         .lcars-btn{
-            width: 3.7rem;
             height: 1.9rem;
-            border-radius: 0.8rem;
+            width: 3.7rem;
             margin-top: 0;
             margin-bottom: 0;
 
+            border-radius: 0.8rem;
             span{
-                font-size: 0.75rem;
-                bottom: 3px;
                 right: 4px;
+                bottom: 3px;
+                font-size: 0.75rem;
             }
         }
     }
@@ -1609,15 +1627,15 @@ a.page-newest{
     // Smaller h1 and surrounding LCARS stuff
     h1{
         display: block;
-        font-size: 1em;
         margin: 0;
+        font-size: 1em;
         font-weight: normal;
     }
     .main-title{
-        font-size: 1.4rem;
         width: 12rem;
-        line-height: 1.5rem;
         padding: 0rem 0.5rem 0rem;
+        font-size: 1.4rem;
+        line-height: 1.5rem;
     }
     .main-title-before{
         min-height: 1rem;
@@ -1642,6 +1660,14 @@ a.page-newest{
         font-size: 1.4rem;
     }
 
+    // Smaller post-btn below the form, to balance the smaller h2 above the form
+    .post-btn{
+        height: 2.2rem;
+        width: 7rem;
+        padding: 0.5rem 0.8rem 0;
+        font-size: 0.9rem;
+    }
+
     // Smaller follow stats, because of smaller h2
     .follow-stats-container{
         .user-follows,
@@ -1649,20 +1675,19 @@ a.page-newest{
             height: 2.2rem;
         }
         .stats-label{
-            width: 5.5rem;
             min-width: 5.5rem;
+            width: 5.5rem;
             font-size: 1rem;
         }
         .stats-result{
             width: 3.5rem;
+            padding-right: 0.5rem;
             font-size: 2rem;
             line-height: 2.7rem;
-            padding-right: 0.5rem;
         }
         .follow-btn{
-            font-size: 1rem;
             width: 6.7rem;
-
+            font-size: 1rem;
             span{
                 right: 0.8rem;
             }
@@ -1672,7 +1697,7 @@ a.page-newest{
         }
     }
 
-    // This just looks nicer.
+    // ... This just looks nicer.
     .main-container{
         width: 75%;
     }

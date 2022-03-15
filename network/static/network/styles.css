@@ -62,8 +62,8 @@ input[type=email]:active {
   border: none;
 }
 .edit-btn span {
-  bottom: 0.1rem;
   right: 1rem;
+  bottom: 0.1rem;
 }
 .edit-btn:hover {
   background: #e7eaff;
@@ -94,8 +94,8 @@ input[type=email]:active {
 }
 .like-btn span {
   position: absolute;
-  bottom: 0;
   right: 0.9rem;
+  bottom: 0;
   pointer-events: none;
 }
 .like-btn.unliked {
@@ -133,7 +133,6 @@ input[type=email]:active {
   padding: 0rem 1rem 0.4rem;
   margin: 0;
   font-size: 3.5rem;
-  font-family: "Antonio", "Oswald", "Arial Narrow", "Avenir Next Condensed", sans-serif;
   line-height: 100%;
   color: #ff9900;
   background: black;
@@ -152,9 +151,9 @@ input[type=email]:active {
 
 .lcars-nav-container {
   display: flex;
-  width: 100%;
   justify-content: flex-end;
   align-items: center;
+  width: 100%;
 }
 .lcars-nav-container ul {
   display: flex;
@@ -175,10 +174,14 @@ input[type=email]:active {
   color: black;
 }
 
-.nav-user, .nav-following, .nav-register {
+.nav-user,
+.nav-following,
+.nav-register {
   background: #9999ff;
 }
-.nav-user:hover, .nav-following:hover, .nav-register:hover {
+.nav-user:hover,
+.nav-following:hover,
+.nav-register:hover {
   background: #c5c5fc;
 }
 
@@ -212,20 +215,18 @@ input[type=email]:active {
 .hz-panel-container {
   display: flex;
   justify-content: flex-start;
-  align-items: left;
-  text-align: right;
   height: 1rem;
   width: 100%;
+  text-align: right;
 }
 
 .header-container {
   display: flex;
   justify-content: flex-end;
-  align-items: right;
-  text-align: right;
   width: 100%;
   max-width: 85rem;
   margin: 1.5rem auto 0;
+  text-align: right;
 }
 .header-container .header-content {
   width: 85%;
@@ -234,16 +235,15 @@ input[type=email]:active {
 .content {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   min-width: 19rem;
+  width: 100%;
   max-width: 85rem;
   margin: 0 auto;
-  font-family: "Antonio", "Oswald", "Arial Narrow", "Avenir Next Condensed", sans-serif;
 }
 
 .main-container {
-  width: 50%;
   min-width: 19.5rem;
+  width: 50%;
   padding: 2rem;
 }
 
@@ -269,9 +269,9 @@ input[type=email]:active {
 .respond-container {
   order: 2;
   display: flex;
-  width: 30%;
-  min-width: 30%;
   align-self: flex-start;
+  min-width: 30%;
+  width: 30%;
   margin-top: 10px;
 }
 .respond-container .vt-panel-container {
@@ -301,13 +301,20 @@ input[type=email]:active {
 .two-column-body .conference-container .vt-panel-container {
   width: 23.5%;
 }
-.two-column-body .panels-conference .hz-p4, .two-column-body .panels-conference .hz-p5 {
+.two-column-body .panels-conference .hz-p4,
+.two-column-body .panels-conference .hz-p5 {
   display: none;
 }
-.two-column-body .panels-respond.hz-top .hz-p0, .two-column-body .panels-respond.hz-top .hz-p1, .two-column-body .panels-respond.hz-top .hz-p2, .two-column-body .panels-respond.hz-top .hz-p3 {
+.two-column-body .panels-respond.hz-top .hz-p0,
+.two-column-body .panels-respond.hz-top .hz-p1,
+.two-column-body .panels-respond.hz-top .hz-p2,
+.two-column-body .panels-respond.hz-top .hz-p3 {
   display: none;
 }
-.two-column-body .panels-respond.hz-btm .hz-p0, .two-column-body .panels-respond.hz-btm .hz-p1, .two-column-body .panels-respond.hz-btm .hz-p2, .two-column-body .panels-respond.hz-btm .hz-p3 {
+.two-column-body .panels-respond.hz-btm .hz-p0,
+.two-column-body .panels-respond.hz-btm .hz-p1,
+.two-column-body .panels-respond.hz-btm .hz-p2,
+.two-column-body .panels-respond.hz-btm .hz-p3 {
   display: none;
 }
 
@@ -351,16 +358,23 @@ input[type=email]:active {
   .two-column-body .conference-container .vt-panel-container {
     width: 15%;
   }
-  .two-column-body .panels-conference .hz-p4, .two-column-body .panels-conference .hz-p5 {
+  .two-column-body .panels-conference .hz-p4,
+.two-column-body .panels-conference .hz-p5 {
     display: inline;
   }
-  .two-column-body .panels-respond.hz-top .hz-p0, .two-column-body .panels-respond.hz-top .hz-p1, .two-column-body .panels-respond.hz-top .hz-p2, .two-column-body .panels-respond.hz-top .hz-p3 {
+  .two-column-body .panels-respond.hz-top .hz-p0,
+.two-column-body .panels-respond.hz-top .hz-p1,
+.two-column-body .panels-respond.hz-top .hz-p2,
+.two-column-body .panels-respond.hz-top .hz-p3 {
     display: inline;
   }
   .two-column-body .panels-respond.hz-top .hz-p4 {
     background: #cc6666;
   }
-  .two-column-body .panels-respond.hz-btm .hz-p0, .two-column-body .panels-respond.hz-btm .hz-p1, .two-column-body .panels-respond.hz-btm .hz-p2, .two-column-body .panels-respond.hz-btm .hz-p3 {
+  .two-column-body .panels-respond.hz-btm .hz-p0,
+.two-column-body .panels-respond.hz-btm .hz-p1,
+.two-column-body .panels-respond.hz-btm .hz-p2,
+.two-column-body .panels-respond.hz-btm .hz-p3 {
     display: inline;
   }
   .two-column-body .panels-respond.hz-btm .hz-p4 {
@@ -379,6 +393,8 @@ input[type=email]:active {
 .one-post .post-section-date-edit {
   width: 8rem;
   padding-top: 0.6rem;
+}
+.one-post .post-section-date-edit .date {
   font-size: 1.1rem;
   color: #cad1ff;
 }
@@ -403,8 +419,8 @@ input[type=email]:active {
 }
 .one-post .post-section-likes {
   min-width: 7.5rem;
-  color: #f8fbdb;
   text-align: right;
+  color: #f8fbdb;
 }
 
 .edit-failed {
@@ -549,8 +565,8 @@ a.page-newest:hover {
 }
 .follow-stats-container label {
   align-self: flex-end;
-  padding: 0 0.2rem 0 0;
   margin: 0;
+  padding: 0 0.2rem 0 0;
 }
 .follow-stats-container .stats-block {
   height: 100%;
@@ -643,13 +659,6 @@ a.page-newest:hover {
     margin-bottom: 0.5rem;
   }
 
-  .post-btn {
-    padding: 0.5rem 0.8rem 0;
-    width: 7rem;
-    font-size: 0.9rem;
-    height: 2.2rem;
-  }
-
   .posts-container {
     padding: 0 1rem;
   }
@@ -676,29 +685,29 @@ a.page-newest:hover {
     left: 0;
     width: 100%;
     font-size: 0.9rem;
-    color: #cad1ff;
   }
   .one-post .pcont-content {
     display: block;
+    width: 100%;
     padding-top: 3.7rem;
     padding-bottom: 0.6rem;
-    width: 100%;
     font-size: 1.1rem;
   }
   .one-post p.like-counter {
-    height: 2.8rem;
-    padding: 0.5rem 0;
     display: block;
+    height: 2.8rem;
     margin: 0;
+    padding: 0.5rem 0;
     font-size: 1rem;
   }
-  .one-post .like-btn, .one-post .edit-btn {
-    margin-bottom: 0px;
-    height: 2rem;
+  .one-post .like-btn,
+.one-post .edit-btn {
     position: absolute;
     bottom: 6px;
     right: 0;
+    height: 2rem;
     width: 5.5rem;
+    margin-bottom: 0px;
     font-size: 0.9rem;
   }
   .one-post .post-section-date-edit,
@@ -719,13 +728,13 @@ a.page-newest:hover {
   }
 }
 .corner-box {
-  width: 2rem;
   height: 2rem;
+  width: 2rem;
 }
 .corner-box .corner {
   background: black;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 .corner-box .internal-top-left-corner {
   border-top-left-radius: 2rem;
@@ -736,8 +745,8 @@ a.page-newest:hover {
 
 @media (max-width: 385px) {
   .corner-box {
-    width: 1rem;
     height: 1rem;
+    width: 1rem;
   }
   .corner-box .internal-top-left-corner {
     border-top-left-radius: 1rem;
@@ -785,16 +794,16 @@ a.page-newest:hover {
     width: 8%;
   }
 }
-.lcars-top-left {
-  border-top-left-radius: 5.5rem;
-  flex-grow: 3;
+.tl-panel {
   position: relative;
+  flex-grow: 3;
+  border-top-left-radius: 5.5rem;
 }
 
 .vt-panel {
+  position: relative;
   width: 100%;
   border-top: 4px solid black;
-  position: relative;
 }
 
 .hz-panel {
@@ -831,8 +840,8 @@ a.page-newest:hover {
   border-top-left-radius: 1rem;
 }
 .panels-header.corner-box.hz-top {
-  width: 1rem;
   height: 1rem;
+  width: 1rem;
 }
 .panels-header .vt-p0,
 .panels-header .main-title-before,
@@ -844,16 +853,16 @@ a.page-newest:hover {
   background: #9999ff;
 }
 .panels-header .vt-p0 {
-  width: 100%;
   flex-grow: 2;
+  width: 100%;
 }
 .panels-header .vt-p1 {
   height: 1rem;
   background: #cc99cc;
 }
 .panels-header .vt-p2 {
-  border-bottom-left-radius: 3rem;
   flex-grow: 1;
+  border-bottom-left-radius: 3rem;
 }
 .panels-header .hz-p1 {
   background: #ff9900;
@@ -889,40 +898,40 @@ a.page-newest:hover {
   background: #cc99cc;
 }
 .panels-conference .vt-p1 {
-  background: #cc6666;
   flex-grow: 2;
+  background: #cc6666;
 }
 .panels-conference .vt-p2 {
-  background: #ff9966;
   flex-grow: 3;
+  background: #ff9966;
 }
 .panels-conference .vt-p3 {
-  background: #9999ff;
   height: 1rem;
+  background: #9999ff;
 }
 .panels-conference .vt-p4 {
-  background: #ff9900;
   flex-grow: 2;
+  background: #ff9900;
 }
 .panels-conference .vt-p5 {
-  background: #cc6666;
   height: 1rem;
+  background: #cc6666;
 }
 .panels-conference .vt-p6 {
-  background: #9999ff;
   flex-grow: 3;
+  background: #9999ff;
 }
 .panels-conference .vt-p7 {
-  background: #cc99cc;
   flex-grow: 2;
+  background: #cc99cc;
 }
 .panels-conference .vt-p8 {
-  background: #cc99cc;
   height: 1rem;
+  background: #cc99cc;
 }
 .panels-conference .vt-p9 {
-  background: #ff9966;
   flex-grow: 3;
+  background: #ff9966;
 }
 
 .panels-respond {
@@ -946,8 +955,8 @@ a.page-newest:hover {
   background: #ffcc99;
 }
 .panels-respond .vt-p1 {
-  background: #ff9966;
   flex-grow: 2;
+  background: #ff9966;
 }
 .panels-respond .vt-p2 {
   flex-grow: 3;
@@ -998,40 +1007,40 @@ a.page-newest:hover {
   background: #cc99cc;
 }
 .panels-profile .vt-p1 {
-  background: #ff9900;
   flex-grow: 2;
+  background: #ff9900;
 }
 .panels-profile .vt-p2 {
-  background: #9999ff;
   flex-grow: 3;
+  background: #9999ff;
 }
 .panels-profile .vt-p3 {
-  background: #9999ff;
   height: 1rem;
+  background: #9999ff;
 }
 .panels-profile .vt-p4 {
-  background: #cc99cc;
   flex-grow: 2;
+  background: #cc99cc;
 }
 .panels-profile .vt-p5 {
-  background: #cc6666;
   height: 1rem;
+  background: #cc6666;
 }
 .panels-profile .vt-p6 {
-  background: #9999ff;
   flex-grow: 3;
+  background: #9999ff;
 }
 .panels-profile .vt-p7 {
-  background: #cc99cc;
   flex-grow: 2;
+  background: #cc99cc;
 }
 .panels-profile .vt-p8 {
-  background: #cc99cc;
   height: 1rem;
+  background: #cc99cc;
 }
 .panels-profile .vt-p9 {
-  background: #ff9966;
   flex-grow: 3;
+  background: #ff9966;
 }
 
 .panels-following .vt-p0,
@@ -1054,40 +1063,40 @@ a.page-newest:hover {
   background: #9999ff;
 }
 .panels-following .vt-p1 {
-  background: #ffcc99;
   flex-grow: 2;
+  background: #ffcc99;
 }
 .panels-following .vt-p2 {
-  background: #ff9966;
   flex-grow: 3;
+  background: #ff9966;
 }
 .panels-following .vt-p3 {
-  background: #9999ff;
   height: 1rem;
+  background: #9999ff;
 }
 .panels-following .vt-p4 {
-  background: #ff9900;
   flex-grow: 2;
+  background: #ff9900;
 }
 .panels-following .vt-p5 {
-  background: #cc6666;
   height: 1rem;
+  background: #cc6666;
 }
 .panels-following .vt-p6 {
-  background: #9999ff;
   flex-grow: 3;
+  background: #9999ff;
 }
 .panels-following .vt-p7 {
-  background: #cc99cc;
   flex-grow: 2;
+  background: #cc99cc;
 }
 .panels-following .vt-p8 {
-  background: #cc99cc;
   height: 1rem;
+  background: #cc99cc;
 }
 .panels-following .vt-p9 {
-  background: #ff9966;
   flex-grow: 3;
+  background: #ff9966;
 }
 
 .panels-login .vt-p0,
@@ -1098,16 +1107,16 @@ a.page-newest:hover {
   flex-grow: 2;
 }
 .panels-login .vt-p1 {
-  background: #ff9900;
   height: 1rem;
+  background: #ff9900;
 }
 .panels-login .vt-p2 {
-  background: #ffcc99;
   flex-grow: 1;
+  background: #ffcc99;
 }
 .panels-login .vt-p3 {
-  background: #9999ff;
   flex-grow: 3;
+  background: #9999ff;
 }
 .panels-login .hz-p1 {
   background: #9999ff;
@@ -1133,16 +1142,16 @@ a.page-newest:hover {
   flex-grow: 2;
 }
 .panels-register .vt-p1 {
-  background: #9999ff;
   height: 1rem;
+  background: #9999ff;
 }
 .panels-register .vt-p2 {
-  background: #ffcc99;
   flex-grow: 1;
+  background: #ffcc99;
 }
 .panels-register .vt-p3 {
-  background: #cc99cc;
   flex-grow: 3;
+  background: #cc99cc;
 }
 .panels-register .hz-p1 {
   background: #ff9900;
@@ -1168,21 +1177,24 @@ a.page-newest:hover {
   flex-grow: 2;
 }
 .panels-error .vt-p1 {
-  background: white;
   height: 1rem;
+  background: white;
 }
 .panels-error .vt-p2 {
-  background: white;
   flex-grow: 1;
+  background: white;
 }
 .panels-error .vt-p3 {
-  background: red;
   flex-grow: 3;
-}
-.panels-error .hz-p1, .panels-error .hz-p3, .panels-error .hz-p4 {
   background: red;
 }
-.panels-error .hz-p2, .panels-error .hz-p5 {
+.panels-error .hz-p1,
+.panels-error .hz-p3,
+.panels-error .hz-p4 {
+  background: red;
+}
+.panels-error .hz-p2,
+.panels-error .hz-p5 {
   background: white;
 }
 .panels-error hr {
@@ -1193,41 +1205,43 @@ a.page-newest:hover {
 /* Dominoes:
     * Teeny little nav buttons and a huge h1 looks silly, so shrink the entire panel
     * h1 being smaller means h2s also need to be smaller
-    * h2 being smaller means the follows/ed stat boxes on profiles look HUGE
+    * h2 being smaller means:
+        ** the "transmit" button on the respond form looks too big
+        ** the follows/ed stat boxes on profiles look HUGE
 */
 @media (max-width: 865px) {
   .lcars-nav-container {
-    padding-left: 0;
     margin-left: 0;
+    padding-left: 0;
   }
   .lcars-nav-container ul {
     padding: 0;
   }
   .lcars-nav-container .lcars-btn {
-    width: 3.7rem;
     height: 1.9rem;
-    border-radius: 0.8rem;
+    width: 3.7rem;
     margin-top: 0;
     margin-bottom: 0;
+    border-radius: 0.8rem;
   }
   .lcars-nav-container .lcars-btn span {
-    font-size: 0.75rem;
-    bottom: 3px;
     right: 4px;
+    bottom: 3px;
+    font-size: 0.75rem;
   }
 
   h1 {
     display: block;
-    font-size: 1em;
     margin: 0;
+    font-size: 1em;
     font-weight: normal;
   }
 
   .main-title {
-    font-size: 1.4rem;
     width: 12rem;
-    line-height: 1.5rem;
     padding: 0rem 0.5rem 0rem;
+    font-size: 1.4rem;
+    line-height: 1.5rem;
   }
 
   .main-title-before {
@@ -1255,24 +1269,31 @@ a.page-newest:hover {
     font-size: 1.4rem;
   }
 
+  .post-btn {
+    height: 2.2rem;
+    width: 7rem;
+    padding: 0.5rem 0.8rem 0;
+    font-size: 0.9rem;
+  }
+
   .follow-stats-container .user-follows,
 .follow-stats-container .following-user {
     height: 2.2rem;
   }
   .follow-stats-container .stats-label {
-    width: 5.5rem;
     min-width: 5.5rem;
+    width: 5.5rem;
     font-size: 1rem;
   }
   .follow-stats-container .stats-result {
     width: 3.5rem;
+    padding-right: 0.5rem;
     font-size: 2rem;
     line-height: 2.7rem;
-    padding-right: 0.5rem;
   }
   .follow-stats-container .follow-btn {
-    font-size: 1rem;
     width: 6.7rem;
+    font-size: 1rem;
   }
   .follow-stats-container .follow-btn span {
     right: 0.8rem;
